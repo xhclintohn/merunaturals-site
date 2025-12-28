@@ -17,6 +17,7 @@
             color: #333;
             padding-top: 80px;
             padding-bottom: 80px;
+            transition: background 0.3s ease;
         }
 
         .header {
@@ -29,6 +30,8 @@
             padding: 15px;
             z-index: 1000;
             text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .logo-container {
@@ -36,6 +39,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            transition: transform 0.3s ease;
         }
 
         .logo {
@@ -43,6 +47,11 @@
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(5deg);
         }
 
         .title {
@@ -57,19 +66,44 @@
 
         .hero {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero h1 {
             color: #2d5016;
             font-size: 1.8rem;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
         }
 
         .hero p {
             color: #666;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             line-height: 1.5;
+            transition: color 0.3s ease;
+        }
+
+        .delivery-note {
+            background: #e6b325;
+            color: #2d5016;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .categories {
@@ -77,26 +111,57 @@
             flex-direction: column;
             gap: 20px;
             padding: 0 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease 0.2s forwards;
         }
 
         .category-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 25px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
             cursor: pointer;
-            border: 2px solid transparent;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+            border-color: #e6b325;
         }
 
         .category-card:active {
-            transform: scale(0.98);
+            transform: translateY(-2px);
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(230, 179, 37, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .category-card:hover::before {
+            left: 100%;
         }
 
         .category-icon {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: #2d5016;
             margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.1);
         }
 
         .category-title {
@@ -104,16 +169,50 @@
             color: #2d5016;
             margin-bottom: 10px;
             font-weight: bold;
+            transition: color 0.3s ease;
         }
 
         .category-desc {
             color: #666;
             font-size: 0.95rem;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .view-btn {
+            background: #e6b325;
+            color: #2d5016;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-btn:hover {
+            background: #d4a21e;
+            transform: scale(1.05);
+        }
+
+        .view-btn:active {
+            transform: scale(0.95);
         }
 
         .products-section {
             display: none;
             padding: 20px;
+            opacity: 0;
+            animation: slideIn 0.4s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .back-btn {
@@ -128,6 +227,12 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #3a641f;
+            transform: translateX(-5px);
         }
 
         .section-title {
@@ -135,95 +240,85 @@
             color: #2d5016;
             font-size: 1.6rem;
             margin-bottom: 5px;
+            transition: color 0.3s ease;
         }
 
         .section-subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .instructions {
+            background: #f0ebe5;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #2d5016;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease;
         }
 
         .products-grid {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
         }
 
         .product-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: productAppear 0.5s ease forwards;
+        }
+
+        @keyframes productAppear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
         }
 
         .product-image {
             width: 100%;
-            height: 300px;
+            height: 320px;
             object-fit: cover;
             display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.02);
         }
 
         .image-fallback {
             width: 100%;
-            height: 300px;
+            height: 320px;
             background: linear-gradient(135deg, #2d5016, #3a641f);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
+            font-size: 2.5rem;
         }
 
         .product-info {
-            padding: 15px;
+            padding: 20px;
             text-align: center;
         }
 
         .order-btn {
             background: #e6b325;
             color: #2d5016;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        .order-btn:active {
-            transform: scale(0.95);
-        }
-
-        .contact-section {
-            background: #2d5016;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            margin: 20px;
-            border-radius: 15px;
-        }
-
-        .contact-title {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-        }
-
-        .contact-text {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
             border: none;
             padding: 15px 30px;
             border-radius: 25px;
@@ -233,12 +328,72 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .order-btn:hover {
+            background: #d4a21e;
+            transform: scale(1.05);
+        }
+
+        .order-btn:active {
+            transform: scale(0.95);
+        }
+
+        .contact-section {
+            background: #2d5016;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 20px;
+            border-radius: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            box-shadow: 0 8px 25px rgba(45, 80, 22, 0.3);
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-text {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
             margin: 0 auto;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
         }
 
         .whatsapp-btn:active {
-            transform: scale(0.95);
+            transform: translateY(-1px);
         }
 
         .bottom-nav {
@@ -250,43 +405,62 @@
             display: flex;
             justify-content: space-around;
             padding: 15px 0;
-            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
             z-index: 1000;
+            transition: transform 0.3s ease;
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             color: #666;
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             cursor: pointer;
+            padding: 10px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            min-width: 70px;
+        }
+
+        .nav-item:hover {
+            background: rgba(45, 80, 22, 0.1);
+            transform: translateY(-3px);
         }
 
         .nav-item.active {
             color: #2d5016;
+            background: rgba(45, 80, 22, 0.15);
+            transform: translateY(-3px);
         }
 
         .nav-icon {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item:hover .nav-icon {
+            transform: scale(1.1);
         }
 
         .loading {
             text-align: center;
-            padding: 40px;
+            padding: 50px;
             color: #2d5016;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
         }
 
         .spinner {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border: 4px solid rgba(45, 80, 22, 0.1);
             border-top-color: #2d5016;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
         }
 
         @keyframes spin {
@@ -295,6 +469,22 @@
 
         .hidden {
             display: none;
+        }
+
+        @media (min-width: 768px) {
+            .products-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .product-image {
+                height: 350px;
+            }
+            
+            .image-fallback {
+                height: 350px;
+            }
         }
     </style>
 </head>
@@ -313,6 +503,7 @@
         <div class="hero">
             <h1>Welcome to Meru Naturals</h1>
             <p>Discover our exclusive collection of crafted tote bags and premium natural skin and hair products. Each item is made with quality materials for your everyday needs.</p>
+            <div class="delivery-note">🚚 We Deliver Countrywide</div>
         </div>
 
         <div class="categories">
@@ -320,20 +511,32 @@
                 <div class="category-icon">👜</div>
                 <h2 class="category-title">Tote Bags</h2>
                 <p class="category-desc">Crafted with premium materials, very spacious and durable for all your needs.</p>
+                <button class="view-btn">
+                    <span>👀</span> View Collection
+                </button>
             </div>
 
             <div class="category-card" onclick="showSkinCare()">
                 <div class="category-icon">✨</div>
                 <h2 class="category-title">Skin & Hair Care</h2>
                 <p class="category-desc">Premium natural products made with organic ingredients for healthy skin and hair.</p>
+                <button class="view-btn">
+                    <span>👀</span> View Products
+                </button>
             </div>
         </div>
     </section>
 
     <section id="toteSection" class="products-section">
-        <button class="back-btn" onclick="showHome()">← Back</button>
+        <button class="back-btn" onclick="showHome()">
+            <span>←</span> Back to Home
+        </button>
         <h2 class="section-title">Tote Bags Collection</h2>
         <p class="section-subtitle">Crafted with premium materials, very spacious and durable</p>
+        
+        <div class="instructions">
+            📸 Take a screenshot of your desired product and send it to us on WhatsApp for ordering
+        </div>
         
         <div class="loading" id="toteLoading">
             <div class="spinner"></div>
@@ -344,9 +547,15 @@
     </section>
 
     <section id="skinSection" class="products-section">
-        <button class="back-btn" onclick="showHome()">← Back</button>
+        <button class="back-btn" onclick="showHome()">
+            <span>←</span> Back to Home
+        </button>
         <h2 class="section-title">Skin & Hair Care</h2>
         <p class="section-subtitle">Premium natural products for healthy skin and hair</p>
+        
+        <div class="instructions">
+            📸 Take a screenshot of your desired product and send it to us on WhatsApp for ordering
+        </div>
         
         <div class="loading" id="skinLoading">
             <div class="spinner"></div>
@@ -357,10 +566,12 @@
     </section>
 
     <section id="contactSection" class="products-section">
-        <button class="back-btn" onclick="showHome()">← Back</button>
+        <button class="back-btn" onclick="showHome()">
+            <span>←</span> Back to Home
+        </button>
         <div class="contact-section">
             <h2 class="contact-title">Ready to Order?</h2>
-            <p class="contact-text">Contact us on WhatsApp for inquiries or to place your order. Our team is ready to assist you!</p>
+            <p class="contact-text">Contact us on WhatsApp for inquiries or to place your order. Take a screenshot of your desired product and send it to us. We deliver countrywide! Our team is ready to assist you!</p>
             <button class="whatsapp-btn" onclick="openWhatsApp()">
                 <span>📱</span> Chat on WhatsApp
             </button>
@@ -484,14 +695,14 @@
             hideAllSections();
             sections.home.style.display = 'block';
             updateNav('home');
-            window.scrollTo(0, 0);
+            setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 100);
         }
 
         function showToteBags() {
             hideAllSections();
             sections.tote.style.display = 'block';
             updateNav('tote');
-            window.scrollTo(0, 0);
+            setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 100);
             
             if (grids.tote.children.length === 0) {
                 loadProducts('tote');
@@ -502,7 +713,7 @@
             hideAllSections();
             sections.skin.style.display = 'block';
             updateNav('skin');
-            window.scrollTo(0, 0);
+            setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 100);
             
             if (grids.skin.children.length === 0) {
                 loadProducts('skin');
@@ -513,7 +724,7 @@
             hideAllSections();
             sections.contact.style.display = 'block';
             updateNav('contact');
-            window.scrollTo(0, 0);
+            setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 100);
         }
 
         function hideAllSections() {
@@ -554,6 +765,7 @@
                 
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
+                productCard.style.animationDelay = `${index * 0.1}s`;
                 
                 productCard.innerHTML = `
                     <img src="${imgUrl}" 
@@ -572,6 +784,7 @@
                 `;
                 
                 grid.appendChild(productCard);
+                loaded++;
             });
             
             setTimeout(() => {
@@ -601,6 +814,16 @@
             
             const logo = new Image();
             logo.src = 'https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png';
+            
+            document.querySelectorAll('.category-card, .nav-item, .order-btn, .whatsapp-btn').forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.8';
+                });
+                
+                element.addEventListener('touchend', function() {
+                    this.style.opacity = '1';
+                });
+            });
         });
     </script>
 </body>
