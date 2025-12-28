@@ -2,246 +2,176 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Meru Naturals - Premium Tote Bags & Natural Products</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meru Naturals</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        :root {
-            --primary-green: #2d5016;
-            --secondary-gold: #e6b325;
-            --light-bg: #f8f5f0;
-            --white: #ffffff;
-            --dark-text: #333333;
-            --light-text: #666666;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --radius: 15px;
-        }
-
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--light-bg);
-            color: var(--dark-text);
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+            background: #f8f5f0;
+            color: #333;
+            padding-top: 80px;
             padding-bottom: 80px;
         }
 
-        /* Header */
-        .mobile-header {
-            background: var(--primary-green);
-            color: var(--white);
-            padding: 15px 0;
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
+            background: #2d5016;
+            color: white;
+            padding: 15px;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(45, 80, 22, 0.3);
+            text-align: center;
         }
 
-        .header-content {
+        .logo-container {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 16px;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .mobile-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-img {
+        .logo {
             width: 50px;
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--secondary-gold);
         }
 
-        .logo-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-            line-height: 1.2;
+        .title {
+            font-size: 1.4rem;
+            font-weight: bold;
         }
 
-        .logo-text p {
-            font-size: 0.75rem;
+        .subtitle {
+            font-size: 0.9rem;
             opacity: 0.9;
         }
 
-        /* Hero Section */
-        .mobile-hero {
-            padding: 100px 16px 40px;
+        .hero {
             text-align: center;
-            background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
-            margin-bottom: 20px;
+            padding: 20px;
         }
 
-        .hero-title {
-            font-family: 'Playfair Display', serif;
+        .hero h1 {
+            color: #2d5016;
             font-size: 1.8rem;
-            color: var(--primary-green);
-            margin-bottom: 15px;
-            line-height: 1.3;
+            margin-bottom: 10px;
         }
 
-        .hero-subtitle {
-            font-size: 1rem;
-            color: var(--light-text);
+        .hero p {
+            color: #666;
             margin-bottom: 30px;
             line-height: 1.5;
         }
 
-        /* Category Cards */
-        .category-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            padding: 0 16px;
-            margin-bottom: 30px;
-        }
-
-        .mobile-category-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
+        .categories {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 180px;
+            gap: 20px;
+            padding: 0 20px;
         }
 
-        .mobile-category-card:active {
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .category-card:active {
             transform: scale(0.98);
         }
 
         .category-icon {
-            font-size: 2.8rem;
-            color: var(--primary-green);
+            font-size: 2.5rem;
+            color: #2d5016;
             margin-bottom: 15px;
         }
 
         .category-title {
             font-size: 1.4rem;
-            color: var(--primary-green);
+            color: #2d5016;
             margin-bottom: 10px;
-            font-weight: 600;
+            font-weight: bold;
         }
 
         .category-desc {
-            font-size: 0.9rem;
-            color: var(--light-text);
-            margin-bottom: 20px;
+            color: #666;
+            font-size: 0.95rem;
         }
 
-        /* Products Section */
         .products-section {
-            padding: 20px 0;
             display: none;
+            padding: 20px;
         }
 
-        .mobile-back-btn {
-            background: var(--primary-green);
-            color: var(--white);
+        .back-btn {
+            background: #2d5016;
+            color: white;
             border: none;
-            border-radius: 25px;
             padding: 12px 25px;
+            border-radius: 25px;
             font-size: 1rem;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin: 0 16px 20px;
             cursor: pointer;
-            box-shadow: var(--shadow);
-        }
-
-        .section-header {
-            text-align: center;
-            padding: 0 16px;
-            margin-bottom: 25px;
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
+            text-align: center;
+            color: #2d5016;
             font-size: 1.6rem;
-            color: var(--primary-green);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
             font-size: 0.95rem;
-            color: var(--light-text);
-        }
-
-        /* Products Grid */
-        .products-container {
-            padding: 0 8px;
         }
 
         .products-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .mobile-product-card {
-            background: var(--white);
-            border-radius: var(--radius);
+        .product-card {
+            background: white;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-product-card:active {
-            transform: scale(0.98);
-        }
-
-        .product-image-container {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            background: #f5f5f5;
-            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .product-image {
             width: 100%;
-            height: 100%;
+            height: 300px;
             object-fit: cover;
             display: block;
         }
 
         .image-fallback {
             width: 100%;
-            height: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #2d5016, #3a641f);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--primary-green), #3a641f);
-            color: var(--white);
+            color: white;
             font-size: 2rem;
         }
 
@@ -250,41 +180,36 @@
             text-align: center;
         }
 
-        .product-name {
-            font-size: 1rem;
-            color: var(--primary-green);
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
         .order-btn {
-            width: 100%;
-            background: var(--secondary-gold);
-            color: var(--primary-green);
+            background: #e6b325;
+            color: #2d5016;
             border: none;
+            padding: 12px 25px;
             border-radius: 25px;
-            padding: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            width: 100%;
             cursor: pointer;
         }
 
-        /* Contact Section */
-        .mobile-contact-section {
-            background: var(--primary-green);
-            color: var(--white);
-            padding: 30px 16px;
+        .order-btn:active {
+            transform: scale(0.95);
+        }
+
+        .contact-section {
+            background: #2d5016;
+            color: white;
+            padding: 30px 20px;
             text-align: center;
-            margin: 30px 16px;
-            border-radius: var(--radius);
+            margin: 20px;
+            border-radius: 15px;
         }
 
         .contact-title {
-            font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
             margin-bottom: 15px;
         }
@@ -300,28 +225,32 @@
             background: #25D366;
             color: white;
             border: none;
+            padding: 15px 30px;
             border-radius: 25px;
-            padding: 12px 25px;
             font-size: 1rem;
+            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             margin: 0 auto;
             cursor: pointer;
         }
 
-        /* Bottom Navigation */
-        .mobile-bottom-nav {
+        .whatsapp-btn:active {
+            transform: scale(0.95);
+        }
+
+        .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--white);
+            background: white;
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
             z-index: 1000;
         }
 
@@ -330,282 +259,208 @@
             flex-direction: column;
             align-items: center;
             gap: 5px;
-            color: var(--light-text);
+            color: #666;
             text-decoration: none;
             font-size: 0.8rem;
-            padding: 8px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            min-width: 70px;
             cursor: pointer;
         }
 
         .nav-item.active {
-            color: var(--primary-green);
-            background: rgba(45, 80, 22, 0.1);
+            color: #2d5016;
         }
 
         .nav-icon {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
         }
 
-        /* Loading */
-        .loading-spinner {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 0;
-            color: var(--primary-green);
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #2d5016;
         }
 
         .spinner {
             width: 40px;
             height: 40px;
             border: 4px solid rgba(45, 80, 22, 0.1);
-            border-top-color: var(--primary-green);
+            border-top-color: #2d5016;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 15px;
+            margin: 0 auto 15px;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* WhatsApp Float */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 70px;
-            right: 16px;
-            background: #25D366;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-            z-index: 999;
-            cursor: pointer;
-        }
-
-        /* Media Queries */
-        @media (min-width: 768px) {
-            .products-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 16px;
-            }
-            
-            .product-image-container {
-                height: 250px;
-            }
-        }
-
-        /* Utility */
         .hidden {
-            display: none !important;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="mobile-header">
-        <div class="header-content">
-            <div class="mobile-logo">
-                <img src="https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png" 
-                     alt="Meru Naturals" class="logo-img">
-                <div class="logo-text">
-                    <h1>Meru Naturals</h1>
-                    <p>Premium Products</p>
-                </div>
+    <div class="header">
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png" alt="Logo" class="logo">
+            <div>
+                <div class="title">Meru Naturals</div>
+                <div class="subtitle">Premium Products</div>
             </div>
         </div>
-    </header>
-
-    <!-- Home Section -->
-    <section id="homeSection" class="mobile-hero">
-        <h1 class="hero-title">Welcome to Meru Naturals</h1>
-        <p class="hero-subtitle">
-            Discover our exclusive collection of handcrafted tote bags and premium natural products.
-        </p>
-        
-        <div class="category-grid">
-            <div class="mobile-category-card" onclick="showToteBags()">
-                <div class="category-icon">
-                    <i class="fas fa-shopping-bag"></i>
-                </div>
-                <h3 class="category-title">Tote Bags</h3>
-                <p class="category-desc">Beautiful handcrafted bags</p>
-            </div>
-
-            <div class="mobile-category-card" onclick="showSkinCare()">
-                <div class="category-icon">
-                    <i class="fas fa-spa"></i>
-                </div>
-                <h3 class="category-title">Skin & Hair Care</h3>
-                <p class="category-desc">Natural care products</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tote Bags Section -->
-    <section id="toteSection" class="products-section">
-        <button class="mobile-back-btn" onclick="showHome()">
-            <i class="fas fa-arrow-left"></i> Back to Home
-        </button>
-        
-        <div class="section-header">
-            <h2 class="section-title">Tote Bags Collection</h2>
-            <p class="section-subtitle">Handcrafted with premium materials</p>
-        </div>
-
-        <div class="loading-spinner" id="toteLoading">
-            <div class="spinner"></div>
-            <p>Loading products...</p>
-        </div>
-
-        <div class="products-container">
-            <div class="products-grid" id="toteGrid"></div>
-        </div>
-    </section>
-
-    <!-- Skin Care Section -->
-    <section id="skinSection" class="products-section">
-        <button class="mobile-back-btn" onclick="showHome()">
-            <i class="fas fa-arrow-left"></i> Back to Home
-        </button>
-        
-        <div class="section-header">
-            <h2 class="section-title">Skin & Hair Care</h2>
-            <p class="section-subtitle">100% natural ingredients</p>
-        </div>
-
-        <div class="loading-spinner" id="skinLoading">
-            <div class="spinner"></div>
-            <p>Loading products...</p>
-        </div>
-
-        <div class="products-container">
-            <div class="products-grid" id="skinGrid"></div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contactSection" class="mobile-contact-section">
-        <h2 class="contact-title">Ready to Order?</h2>
-        <p class="contact-text">
-            Contact us on WhatsApp for inquiries or orders. We're here to help!
-        </p>
-        <button class="whatsapp-btn" onclick="openWhatsApp()">
-            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-        </button>
-    </section>
-
-    <!-- WhatsApp Float -->
-    <div class="whatsapp-float" onclick="openWhatsApp()">
-        <i class="fab fa-whatsapp"></i>
     </div>
 
-    <!-- Bottom Navigation -->
-    <nav class="mobile-bottom-nav">
+    <section id="homeSection">
+        <div class="hero">
+            <h1>Welcome to Meru Naturals</h1>
+            <p>Discover our exclusive collection of crafted tote bags and premium natural skin and hair products. Each item is made with quality materials for your everyday needs.</p>
+        </div>
+
+        <div class="categories">
+            <div class="category-card" onclick="showToteBags()">
+                <div class="category-icon">👜</div>
+                <h2 class="category-title">Tote Bags</h2>
+                <p class="category-desc">Crafted with premium materials, very spacious and durable for all your needs.</p>
+            </div>
+
+            <div class="category-card" onclick="showSkinCare()">
+                <div class="category-icon">✨</div>
+                <h2 class="category-title">Skin & Hair Care</h2>
+                <p class="category-desc">Premium natural products made with organic ingredients for healthy skin and hair.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="toteSection" class="products-section">
+        <button class="back-btn" onclick="showHome()">← Back</button>
+        <h2 class="section-title">Tote Bags Collection</h2>
+        <p class="section-subtitle">Crafted with premium materials, very spacious and durable</p>
+        
+        <div class="loading" id="toteLoading">
+            <div class="spinner"></div>
+            <p>Loading products...</p>
+        </div>
+        
+        <div class="products-grid" id="toteGrid"></div>
+    </section>
+
+    <section id="skinSection" class="products-section">
+        <button class="back-btn" onclick="showHome()">← Back</button>
+        <h2 class="section-title">Skin & Hair Care</h2>
+        <p class="section-subtitle">Premium natural products for healthy skin and hair</p>
+        
+        <div class="loading" id="skinLoading">
+            <div class="spinner"></div>
+            <p>Loading products...</p>
+        </div>
+        
+        <div class="products-grid" id="skinGrid"></div>
+    </section>
+
+    <section id="contactSection" class="products-section">
+        <button class="back-btn" onclick="showHome()">← Back</button>
+        <div class="contact-section">
+            <h2 class="contact-title">Ready to Order?</h2>
+            <p class="contact-text">Contact us on WhatsApp for inquiries or to place your order. Our team is ready to assist you!</p>
+            <button class="whatsapp-btn" onclick="openWhatsApp()">
+                <span>📱</span> Chat on WhatsApp
+            </button>
+        </div>
+    </section>
+
+    <div class="bottom-nav">
         <div class="nav-item active" onclick="showHome()">
-            <i class="fas fa-home nav-icon"></i>
-            <span>Home</span>
+            <div class="nav-icon">🏠</div>
+            <div>Home</div>
         </div>
         <div class="nav-item" onclick="showToteBags()">
-            <i class="fas fa-shopping-bag nav-icon"></i>
-            <span>Tote Bags</span>
+            <div class="nav-icon">👜</div>
+            <div>Tote Bags</div>
         </div>
         <div class="nav-item" onclick="showSkinCare()">
-            <i class="fas fa-spa nav-icon"></i>
-            <span>Skin & Hair</span>
+            <div class="nav-icon">✨</div>
+            <div>Skin & Hair</div>
         </div>
         <div class="nav-item" onclick="showContact()">
-            <i class="fab fa-whatsapp nav-icon"></i>
-            <span>Contact</span>
+            <div class="nav-icon">📱</div>
+            <div>Contact</div>
         </div>
-    </nav>
+    </div>
 
     <script>
-        // Image URLs - DIRECT GitHub Raw URLs
-        const toteImageUrls = [
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0171.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0158.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0178.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0157.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0164.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0149.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0155.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0166.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0147.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0185.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0186.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0168.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0152.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0181.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0154.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0175.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0173.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0159.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0163.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0184.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0179.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0156.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0165.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0176.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0153.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0151.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0169.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0177.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0144.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0170.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0183.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0182.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0162.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0174.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0143.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0167.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0161.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0160.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0145.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0172.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0146.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0140.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0141.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0142.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0138.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0127.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0126.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0139.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0136.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0131.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0133.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0129.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0135.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0128.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0134.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0148.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0137.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0132.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251223-WA0220.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/IMG-20251226-WA0130.jpg"
+        const toteImages = [
+            "IMG-20251226-WA0171.jpg",
+            "IMG-20251226-WA0158.jpg",
+            "IMG-20251226-WA0178.jpg",
+            "IMG-20251226-WA0157.jpg",
+            "IMG-20251226-WA0164.jpg",
+            "IMG-20251226-WA0149.jpg",
+            "IMG-20251226-WA0155.jpg",
+            "IMG-20251226-WA0166.jpg",
+            "IMG-20251226-WA0147.jpg",
+            "IMG-20251226-WA0185.jpg",
+            "IMG-20251226-WA0186.jpg",
+            "IMG-20251226-WA0168.jpg",
+            "IMG-20251226-WA0152.jpg",
+            "IMG-20251226-WA0181.jpg",
+            "IMG-20251226-WA0154.jpg",
+            "IMG-20251226-WA0175.jpg",
+            "IMG-20251226-WA0173.jpg",
+            "IMG-20251226-WA0159.jpg",
+            "IMG-20251226-WA0163.jpg",
+            "IMG-20251226-WA0184.jpg",
+            "IMG-20251226-WA0179.jpg",
+            "IMG-20251226-WA0156.jpg",
+            "IMG-20251226-WA0165.jpg",
+            "IMG-20251226-WA0176.jpg",
+            "IMG-20251226-WA0153.jpg",
+            "IMG-20251226-WA0151.jpg",
+            "IMG-20251226-WA0169.jpg",
+            "IMG-20251226-WA0177.jpg",
+            "IMG-20251226-WA0144.jpg",
+            "IMG-20251226-WA0170.jpg",
+            "IMG-20251226-WA0183.jpg",
+            "IMG-20251226-WA0182.jpg",
+            "IMG-20251226-WA0162.jpg",
+            "IMG-20251226-WA0174.jpg",
+            "IMG-20251226-WA0143.jpg",
+            "IMG-20251226-WA0167.jpg",
+            "IMG-20251226-WA0161.jpg",
+            "IMG-20251226-WA0160.jpg",
+            "IMG-20251226-WA0145.jpg",
+            "IMG-20251226-WA0172.jpg",
+            "IMG-20251226-WA0146.jpg",
+            "IMG-20251226-WA0140.jpg",
+            "IMG-20251226-WA0141.jpg",
+            "IMG-20251226-WA0142.jpg",
+            "IMG-20251226-WA0138.jpg",
+            "IMG-20251226-WA0127.jpg",
+            "IMG-20251226-WA0126.jpg",
+            "IMG-20251226-WA0139.jpg",
+            "IMG-20251226-WA0136.jpg",
+            "IMG-20251226-WA0131.jpg",
+            "IMG-20251226-WA0133.jpg",
+            "IMG-20251226-WA0129.jpg",
+            "IMG-20251226-WA0135.jpg",
+            "IMG-20251226-WA0128.jpg",
+            "IMG-20251226-WA0134.jpg",
+            "IMG-20251226-WA0148.jpg",
+            "IMG-20251226-WA0137.jpg",
+            "IMG-20251226-WA0132.jpg",
+            "IMG-20251223-WA0220.jpg",
+            "IMG-20251226-WA0130.jpg"
         ];
 
-        const skinImageUrls = [
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images2/images/IMG-20251228-WA0050.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images2/images/IMG-20251228-WA0045.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images2/images/IMG-20251228-WA0047.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images2/images/IMG-20251228-WA0046.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images2/images/IMG-20251228-WA0049.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images2/images/IMG-20251228-WA0054.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images2/images/IMG-20251228-WA0051.jpg",
-            "https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images2/images/IMG-20251228-WA0052.jpg"
+        const skinImages = [
+            "IMG-20251228-WA0050.jpg",
+            "IMG-20251228-WA0045.jpg",
+            "IMG-20251228-WA0047.jpg",
+            "IMG-20251228-WA0046.jpg",
+            "IMG-20251228-WA0049.jpg",
+            "IMG-20251228-WA0054.jpg",
+            "IMG-20251228-WA0051.jpg",
+            "IMG-20251228-WA0052.jpg"
         ];
 
-        // DOM Elements
         const sections = {
             home: document.getElementById('homeSection'),
             tote: document.getElementById('toteSection'),
@@ -625,19 +480,18 @@
 
         const navItems = document.querySelectorAll('.nav-item');
 
-        // Navigation functions
         function showHome() {
             hideAllSections();
             sections.home.style.display = 'block';
             updateNav('home');
-            scrollToTop();
+            window.scrollTo(0, 0);
         }
 
         function showToteBags() {
             hideAllSections();
             sections.tote.style.display = 'block';
             updateNav('tote');
-            scrollToTop();
+            window.scrollTo(0, 0);
             
             if (grids.tote.children.length === 0) {
                 loadProducts('tote');
@@ -648,7 +502,7 @@
             hideAllSections();
             sections.skin.style.display = 'block';
             updateNav('skin');
-            scrollToTop();
+            window.scrollTo(0, 0);
             
             if (grids.skin.children.length === 0) {
                 loadProducts('skin');
@@ -659,7 +513,7 @@
             hideAllSections();
             sections.contact.style.display = 'block';
             updateNav('contact');
-            scrollToTop();
+            window.scrollTo(0, 0);
         }
 
         function hideAllSections() {
@@ -671,113 +525,82 @@
         function updateNav(active) {
             navItems.forEach(item => {
                 item.classList.remove('active');
-                const icon = item.querySelector('.nav-icon').className;
-                if (icon.includes('home') && active === 'home') {
+                if (active === 'home' && item.textContent.includes('Home')) {
                     item.classList.add('active');
-                } else if (icon.includes('shopping-bag') && active === 'tote') {
+                } else if (active === 'tote' && item.textContent.includes('Tote')) {
                     item.classList.add('active');
-                } else if (icon.includes('spa') && active === 'skin') {
+                } else if (active === 'skin' && item.textContent.includes('Skin')) {
                     item.classList.add('active');
-                } else if (icon.includes('whatsapp') && active === 'contact') {
+                } else if (active === 'contact' && item.textContent.includes('Contact')) {
                     item.classList.add('active');
                 }
             });
         }
 
         function loadProducts(type) {
-            const imageUrls = type === 'tote' ? toteImageUrls : skinImageUrls;
+            const images = type === 'tote' ? toteImages : skinImages;
+            const folder = type === 'tote' ? 'Images/' : 'Images2/';
             const grid = grids[type];
             const loader = loaders[type];
             
-            loader.style.display = 'flex';
+            loader.style.display = 'block';
             grid.innerHTML = '';
             
-            // Preload all images
-            let loadedCount = 0;
-            const totalImages = imageUrls.length;
+            let loaded = 0;
+            const total = images.length;
             
-            imageUrls.forEach((imageUrl, index) => {
-                const img = new Image();
-                img.onload = function() {
-                    loadedCount++;
-                    if (loadedCount === totalImages) {
-                        displayImages(type, imageUrls);
-                        loader.style.display = 'none';
-                    }
-                };
-                img.onerror = function() {
-                    loadedCount++;
-                    if (loadedCount === totalImages) {
-                        displayImages(type, imageUrls);
-                        loader.style.display = 'none';
-                    }
-                };
-                img.src = imageUrl;
-            });
-            
-            // Fallback timeout
-            setTimeout(() => {
-                displayImages(type, imageUrls);
-                loader.style.display = 'none';
-            }, 5000);
-        }
-
-        function displayImages(type, imageUrls) {
-            const grid = grids[type];
-            grid.innerHTML = '';
-            
-            imageUrls.forEach((imageUrl, index) => {
-                const productCard = document.createElement('div');
-                productCard.className = 'mobile-product-card';
+            images.forEach((img, index) => {
+                const imgUrl = `https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/${folder}${img}`;
                 
-                const randomId = Math.random().toString(36).substr(2, 9);
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
                 
                 productCard.innerHTML = `
-                    <div class="product-image-container">
-                        <img src="${imageUrl}" 
-                             alt="Product ${index + 1}" 
-                             class="product-image"
-                             id="img-${randomId}"
-                             loading="lazy"
-                             onerror="this.style.display='none'; document.getElementById('fallback-${randomId}').style.display='flex';">
-                        <div class="image-fallback" id="fallback-${randomId}" style="display: none;">
-                            <i class="fas fa-${type === 'tote' ? 'shopping-bag' : 'spa'}"></i>
-                        </div>
+                    <img src="${imgUrl}" 
+                         alt="Product ${index + 1}" 
+                         class="product-image"
+                         onload="imageLoaded('${type}', ${total})"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-fallback" style="display: none;">
+                        ${type === 'tote' ? '👜' : '✨'}
                     </div>
                     <div class="product-info">
-                        <div class="order-btn" onclick="openWhatsApp('${type === 'tote' ? 'Tote Bag' : 'Skin Care Product'} ${index + 1}')">
-                            <i class="fab fa-whatsapp"></i> Order This Product
-                        </div>
+                        <button class="order-btn" onclick="orderProduct('${type === 'tote' ? 'Tote Bag' : 'Skin Care Product'} ${index + 1}')">
+                            <span>📱</span> Order This Product
+                        </button>
                     </div>
                 `;
                 
                 grid.appendChild(productCard);
             });
+            
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 2000);
         }
 
-        function openWhatsApp(productName = '') {
+        function imageLoaded(type, total) {
+        }
+
+        function orderProduct(productName) {
             const phone = '254734943210';
-            let message = 'Hello! I\'m interested in products from Meru Naturals.';
-            
-            if (productName) {
-                message = `Hello! I'd like to order: ${productName} from Meru Naturals.`;
-            }
-            
+            const message = `Hello! I'd like to order: ${productName} from Meru Naturals.`;
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
         }
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function openWhatsApp() {
+            const phone = '254734943210';
+            const message = 'Hello! I\'m interested in products from Meru Naturals.';
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
         }
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             showHome();
             
-            // Preload logo
-            const logoImg = new Image();
-            logoImg.src = 'https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png';
+            const logo = new Image();
+            logo.src = 'https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png';
         });
     </script>
 </body>
