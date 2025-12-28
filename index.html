@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meru Naturals - Premium Tote Bags & Natural Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f5f0 0%, #f0ebe5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #2d5016;
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(45, 80, 22, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e6b325;
+        }
+
+        .logo-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #e6b325;
+            color: #2d5016;
+        }
+
+        .btn-primary:hover {
+            background: #d4a21e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(230, 179, 37, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)), 
+                        url('https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 3rem;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #2d5016;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .category-selector {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #e6b325;
+        }
+
+        .category-card i {
+            font-size: 3.5rem;
+            color: #2d5016;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-card h3 {
+            font-size: 1.8rem;
+            color: #2d5016;
+            margin-bottom: 1rem;
+        }
+
+        .category-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .products-section {
+            display: none;
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #2d5016;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            background: #2d5016;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn:hover {
+            background: #3a641f;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            color: #2d5016;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: 700;
+            color: #e6b325;
+            font-size: 1.3rem;
+        }
+
+        .contact-section {
+            background: #2d5016;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 30px;
+            margin-top: 4rem;
+        }
+
+        .contact-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 40px;
+            margin: 0 auto;
+            display: inline-flex;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.4rem;
+        }
+
+        footer {
+            background: #1a3710;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #e6b325;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e6b325;
+            color: #2d5016;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .category-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: #2d5016;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png" 
+                         alt="Meru Naturals Logo" class="logo-img">
+                    <div class="logo-text">
+                        <h1>Meru Naturals</h1>
+                        <p>Premium Tote Bags & Natural Products</p>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="showHome()">
+                        <i class="fas fa-home"></i> Home
+                    </button>
+                    <button class="btn btn-primary" onclick="openWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home-section">
+        <div class="container">
+            <h2>Welcome to Meru Naturals</h2>
+            <p>Discover our exclusive collection of handcrafted tote bags and premium natural skin & hair care products. 
+               Each item is carefully selected for quality, sustainability, and style.</p>
+            
+            <div class="category-selector">
+                <div class="category-card" onclick="showToteBags()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>Tote Bags</h3>
+                    <p>Beautiful, durable handcrafted bags for every occasion</p>
+                    <button class="btn btn-primary">Browse Collection</button>
+                </div>
+                
+                <div class="category-card" onclick="showSkinCare()">
+                    <i class="fas fa-spa"></i>
+                    <h3>Skin & Hair Care</h3>
+                    <p>Natural products for glowing skin and healthy hair</p>
+                    <button class="btn btn-primary">View Products</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section" id="tote-bags-section">
+        <div class="container">
+            <button class="btn back-btn" onclick="showHome()">
+                <i class="fas fa-arrow-left"></i> Back to Categories
+            </button>
+            
+            <div class="section-title">
+                <h2>Our Tote Bags Collection</h2>
+                <p>Each bag is uniquely crafted with attention to detail, combining style with functionality.</p>
+            </div>
+            
+            <div class="loading" id="tote-loading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading products...</p>
+            </div>
+            
+            <div class="products-grid" id="tote-grid">
+                <!-- Tote bags will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section" id="skincare-section">
+        <div class="container">
+            <button class="btn back-btn" onclick="showHome()">
+                <i class="fas fa-arrow-left"></i> Back to Categories
+            </button>
+            
+            <div class="section-title">
+                <h2>Natural Skin & Hair Care</h2>
+                <p>Premium natural products made with organic ingredients for your wellness.</p>
+            </div>
+            
+            <div class="loading" id="skin-loading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading products...</p>
+            </div>
+            
+            <div class="products-grid" id="skin-grid">
+                <!-- Skin care products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <h2>Ready to Order?</h2>
+            <p>Contact us directly on WhatsApp for inquiries, custom orders, or to place your order. 
+               Our team is ready to assist you!</p>
+            <button class="btn whatsapp-btn" onclick="openWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Chat on WhatsApp: +254 734 943210
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <img src="https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png" 
+                         alt="Meru Naturals Logo" class="logo-img" style="width: 50px; height: 50px;">
+                    <div class="logo-text">
+                        <h3>Meru Naturals</h3>
+                    </div>
+                </div>
+                <p>© 2024 Meru Naturals. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showHome()">Home</a>
+                    <a href="#" onclick="showToteBags()">Tote Bags</a>
+                    <a href="#" onclick="showSkinCare()">Skin & Hair Care</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="scroll-top" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        const toteImages = [
+            "IMG-20251226-WA0171.jpg", "IMG-20251226-WA0158.jpg", "IMG-20251226-WA0178.jpg",
+            "IMG-20251226-WA0157.jpg", "IMG-20251226-WA0164.jpg", "IMG-20251226-WA0149.jpg",
+            "IMG-20251226-WA0155.jpg", "IMG-20251226-WA0166.jpg", "IMG-20251226-WA0147.jpg",
+            "IMG-20251226-WA0185.jpg", "IMG-20251226-WA0186.jpg", "IMG-20251226-WA0168.jpg",
+            "IMG-20251226-WA0152.jpg", "IMG-20251226-WA0181.jpg", "IMG-20251226-WA0154.jpg",
+            "IMG-20251226-WA0175.jpg", "IMG-20251226-WA0173.jpg", "IMG-20251226-WA0159.jpg",
+            "IMG-20251226-WA0163.jpg", "IMG-20251226-WA0184.jpg", "IMG-20251226-WA0179.jpg",
+            "IMG-20251226-WA0156.jpg", "IMG-20251226-WA0165.jpg", "IMG-20251226-WA0176.jpg",
+            "IMG-20251226-WA0153.jpg", "IMG-20251226-WA0151.jpg", "IMG-20251226-WA0169.jpg",
+            "IMG-20251226-WA0177.jpg", "IMG-20251226-WA0144.jpg", "IMG-20251226-WA0170.jpg",
+            "IMG-20251226-WA0183.jpg", "IMG-20251226-WA0182.jpg", "IMG-20251226-WA0162.jpg",
+            "IMG-20251226-WA0174.jpg", "IMG-20251226-WA0143.jpg", "IMG-20251226-WA0167.jpg",
+            "IMG-20251226-WA0161.jpg", "IMG-20251226-WA0160.jpg", "IMG-20251226-WA0145.jpg",
+            "IMG-20251226-WA0172.jpg", "IMG-20251226-WA0146.jpg", "IMG-20251226-WA0140.jpg",
+            "IMG-20251226-WA0141.jpg", "IMG-20251226-WA0142.jpg", "IMG-20251226-WA0138.jpg",
+            "IMG-20251226-WA0127.jpg", "IMG-20251226-WA0126.jpg", "IMG-20251226-WA0139.jpg",
+            "IMG-20251226-WA0136.jpg", "IMG-20251226-WA0131.jpg", "IMG-20251226-WA0133.jpg",
+            "IMG-20251226-WA0129.jpg", "IMG-20251226-WA0135.jpg", "IMG-20251226-WA0128.jpg",
+            "IMG-20251226-WA0134.jpg", "IMG-20251226-WA0148.jpg", "IMG-20251226-WA0137.jpg",
+            "IMG-20251226-WA0132.jpg", "IMG-20251223-WA0220.jpg", "IMG-20251226-WA0130.jpg"
+        ];
+
+        const skinImages = [
+            "IMG-20251228-WA0050.jpg", "IMG-20251228-WA0045.jpg", "IMG-20251228-WA0047.jpg",
+            "IMG-20251228-WA0046.jpg", "IMG-20251228-WA0049.jpg", "IMG-20251228-WA0054.jpg",
+            "IMG-20251228-WA0051.jpg", "IMG-20251228-WA0052.jpg"
+        ];
+
+        const toteNames = [
+            "African Print Tote", "Canvas Eco Bag", "Kitenge Style Tote",
+            "Handwoven Basket Bag", "Colorful Market Tote", "Traditional Pattern Bag",
+            "Ethnic Design Tote", "Natural Fiber Bag", "Modern African Tote",
+            "Striped Canvas Bag", "Geometric Print Tote", "Boho Style Bag",
+            "Classic Kitenge Tote", "Embroidered Handbag", "Patterned Market Bag",
+            "Color Block Tote", "Traditional Weave Bag", "Contemporary African Bag",
+            "Textured Canvas Tote", "Vibrant Print Bag", "Elegant Evening Tote",
+            "Casual Day Bag", "Stylish Shopper", "Artisan Crafted Bag",
+            "Unique Design Tote", "Handmade Market Tote", "Premium Kitenge Bag",
+            "Fashionable Carryall", "Everyday Essential Tote", "Special Occasion Bag",
+            "Colorful Carry Bag", "Patterned Shopper", "Textured Market Tote",
+            "Designer African Bag", "Classic Canvas Tote", "Stylish Weave Bag",
+            "Modern Market Tote", "Traditional Carry Bag", "Vibrant Canvas Tote",
+            "Elegant Print Bag", "Handcrafted Tote", "Simple Shopper Bag",
+            "Minimalist Tote", "Bold Print Bag", "Subtle Pattern Tote",
+            "Artistic Design Bag", "Cultural Inspired Tote", "Contemporary Market Bag",
+            "Functional Day Tote", "Spacious Shopper", "Compact Carry Bag",
+            "Luxury African Tote", "Everyday Market Bag", "Premium Quality Tote"
+        ];
+
+        const skinNames = [
+            "Organic Face Cream", "Natural Body Butter", "Herbal Hair Oil",
+            "Vitamin E Serum", "Aloe Vera Gel", "Tea Tree Face Wash",
+            "Coconut Hair Mask", "Shea Body Lotion"
+        ];
+
+        function showHome() {
+            document.getElementById('home-section').style.display = 'block';
+            document.getElementById('tote-bags-section').style.display = 'none';
+            document.getElementById('skincare-section').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showToteBags() {
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('tote-bags-section').style.display = 'block';
+            document.getElementById('skincare-section').style.display = 'none';
+            
+            const grid = document.getElementById('tote-grid');
+            const loading = document.getElementById('tote-loading');
+            
+            if (grid.innerHTML === '') {
+                loading.style.display = 'block';
+                
+                setTimeout(() => {
+                    grid.innerHTML = '';
+                    toteImages.forEach((img, index) => {
+                        const price = (1500 + Math.random() * 1000).toFixed(0);
+                        const name = toteNames[index % toteNames.length];
+                        
+                        const productCard = document.createElement('div');
+                        productCard.className = 'product-card';
+                        productCard.innerHTML = `
+                            <img src="https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images/${img}" 
+                                 alt="${name}" class="product-img" onerror="this.src='https://via.placeholder.com/300x250/2d5016/ffffff?text=Meru+Naturals'">
+                            <div class="product-info">
+                                <h3>${name}</h3>
+                                <p>Handcrafted with premium materials and traditional African patterns.</p>
+                                <div class="product-price">
+                                    <span class="price">KSh ${price}</span>
+                                    <button class="btn btn-primary" onclick="orderProduct('${name}', ${price})">
+                                        <i class="fab fa-whatsapp"></i> Order
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        grid.appendChild(productCard);
+                    });
+                    loading.style.display = 'none';
+                }, 500);
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showSkinCare() {
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('tote-bags-section').style.display = 'none';
+            document.getElementById('skincare-section').style.display = 'block';
+            
+            const grid = document.getElementById('skin-grid');
+            const loading = document.getElementById('skin-loading');
+            
+            if (grid.innerHTML === '') {
+                loading.style.display = 'block';
+                
+                setTimeout(() => {
+                    grid.innerHTML = '';
+                    skinImages.forEach((img, index) => {
+                        const price = (800 + Math.random() * 700).toFixed(0);
+                        const name = skinNames[index % skinNames.length];
+                        
+                        const productCard = document.createElement('div');
+                        productCard.className = 'product-card';
+                        productCard.innerHTML = `
+                            <img src="https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/Images2/images/${img}" 
+                                 alt="${name}" class="product-img" onerror="this.src='https://via.placeholder.com/300x250/2d5016/ffffff?text=Meru+Naturals'">
+                            <div class="product-info">
+                                <h3>${name}</h3>
+                                <p>100% natural ingredients for healthy skin and hair.</p>
+                                <div class="product-price">
+                                    <span class="price">KSh ${price}</span>
+                                    <button class="btn btn-primary" onclick="orderProduct('${name}', ${price})">
+                                        <i class="fab fa-whatsapp"></i> Order
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        grid.appendChild(productCard);
+                    });
+                    loading.style.display = 'none';
+                }, 500);
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openWhatsApp(productName = '', price = '') {
+            const phone = '254734943210';
+            let message = 'Hello! I\'m interested in products from Meru Naturals.';
+            
+            if (productName) {
+                message = `Hello! I'd like to order: ${productName} (KSh ${price}) from Meru Naturals.`;
+            }
+            
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function orderProduct(productName, price) {
+            openWhatsApp(productName, price);
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onscroll = function() {
+            const scrollBtn = document.querySelector('.scroll-top');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            showHome();
+            
+            const scrollBtn = document.querySelector('.scroll-top');
+            scrollBtn.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
