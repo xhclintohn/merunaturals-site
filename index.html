@@ -471,19 +471,102 @@
             display: none;
         }
 
+        /* Enhanced UX: Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2d5016;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a641f;
+        }
+
+        /* Enhanced UX: Product counter */
+        .product-counter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e6b325;
+            color: #2d5016;
+            font-weight: bold;
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            z-index: 1;
+        }
+
+        /* Enhanced UX: Loading dots animation */
+        .loading-dots {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .loading-dots::after {
+            content: '.';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Enhanced UX: Haptic feedback simulation */
+        @media (hover: none) and (pointer: coarse) {
+            .category-card:active,
+            .order-btn:active,
+            .whatsapp-btn:active,
+            .nav-item:active {
+                transform: scale(0.95);
+                transition: transform 0.1s ease;
+            }
+        }
+
         @media (min-width: 768px) {
             .products-grid {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
                 gap: 25px;
             }
-            
+
             .product-image {
                 height: 350px;
             }
-            
+
             .image-fallback {
                 height: 350px;
+            }
+
+            /* Enhanced UX: Desktop hover effects */
+            .product-card {
+                position: relative;
+            }
+
+            .product-card::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(230, 179, 37, 0);
+                transition: background 0.3s ease;
+                pointer-events: none;
+                border-radius: 20px;
+            }
+
+            .product-card:hover::after {
+                background: rgba(230, 179, 37, 0.05);
             }
         }
     </style>
@@ -533,16 +616,16 @@
         </button>
         <h2 class="section-title">Tote Bags Collection</h2>
         <p class="section-subtitle">Crafted with premium materials, very spacious and durable</p>
-        
+
         <div class="instructions">
             📸 Take a screenshot of your desired product and send it to us on WhatsApp for ordering
         </div>
-        
+
         <div class="loading" id="toteLoading">
             <div class="spinner"></div>
-            <p>Loading products...</p>
+            <p>Loading products<span class="loading-dots"></span></p>
         </div>
-        
+
         <div class="products-grid" id="toteGrid"></div>
     </section>
 
@@ -552,16 +635,16 @@
         </button>
         <h2 class="section-title">Skin & Hair Care</h2>
         <p class="section-subtitle">Premium natural products for healthy skin and hair</p>
-        
+
         <div class="instructions">
             📸 Take a screenshot of your desired product and send it to us on WhatsApp for ordering
         </div>
-        
+
         <div class="loading" id="skinLoading">
             <div class="spinner"></div>
-            <p>Loading products...</p>
+            <p>Loading products<span class="loading-dots"></span></p>
         </div>
-        
+
         <div class="products-grid" id="skinGrid"></div>
     </section>
 
@@ -661,6 +744,7 @@
             "IMG-20251226-WA0130.jpg"
         ];
 
+        // Removed product 59 (the bag image) from skin care products
         const skinImages = [
             "IMG-20251228-WA0050.jpg",
             "IMG-20251228-WA0045.jpg",
@@ -670,6 +754,7 @@
             "IMG-20251228-WA0054.jpg",
             "IMG-20251228-WA0051.jpg",
             "IMG-20251228-WA0052.jpg"
+            // Removed the bag image that was product 59
         ];
 
         const sections = {
@@ -691,19 +776,24 @@
 
         const navItems = document.querySelectorAll('.nav-item');
 
+        // Enhanced UX: Store visited sections
+        const visitedSections = new Set(['home']);
+
         function showHome() {
             hideAllSections();
             sections.home.style.display = 'block';
             updateNav('home');
-            setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 100);
+            visitedSections.add('home');
+            smoothScrollToTop();
         }
 
         function showToteBags() {
             hideAllSections();
             sections.tote.style.display = 'block';
             updateNav('tote');
-            setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 100);
-            
+            visitedSections.add('tote');
+            smoothScrollToTop();
+
             if (grids.tote.children.length === 0) {
                 loadProducts('tote');
             }
@@ -713,8 +803,9 @@
             hideAllSections();
             sections.skin.style.display = 'block';
             updateNav('skin');
-            setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 100);
-            
+            visitedSections.add('skin');
+            smoothScrollToTop();
+
             if (grids.skin.children.length === 0) {
                 loadProducts('skin');
             }
@@ -724,7 +815,8 @@
             hideAllSections();
             sections.contact.style.display = 'block';
             updateNav('contact');
-            setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 100);
+            visitedSections.add('contact');
+            smoothScrollToTop();
         }
 
         function hideAllSections() {
@@ -753,23 +845,33 @@
             const folder = type === 'tote' ? 'Images/' : 'Images2/';
             const grid = grids[type];
             const loader = loaders[type];
-            
+
             loader.style.display = 'block';
             grid.innerHTML = '';
-            
+
             let loaded = 0;
             const total = images.length;
-            
+
+            // Enhanced UX: Show product count in section title
+            const sectionTitle = document.querySelector(`#${type}Section .section-subtitle`);
+            if (sectionTitle) {
+                const originalText = type === 'tote' 
+                    ? "Crafted with premium materials, very spacious and durable" 
+                    : "Premium natural products for healthy skin and hair";
+                sectionTitle.innerHTML = `${originalText} <br><small style="font-size:0.8em;color:#e6b325;">(${total} products available)</small>`;
+            }
+
             images.forEach((img, index) => {
                 const imgUrl = `https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/${folder}${img}`;
-                
+
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.style.animationDelay = `${index * 0.1}s`;
-                
+
                 productCard.innerHTML = `
+                    <div class="product-counter">#${index + 1}</div>
                     <img src="${imgUrl}" 
-                         alt="Product ${index + 1}" 
+                         alt="${type === 'tote' ? 'Tote Bag' : 'Skin & Hair Product'} ${index + 1}" 
                          class="product-image"
                          onload="imageLoaded('${type}', ${total})"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -777,16 +879,16 @@
                         ${type === 'tote' ? '👜' : '✨'}
                     </div>
                     <div class="product-info">
-                        <button class="order-btn" onclick="orderProduct('${type === 'tote' ? 'Tote Bag' : 'Skin Care Product'} ${index + 1}')">
+                        <button class="order-btn" onclick="orderProduct('${type === 'tote' ? 'Tote Bag' : 'Skin & Hair Product'} ${index + 1}')">
                             <span>📱</span> Order This Product
                         </button>
                     </div>
                 `;
-                
+
                 grid.appendChild(productCard);
                 loaded++;
             });
-            
+
             setTimeout(() => {
                 loader.style.display = 'none';
             }, 2000);
@@ -796,6 +898,11 @@
         }
 
         function orderProduct(productName) {
+            // Enhanced UX: Add haptic feedback simulation
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
             const phone = '254734943210';
             const message = `Hello! I'd like to order: ${productName} from Meru Naturals.`;
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
@@ -803,26 +910,65 @@
         }
 
         function openWhatsApp() {
+            // Enhanced UX: Add haptic feedback simulation
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
             const phone = '254734943210';
             const message = 'Hello! I\'m interested in products from Meru Naturals.';
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
         }
 
+        // Enhanced UX: Smooth scroll function
+        function smoothScrollToTop() {
+            setTimeout(() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+
+        // Enhanced UX: Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && visitedSections.size > 1) {
+                showHome();
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             showHome();
-            
+
+            // Enhanced UX: Preload logo
             const logo = new Image();
             logo.src = 'https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png';
-            
+            logo.onload = function() {
+                document.querySelector('.logo').style.opacity = '1';
+            };
+
+            // Enhanced UX: Touch feedback for mobile
             document.querySelectorAll('.category-card, .nav-item, .order-btn, .whatsapp-btn').forEach(element => {
                 element.addEventListener('touchstart', function() {
                     this.style.opacity = '0.8';
+                    this.style.transform = 'scale(0.98)';
                 });
-                
+
                 element.addEventListener('touchend', function() {
                     this.style.opacity = '1';
+                    this.style.transform = '';
                 });
+
+                element.addEventListener('touchcancel', function() {
+                    this.style.opacity = '1';
+                    this.style.transform = '';
+                });
+            });
+
+            // Enhanced UX: Improve loading state
+            document.querySelectorAll('.loading p').forEach(p => {
+                p.innerHTML = 'Loading products<span class="loading-dots"></span>';
             });
         });
     </script>
