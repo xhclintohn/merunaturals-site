@@ -3,5 +3,6 @@ const MERU_CONFIG = {
     REPO_OWNER: 'xhclintohn',
     REPO_NAME: 'merunaturals-site',
     BRANCH: 'main',
-    ADMIN_PASSWORD: 'Mugambi@2020'
+    ADMIN_PASSWORD: 'Mugambi@2020',
+    API_BASE: 'https://api.github.com'
 };
