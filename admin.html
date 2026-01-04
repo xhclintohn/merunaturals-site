@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meru Naturals - Admin Dashboard</title>
     <style>
+        :root {
+            --primary-color: #2d5016;
+            --secondary-color: #e6b325;
+            --bg-color: #f8f9fa;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --warning-color: #ffc107;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-theme {
+            --primary-color: #4CAF50;
+            --secondary-color: #FFC107;
+            --bg-color: #121212;
+            --card-color: #1e1e1e;
+            --text-color: #ffffff;
+            --border-color: #333333;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,75 +37,90 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             min-height: 100vh;
             padding: 20px;
-            touch-action: manipulation;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
-            background: white;
+            background-color: var(--card-color);
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .header {
-            background: linear-gradient(135deg, #2d5016 0%, #3a6b1e 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a6b1e 100%);
             color: white;
             padding: 25px 30px;
-            text-align: center;
+            position: relative;
         }
 
-        .logo {
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
         }
 
-        .logo-icon {
-            font-size: 2rem;
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
         }
 
-        .logo-text h1 {
+        .logo {
+            text-align: center;
+        }
+
+        .logo h1 {
             font-size: 1.8rem;
             margin-bottom: 5px;
         }
 
-        .logo-text p {
+        .logo p {
             opacity: 0.9;
             font-size: 0.9rem;
         }
 
         .tab-bar {
             display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
+            background: rgba(0, 0, 0, 0.05);
+            border-bottom: 2px solid var(--border-color);
         }
 
         .tab {
             flex: 1;
-            padding: 18px 10px;
+            padding: 20px 10px;
             text-align: center;
             font-weight: 600;
             color: #6c757d;
             cursor: pointer;
             transition: all 0.3s ease;
             border-bottom: 3px solid transparent;
-            font-size: 0.95rem;
             user-select: none;
+            font-size: 1rem;
         }
 
         .tab.active {
-            color: #2d5016;
-            border-bottom-color: #e6b325;
-            background: white;
+            color: var(--primary-color);
+            border-bottom-color: var(--secondary-color);
+            background-color: var(--card-color);
         }
 
         .tab-content {
@@ -107,29 +145,26 @@
         .form-label {
             display: block;
             margin-bottom: 10px;
-            color: #2d5016;
+            color: var(--primary-color);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
 
         .form-input, .form-select {
             width: 100%;
             padding: 16px 20px;
-            border: 2px solid #e9ecef;
+            border: 2px solid var(--border-color);
             border-radius: 12px;
             font-size: 1rem;
             transition: all 0.3s ease;
-            background: white;
+            background-color: var(--card-color);
+            color: var(--text-color);
         }
 
         .form-input:focus, .form-select:focus {
             outline: none;
-            border-color: #2d5016;
+            border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
-        }
-
-        .form-input::placeholder {
-            color: #adb5bd;
         }
 
         .input-with-icon {
@@ -143,10 +178,16 @@
             transform: translateY(-50%);
             background: none;
             border: none;
-            color: #6c757d;
+            color: var(--text-color);
+            opacity: 0.7;
             cursor: pointer;
             padding: 5px;
             font-size: 1.2rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .toggle-password:hover {
+            opacity: 1;
         }
 
         .price-input {
@@ -156,46 +197,44 @@
         }
 
         .currency {
-            color: #2d5016;
+            color: var(--primary-color);
             font-weight: bold;
-            min-width: 40px;
+            min-width: 50px;
+            font-size: 1.1rem;
         }
 
         .file-input {
-            padding: 20px;
-            border: 2px dashed #dee2e6;
-            border-radius: 12px;
+            padding: 30px 20px;
+            border: 3px dashed var(--border-color);
+            border-radius: 15px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .file-input:hover {
-            border-color: #2d5016;
-            background: #f8f9fa;
-        }
-
-        .file-input input {
-            display: none;
+            border-color: var(--primary-color);
+            background-color: rgba(45, 80, 22, 0.05);
         }
 
         .image-preview {
-            margin-top: 20px;
+            margin: 25px 0;
             text-align: center;
         }
 
         .preview-img {
             max-width: 100%;
-            max-height: 300px;
-            border-radius: 10px;
-            border: 2px solid #e9ecef;
+            max-height: 350px;
+            border-radius: 15px;
+            border: 3px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .btn {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(135deg, #e6b325 0%, #ffc720 100%);
-            color: #2d5016;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #ffd740 100%);
+            color: var(--primary-color);
             border: none;
             border-radius: 12px;
             font-size: 1.1rem;
@@ -206,117 +245,133 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(230, 179, 37, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 179, 37, 0.3);
         }
 
         .btn:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
 
         .btn-delete {
             background: linear-gradient(135deg, #dc3545 0%, #e35d6a 100%);
             color: white;
             padding: 12px 25px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             width: auto;
+            min-width: 100px;
         }
 
         .products-list {
-            max-height: 500px;
-            overflow-y: auto;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .product-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #e9ecef;
+            background-color: var(--card-color);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
         .product-item:hover {
-            transform: translateX(5px);
-            border-color: #2d5016;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .product-image-container {
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .product-image {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 2px solid #e6b325;
+            max-width: 100%;
+            max-height: 350px;
+            border-radius: 12px;
+            border: 3px solid var(--secondary-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            object-fit: contain;
+            background-color: #f5f5f5;
         }
 
         .product-details {
-            flex: 1;
+            margin-bottom: 20px;
         }
 
         .product-name {
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #2d5016;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            word-break: break-all;
         }
 
         .product-price {
-            color: #e6b325;
-            font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
         }
 
         .product-category {
             display: inline-block;
-            padding: 3px 10px;
+            padding: 6px 15px;
             background: rgba(45, 80, 22, 0.1);
-            color: #2d5016;
+            color: var(--primary-color);
             border-radius: 20px;
-            font-size: 0.8rem;
-            margin-left: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
 
         .status {
-            padding: 15px;
-            border-radius: 10px;
+            padding: 18px;
+            border-radius: 12px;
             margin: 20px 0;
             text-align: center;
             font-weight: 600;
+            border: 2px solid transparent;
         }
 
         .status.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+            border-color: rgba(40, 167, 69, 0.2);
         }
 
         .status.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--error-color);
+            border-color: rgba(220, 53, 69, 0.2);
         }
 
         .status.loading {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+            border-color: rgba(255, 193, 7, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .loading-spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #856404;
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--warning-color);
             border-top-color: transparent;
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -330,39 +385,115 @@
             display: none !important;
         }
 
-        /* Scrollbar styling */
-        .products-list::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .products-list::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 4px;
-        }
-
-        .products-list::-webkit-scrollbar-thumb {
-            background: #2d5016;
-            border-radius: 4px;
-        }
-
         .login-screen {
             padding: 50px 30px;
             text-align: center;
         }
 
         .login-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #2d5016;
+            font-size: 4rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
         }
 
         .login-title {
-            font-size: 1.8rem;
-            color: #2d5016;
+            font-size: 2rem;
+            color: var(--primary-color);
             margin-bottom: 30px;
         }
 
-        /* Mobile optimizations */
+        .category-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .category-btn {
+            flex: 1;
+            padding: 20px 15px;
+            border: 3px solid var(--border-color);
+            border-radius: 12px;
+            background-color: var(--card-color);
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .category-btn.active {
+            border-color: var(--primary-color);
+            background-color: rgba(45, 80, 22, 0.1);
+            color: var(--primary-color);
+            transform: scale(1.02);
+        }
+
+        .category-btn .icon {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .settings-section {
+            background-color: rgba(0, 0, 0, 0.03);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .settings-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background-color: var(--card-color);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -380,84 +511,37 @@
                 padding: 20px;
             }
             
-            .product-item {
+            .category-selector {
                 flex-direction: column;
-                text-align: center;
-                gap: 15px;
+            }
+            
+            .product-item {
+                padding: 20px;
             }
             
             .product-image {
-                width: 120px;
-                height: 120px;
+                max-height: 300px;
             }
             
-            .form-input, .form-select {
-                padding: 14px;
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* Touch improvements */
-        button, .tab, .file-input {
-            touch-action: manipulation;
-        }
-
-        button:active {
-            opacity: 0.8;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #6c757d;
-        }
-
-        .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-
-        .category-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .category-btn {
-            flex: 1;
-            padding: 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            background: white;
-            cursor: pointer;
-            font-weight: 600;
-            color: #6c757d;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .category-btn.active {
-            border-color: #2d5016;
-            background: rgba(45, 80, 22, 0.05);
-            color: #2d5016;
-        }
-
-        .category-btn .icon {
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+        /* Ensure images are properly displayed */
+        img[src*="raw.githubusercontent.com"] {
+            background: linear-gradient(45deg, #f5f5f5 25%, #e0e0e0 25%, #e0e0e0 50%, #f5f5f5 50%, #f5f5f5 75%, #e0e0e0 75%);
+            background-size: 20px 20px;
         }
     </style>
 </head>
-<body>
+<body class="light-theme">
     <div class="container">
         <div class="header">
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
             <div class="logo">
-                <div class="logo-icon">🔒</div>
-                <div class="logo-text">
-                    <h1>Meru Naturals Admin</h1>
-                    <p>Product Management Dashboard</p>
-                </div>
+                <h1>Meru Naturals Admin</h1>
+                <p>Product Management Dashboard</p>
             </div>
         </div>
 
@@ -466,7 +550,7 @@
             <h2 class="login-title">Admin Login</h2>
             <div class="form-group">
                 <div class="input-with-icon">
-                    <input type="password" id="adminPassword" class="form-input" placeholder="Enter admin password">
+                    <input type="password" id="adminPassword" class="form-input" placeholder="Enter admin password" autocomplete="current-password">
                     <button type="button" class="toggle-password" onclick="togglePassword('adminPassword')">
                         👁️ Show
                     </button>
@@ -489,11 +573,11 @@
                 <div class="form-group">
                     <label class="form-label">Product Category</label>
                     <div class="category-selector">
-                        <button class="category-btn active" data-category="tote" onclick="selectCategory('tote')">
+                        <button class="category-btn active" onclick="selectCategory('tote')">
                             <span class="icon">👜</span>
                             Tote Bags
                         </button>
-                        <button class="category-btn" data-category="skin" onclick="selectCategory('skin')">
+                        <button class="category-btn" onclick="selectCategory('skin')">
                             <span class="icon">✨</span>
                             Skin & Hair
                         </button>
@@ -512,14 +596,15 @@
                 <div class="form-group">
                     <label class="form-label">Product Image</label>
                     <div class="file-input" onclick="document.getElementById('imageInput').click()">
-                        <div style="font-size: 3rem; color: #6c757d;">📷</div>
-                        <div style="margin-top: 10px; color: #2d5016; font-weight: 600;">Tap to select image</div>
-                        <div style="margin-top: 5px; color: #6c757d; font-size: 0.9rem;">JPG, PNG or GIF files</div>
+                        <div style="font-size: 3.5rem; color: var(--primary-color);">📷</div>
+                        <div style="margin-top: 15px; color: var(--primary-color); font-weight: 700; font-size: 1.1rem;">Tap to Select Image</div>
+                        <div style="margin-top: 8px; color: var(--text-color); opacity: 0.7; font-size: 0.95rem;">JPG, PNG or GIF files</div>
                         <input type="file" id="imageInput" accept="image/*" onchange="previewImage()">
                     </div>
                 </div>
 
                 <div id="imagePreview" class="hidden">
+                    <div class="form-label">📸 Image Preview</div>
                     <img id="preview" class="preview-img">
                 </div>
 
@@ -532,7 +617,7 @@
             <!-- Manage Tab -->
             <div id="manageTab" class="tab-content">
                 <div class="form-group">
-                    <label class="form-label">View Products By Category</label>
+                    <label class="form-label">Select Category to Manage</label>
                     <select id="manageCategory" class="form-select" onchange="loadProducts()">
                         <option value="tote">👜 Tote Bags Collection</option>
                         <option value="skin">✨ Natural Skin & Hair Care</option>
@@ -541,51 +626,50 @@
 
                 <div id="productsLoading" class="status loading hidden">
                     <div class="loading-spinner"></div>
-                    Loading products...
+                    Loading products from storage...
                 </div>
 
                 <div id="productsList" class="products-list">
                     <div class="empty-state">
                         <div class="empty-icon">📦</div>
-                        <div>No products found. Upload some products to get started.</div>
+                        <h3>No Products Found</h3>
+                        <div>Start by uploading some products in the Upload tab.</div>
                     </div>
                 </div>
             </div>
 
             <!-- Settings Tab -->
             <div id="settingsTab" class="tab-content">
-                <div class="form-group">
-                    <label class="form-label">Change Admin Password</label>
-                    <div class="input-with-icon">
-                        <input type="password" id="newPassword" class="form-input" placeholder="Enter new password">
-                        <button type="button" class="toggle-password" onclick="togglePassword('newPassword')">
-                            👁️ Show
-                        </button>
+                <div class="settings-section">
+                    <h3>🔐 Change Admin Password</h3>
+                    <div class="form-group">
+                        <label class="form-label">New Password</label>
+                        <div class="input-with-icon">
+                            <input type="password" id="newPassword" class="form-input" placeholder="Enter new password">
+                            <button type="button" class="toggle-password" onclick="togglePassword('newPassword')">
+                                👁️ Show
+                            </button>
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm New Password</label>
+                        <div class="input-with-icon">
+                            <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm new password">
+                            <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">
+                                👁️ Show
+                            </button>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="changePassword()">
+                        🔐 Update Password
+                    </button>
+                    <div id="passwordStatus" class="status" style="margin-top: 20px;"></div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">Confirm New Password</label>
-                    <div class="input-with-icon">
-                        <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm new password">
-                        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">
-                            👁️ Show
-                        </button>
-                    </div>
-                </div>
-
-                <button class="btn" onclick="changePassword()">
-                    🔐 Update Password
-                </button>
-                
-                <div id="settingsStatus" class="status" style="margin-top: 20px;"></div>
-                
-                <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
-                    <h4 style="color: #2d5016; margin-bottom: 10px;">📊 System Status</h4>
-                    <div style="color: #6c757d; font-size: 0.9rem;">
-                        <div>✅ Connection: Active</div>
-                        <div>✅ Storage: Unlimited</div>
-                        <div>✅ Real-time Updates: Enabled</div>
+                <div class="settings-section">
+                    <h3>📊 System Status</h3>
+                    <div id="statsGrid" class="stats-grid">
+                        <!-- Stats will be populated by JavaScript -->
                     </div>
                 </div>
             </div>
@@ -604,8 +688,29 @@
 
         // State
         let currentProducts = [];
+        let currentTheme = 'light';
 
-        // Toggle password visibility with clear text
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            if (currentTheme === 'light') {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                themeToggle.textContent = '☀️';
+                currentTheme = 'dark';
+                localStorage.setItem('adminTheme', 'dark');
+            } else {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                themeToggle.textContent = '🌙';
+                currentTheme = 'light';
+                localStorage.setItem('adminTheme', 'light');
+            }
+        }
+
+        // Toggle password visibility
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
             const button = input.parentElement.querySelector('.toggle-password');
@@ -636,6 +741,7 @@
             if (password === CONFIG.ADMIN_PASSWORD) {
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('adminPanel').classList.remove('hidden');
+                updateStats(); // Load stats
             } else {
                 alert('❌ Incorrect password. Please try again.');
                 document.getElementById('adminPassword').value = '';
@@ -660,6 +766,8 @@
             // Load products if manage tab
             if (tabName === 'manage') {
                 loadProducts();
+            } else if (tabName === 'settings') {
+                updateStats();
             }
         }
 
@@ -672,15 +780,14 @@
             reader.onload = function(e) {
                 document.getElementById('preview').src = e.target.result;
                 document.getElementById('imagePreview').classList.remove('hidden');
+                
+                // Scroll to preview
+                document.getElementById('imagePreview').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
             };
             reader.readAsDataURL(file);
-        }
-
-        // Generate unique filename
-        function generateFilename(category) {
-            const timestamp = Date.now();
-            const random = Math.random().toString(36).substring(2, 8);
-            return `${category}_${timestamp}_${random}.jpg`;
         }
 
         // Upload product
@@ -692,20 +799,23 @@
 
             // Validation
             if (!price || price < 1) {
-                showStatus(statusDiv, '❌ Please enter a valid price', 'error');
+                showStatus(statusDiv, '❌ Please enter a valid price (minimum 1 KSH)', 'error');
                 return;
             }
 
             if (!fileInput.files[0]) {
-                showStatus(statusDiv, '❌ Please select an image', 'error');
+                showStatus(statusDiv, '❌ Please select an image file', 'error');
                 return;
             }
 
             try {
-                showStatus(statusDiv, '⏳ Uploading product...', 'loading');
+                showStatus(statusDiv, '⏳ Uploading product to storage...', 'loading');
 
                 const file = fileInput.files[0];
-                const filename = generateFilename(category);
+                const timestamp = Date.now();
+                const random = Math.random().toString(36).substring(2, 8);
+                const filename = `${category}_${timestamp}_${random}.jpg`;
+                
                 const folder = category === 'tote' ? 'Images' : 'Images2';
                 const priceFolder = price.trim();
                 const path = `${folder}/${priceFolder}/${filename}`;
@@ -734,17 +844,16 @@
 
                 if (response.ok) {
                     const result = await response.json();
-                    showStatus(statusDiv, `✅ Product uploaded successfully!`, 'success');
                     
                     // Clear form
                     document.getElementById('productPrice').value = '';
                     document.getElementById('imageInput').value = '';
                     document.getElementById('imagePreview').classList.add('hidden');
                     
-                    // Auto-switch to manage tab after 2 seconds
-                    setTimeout(() => {
-                        switchTab('manage');
-                    }, 2000);
+                    showStatus(statusDiv, `✅ Success! Product uploaded to ${category} collection. Price: KSH ${price}`, 'success');
+                    
+                    // Update stats after successful upload
+                    updateStats();
                     
                 } else {
                     const error = await response.json();
@@ -757,7 +866,7 @@
             }
         }
 
-        // Load products directly from GitHub
+        // Load products with proper image display
         async function loadProducts() {
             const category = document.getElementById('manageCategory').value;
             const folder = category === 'tote' ? 'Images' : 'Images2';
@@ -783,7 +892,8 @@
                     productsList.innerHTML = `
                         <div class="empty-state">
                             <div class="empty-icon">📁</div>
-                            <div>No products found. Start by uploading some products!</div>
+                            <h3>No Products Found</h3>
+                            <div>No products in ${category} collection yet.</div>
                         </div>
                     `;
                     loadingDiv.classList.add('hidden');
@@ -817,8 +927,8 @@
                             
                             images.forEach(image => {
                                 if (image.type === 'file' && /\.(jpg|jpeg|png|gif|webp)$/i.test(image.name)) {
-                                    // Create authenticated image URL with token
-                                    const imageUrl = `https://raw.githubusercontent.com/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/${CONFIG.BRANCH}/${image.path}`;
+                                    // Create authenticated image URL
+                                    const imageUrl = `https://raw.githubusercontent.com/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/${CONFIG.BRANCH}/${image.path}?t=${Date.now()}`;
                                     
                                     currentProducts.push({
                                         path: image.path,
@@ -826,8 +936,7 @@
                                         price: price,
                                         url: imageUrl,
                                         sha: image.sha,
-                                        category: category,
-                                        rawUrl: `https://raw.githubusercontent.com/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/${CONFIG.BRANCH}/${image.path}`
+                                        category: category
                                     });
                                 }
                             });
@@ -841,33 +950,36 @@
                     productsList.innerHTML = `
                         <div class="empty-state">
                             <div class="empty-icon">📦</div>
-                            <div>No products found in this category.</div>
+                            <h3>No Products Found</h3>
+                            <div>Start by uploading some products in the Upload tab.</div>
                         </div>
                     `;
                     return;
                 }
 
-                // Display products
+                // Display products with large images
                 currentProducts.forEach(product => {
                     const productDiv = document.createElement('div');
                     productDiv.className = 'product-item';
                     
                     productDiv.innerHTML = `
-                        <img src="${product.url}?token=${CONFIG.GITHUB_TOKEN}&t=${Date.now()}" 
-                             class="product-image"
-                             alt="${product.name}"
-                             loading="lazy"
-                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iODAiIGhlaWdodD0iODAiIGZpbGw9IiNGOUY5RkYiIHJ4PSI4Ii8+PHBhdGggZD0iTTQwIDI0QzMxLjE2IDI0IDI0IDMxLjE2IDI0IDQwUzMxLjE2IDU2IDQwIDU2czE2LTcuMTYgMTYtMTZTNDguODQgMjQgNDAgMjR6bTAgMjhjNi42MiAwIDEyLTUuMzggMTItMTJTNDYuNjIgMjggNDAgMjh6IiBmaWxsPSIjMkQ1MDE2Ii8+PHBhdGggZD0iTTU0LjQ0IDUzLjU2TDUzLjU2IDU0LjQ0TDQwIDQwLjg4TDI2LjQ0IDU0LjQ0TDI1LjU2IDUzLjU2TDM5LjEyIDQwTDI1LjU2IDI2LjQ0TDI2LjQ0IDI1LjU2TDQwIDM5LjEyTDUzLjU2IDI1LjU2TDU0LjQ0IDI2LjQ0TDQwLjg4IDQwTDU0LjQ0IDUzLjU2WiIgZmlsbD0iI0U2QjMyNSIvPjwvc3ZnPg=='">
+                        <div class="product-image-container">
+                            <img src="${product.url}"
+                                 class="product-image"
+                                 alt="${product.name}"
+                                 loading="lazy"
+                                 onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNGNUY1RjUiLz48dGV4dCB4PSIzMDAiIHk9IjIwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjODA4MDgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW1hZ2UgTm90IEZvdW5kPC90ZXh0Pjwvc3ZnPg=='">
+                        </div>
                         <div class="product-details">
                             <div class="product-name">${product.name}</div>
-                            <div>
-                                <span class="product-price">Ksh ${product.price}</span>
-                                <span class="product-category">${category === 'tote' ? 'Tote Bag' : 'Natural Care'}</span>
-                            </div>
+                            <div class="product-price">KSH ${product.price}</div>
+                            <span class="product-category">${product.category === 'tote' ? '👜 Tote Bag' : '✨ Natural Product'}</span>
                         </div>
-                        <button class="btn btn-delete" onclick="deleteProduct('${product.path}', '${product.sha}')">
-                            Delete
-                        </button>
+                        <div class="product-actions">
+                            <button class="btn btn-delete" onclick="deleteProduct('${product.path}', '${product.sha}')">
+                                🗑️ Delete
+                            </button>
+                        </div>
                     `;
                     
                     productsList.appendChild(productDiv);
@@ -877,9 +989,10 @@
                 console.error('Load error:', error);
                 loadingDiv.classList.add('hidden');
                 productsList.innerHTML = `
-                    <div class="status error">
-                        ❌ Failed to load products
-                        <br><small>${error.message}</small>
+                    <div class="empty-state">
+                        <div class="empty-icon">⚠️</div>
+                        <h3>Error Loading Products</h3>
+                        <div>${error.message}</div>
                     </div>
                 `;
             }
@@ -887,7 +1000,7 @@
 
         // Delete product
         async function deleteProduct(path, sha) {
-            if (!confirm('Are you sure you want to delete this product?\nThis action cannot be undone.')) {
+            if (!confirm('⚠️ ARE YOU SURE?\n\nThis will permanently delete this product from storage.\n\nThis action cannot be undone!')) {
                 return;
             }
 
@@ -912,6 +1025,7 @@
                 if (response.ok) {
                     alert('✅ Product deleted successfully!');
                     loadProducts(); // Refresh the list
+                    updateStats(); // Update stats
                 } else {
                     throw new Error('Delete failed');
                 }
@@ -922,10 +1036,10 @@
         }
 
         // Change password
-        function changePassword() {
+        async function changePassword() {
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-            const statusDiv = document.getElementById('settingsStatus');
+            const statusDiv = document.getElementById('passwordStatus');
 
             if (!newPassword || !confirmPassword) {
                 showStatus(statusDiv, '❌ Please fill in both password fields', 'error');
@@ -952,8 +1066,70 @@
             document.getElementById('confirmPassword').value = '';
         }
 
+        // Update statistics
+        async function updateStats() {
+            const statsGrid = document.getElementById('statsGrid');
+            if (!statsGrid) return;
+
+            try {
+                // Get counts from both folders
+                const [toteRes, skinRes] = await Promise.all([
+                    fetch(`https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/Images`, {
+                        headers: { 'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}` }
+                    }),
+                    fetch(`https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/Images2`, {
+                        headers: { 'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}` }
+                    })
+                ]);
+
+                let toteCount = 0;
+                let skinCount = 0;
+
+                if (toteRes.ok) {
+                    const toteFolders = await toteRes.json();
+                    toteCount = toteFolders.filter(f => f.type === 'dir').length;
+                }
+
+                if (skinRes.ok) {
+                    const skinFolders = await skinRes.json();
+                    skinCount = skinFolders.filter(f => f.type === 'dir').length;
+                }
+
+                const totalProducts = toteCount + skinCount;
+
+                statsGrid.innerHTML = `
+                    <div class="stat-item">
+                        <div class="stat-value">${totalProducts}</div>
+                        <div class="stat-label">Total Products</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${toteCount}</div>
+                        <div class="stat-label">Tote Bags</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${skinCount}</div>
+                        <div class="stat-label">Skin & Hair</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">✅</div>
+                        <div class="stat-label">System Active</div>
+                    </div>
+                `;
+
+            } catch (error) {
+                statsGrid.innerHTML = `
+                    <div class="stat-item">
+                        <div class="stat-value">❌</div>
+                        <div class="stat-label">Error Loading Stats</div>
+                    </div>
+                `;
+            }
+        }
+
         // Helper functions
         function showStatus(element, message, type) {
+            if (!element) return;
+            
             element.textContent = message;
             element.className = `status ${type}`;
             
@@ -976,6 +1152,14 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            // Load saved theme
+            const savedTheme = localStorage.getItem('adminTheme') || 'light';
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.querySelector('.theme-toggle').textContent = '☀️';
+                currentTheme = 'dark';
+            }
+
             // Load saved password
             const savedPassword = localStorage.getItem('meru_admin_password');
             if (savedPassword) {
@@ -988,17 +1172,6 @@
             // Enter key login
             document.getElementById('adminPassword').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') login();
-            });
-
-            // Mobile touch improvements
-            document.querySelectorAll('button, .tab, .file-input').forEach(el => {
-                el.addEventListener('touchstart', function() {
-                    this.style.opacity = '0.7';
-                });
-                
-                el.addEventListener('touchend', function() {
-                    this.style.opacity = '1';
-                });
             });
         });
     </script>
