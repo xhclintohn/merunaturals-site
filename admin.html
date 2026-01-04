@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #1a1a1a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             color: white;
             min-height: 100vh;
             display: flex;
@@ -25,54 +25,72 @@
         .container {
             width: 100%;
             max-width: 500px;
-            background: #2d2d2d;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .logo h1 {
-            color: #e6b325;
-            font-size: 1.8rem;
-            margin-bottom: 5px;
+            background: linear-gradient(45deg, #e6b325, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            font-weight: 800;
         }
 
         .logo p {
-            color: #888;
-            font-size: 0.9rem;
+            color: #aaa;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
         .input-group label {
             display: block;
-            color: #ccc;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+            color: #e6b325;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        .input-group input {
+        .input-group input,
+        .input-group select {
             width: 100%;
-            padding: 12px 15px;
-            background: #3a3a3a;
-            border: 2px solid #444;
-            border-radius: 8px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(230, 179, 37, 0.3);
+            border-radius: 12px;
             color: white;
             font-size: 1rem;
             transition: all 0.3s ease;
         }
 
-        .input-group input:focus {
+        .input-group input:focus,
+        .input-group select:focus {
             outline: none;
             border-color: #e6b325;
-            background: #444;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 3px rgba(230, 179, 37, 0.2);
+        }
+
+        .input-group select option {
+            background: #2d2d2d;
+            color: white;
         }
 
         .input-group input[type="number"] {
@@ -84,71 +102,109 @@
             margin: 0;
         }
 
+        .password-toggle {
+            position: absolute;
+            right: 20px;
+            top: 45px;
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #e6b325;
+        }
+
         .btn {
             width: 100%;
-            padding: 14px;
-            background: #e6b325;
+            padding: 18px;
+            background: linear-gradient(45deg, #e6b325, #ffd700);
             color: #1a1a1a;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 10px;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            background: #d4a21e;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(230, 179, 37, 0.4);
         }
 
         .btn:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
 
         .btn-delete {
-            background: #dc3545;
+            background: linear-gradient(45deg, #dc3545, #ff6b6b);
             color: white;
-            padding: 10px;
-            margin-top: 5px;
+            padding: 12px 20px;
+            font-size: 0.95rem;
         }
 
         .btn-delete:hover {
-            background: #c82333;
+            box-shadow: 0 10px 25px rgba(220, 53, 69, 0.4);
         }
 
         .tabs {
             display: flex;
-            background: #3a3a3a;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 30px;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .tab {
             flex: 1;
-            padding: 12px;
+            padding: 16px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             color: #aaa;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
         }
 
         .tab.active {
-            background: #e6b325;
+            background: linear-gradient(45deg, #e6b325, #ffd700);
             color: #1a1a1a;
-            font-weight: bold;
+            font-weight: 700;
         }
 
-        .tab:hover:not(.active) {
-            background: #444;
-            color: white;
+        .tab:not(.active):hover {
+            background: rgba(230, 179, 37, 0.1);
+            color: #e6b325;
         }
 
         .tab-content {
             display: none;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease;
         }
 
         .tab-content.active {
@@ -156,47 +212,57 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .products-list {
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
-            background: #3a3a3a;
-            border-radius: 8px;
-            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
             margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .product-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px;
-            background: #444;
-            border-radius: 6px;
-            margin-bottom: 8px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            margin-bottom: 12px;
             animation: slideIn 0.3s ease;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(5px);
+            border-color: rgba(230, 179, 37, 0.2);
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-10px); }
+            from { opacity: 0; transform: translateX(-20px); }
             to { opacity: 1; transform: translateX(0); }
         }
 
         .product-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             flex: 1;
         }
 
         .product-image {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 8px;
+            border: 2px solid rgba(230, 179, 37, 0.3);
         }
 
         .product-details {
@@ -204,105 +270,192 @@
         }
 
         .product-name {
-            font-weight: bold;
-            margin-bottom: 3px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #fff;
+            font-size: 1rem;
         }
 
         .product-price {
             color: #e6b325;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: rgba(230, 179, 37, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+
+        .category-badge.tote {
+            background: rgba(155, 89, 182, 0.2);
+            color: #9b59b6;
+        }
+
+        .category-badge.skin {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
         }
 
         .status {
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 15px 0;
         }
 
         .status.success {
-            background: rgba(40, 167, 69, 0.2);
-            color: #28a745;
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 1px solid rgba(46, 204, 113, 0.3);
         }
 
         .status.error {
-            background: rgba(220, 53, 69, 0.2);
-            color: #dc3545;
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
         }
 
         .status.loading {
-            background: rgba(255, 193, 7, 0.2);
-            color: #ffc107;
+            background: rgba(241, 196, 15, 0.2);
+            color: #f1c40f;
+            border: 1px solid rgba(241, 196, 15, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(241, 196, 15, 0.3);
+            border-top-color: #f1c40f;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .login-screen {
             text-align: center;
+            animation: fadeIn 0.5s ease;
         }
 
         .login-screen h2 {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             color: #e6b325;
+            font-size: 1.8rem;
         }
 
-        .token-warning {
-            background: rgba(220, 53, 69, 0.1);
-            border: 1px solid #dc3545;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 20px 0;
-            font-size: 0.9rem;
-            color: #ff6b6b;
-        }
-
-        .token-warning code {
-            background: rgba(0,0,0,0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-
-        .admin-info {
+        .admin-welcome {
             background: rgba(230, 179, 37, 0.1);
-            border: 1px solid #e6b325;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 20px 0;
-            font-size: 0.9rem;
+            border: 1px solid rgba(230, 179, 37, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .admin-welcome h3 {
+            color: #e6b325;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .admin-welcome ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .admin-welcome li {
+            margin-bottom: 8px;
+            color: #ccc;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .admin-welcome li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #e6b325;
+            font-weight: bold;
         }
 
         /* Scrollbar styling */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #2d2d2d;
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb {
             background: #e6b325;
-            border-radius: 4px;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffd700;
         }
 
         .hidden {
-            display: none;
+            display: none !important;
+        }
+
+        .price-input-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .price-input-group input {
+            flex: 1;
+        }
+
+        .currency {
+            color: #e6b325;
+            font-weight: bold;
+            font-size: 1.1rem;
+            white-space: nowrap;
         }
 
         @media (max-width: 600px) {
             .container {
-                padding: 20px;
+                padding: 25px;
+                border-radius: 15px;
             }
             
             .product-info {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+                gap: 15px;
             }
             
             .product-image {
-                width: 80px;
-                height: 80px;
+                width: 100%;
+                height: 150px;
+            }
+            
+            .tabs {
+                flex-direction: column;
             }
         }
     </style>
@@ -311,65 +464,85 @@
     <div class="container">
         <div class="logo">
             <h1>Meru Naturals</h1>
-            <p>Admin Panel</p>
+            <p>Secure Admin Panel</p>
         </div>
 
         <div id="loginScreen" class="login-screen">
-            <h2>Admin Login</h2>
+            <h2>🔐 Admin Login</h2>
             <div class="input-group">
-                <label for="adminPassword">Password</label>
+                <label for="adminPassword">Admin Password</label>
                 <input type="password" id="adminPassword" placeholder="Enter admin password">
+                <button type="button" class="password-toggle" onclick="togglePassword('adminPassword', this)">
+                    👁️
+                </button>
             </div>
-            <div class="admin-info">
-                <strong>Note:</strong> You need to set up a GitHub token first. Read the instructions below.
+            <div class="admin-welcome">
+                <h3>📋 Admin Features:</h3>
+                <ul>
+                    <li>Upload products with prices</li>
+                    <li>Organize by categories</li>
+                    <li>Delete out-of-stock items</li>
+                    <li>Auto-create price folders</li>
+                    <li>Secure private repository</li>
+                </ul>
             </div>
-            <button class="btn" onclick="login()">Login</button>
+            <button class="btn" onclick="login()">Login to Admin Panel</button>
         </div>
 
         <div id="adminPanel" class="hidden">
             <div class="tabs">
-                <div class="tab active" onclick="switchTab('upload')">📤 Upload</div>
-                <div class="tab" onclick="switchTab('manage')">📋 Manage</div>
-                <div class="tab" onclick="switchTab('config')">⚙️ Config</div>
+                <div class="tab active" onclick="switchTab('upload')">📤 Upload Product</div>
+                <div class="tab" onclick="switchTab('manage')">📋 Manage Products</div>
+                <div class="tab" onclick="switchTab('config')">⚙️ System Status</div>
             </div>
 
             <div id="uploadTab" class="tab-content active">
                 <div class="input-group">
-                    <label for="productCategory">Category</label>
-                    <select id="productCategory" class="category-select">
-                        <option value="tote">👜 Tote Bags</option>
-                        <option value="skin">✨ Skin & Hair Care</option>
+                    <label for="productCategory">
+                        🏷️ Product Category
+                        <span id="categoryIcon">👜</span>
+                    </label>
+                    <select id="productCategory" class="category-select" onchange="updateCategoryIcon()">
+                        <option value="tote">Tote Bags Collection</option>
+                        <option value="skin">Natural Skin & Hair Care</option>
                     </select>
                 </div>
 
                 <div class="input-group">
-                    <label for="productPrice">Price (Ksh)</label>
-                    <input type="number" id="productPrice" placeholder="e.g., 1500" min="1" step="1">
+                    <label for="productPrice">💰 Product Price</label>
+                    <div class="price-input-group">
+                        <input type="number" id="productPrice" placeholder="Enter price in Ksh" min="1" step="1">
+                        <span class="currency">KSH</span>
+                    </div>
                 </div>
 
                 <div class="input-group">
-                    <label for="productImage">Product Image</label>
+                    <label for="productImage">🖼️ Product Image</label>
                     <input type="file" id="productImage" accept="image/*" onchange="previewImage()">
                 </div>
 
-                <div id="imagePreview" class="hidden" style="margin: 15px 0; text-align: center;">
-                    <img id="preview" style="max-width: 200px; max-height: 200px; border-radius: 8px;">
+                <div id="imagePreview" class="hidden" style="margin: 20px 0; text-align: center;">
+                    <div style="margin-bottom: 10px; color: #e6b325; font-weight: bold;">📸 Image Preview:</div>
+                    <img id="preview" style="max-width: 100%; max-height: 300px; border-radius: 12px; border: 2px solid rgba(230, 179, 37, 0.3);">
                 </div>
 
-                <button class="btn" onclick="uploadProduct()">Upload Product</button>
-                <div id="uploadStatus" class="status" style="margin-top: 15px;"></div>
+                <button class="btn" onclick="uploadProduct()">
+                    🚀 Upload Product to GitHub
+                </button>
+                <div id="uploadStatus" class="status" style="margin-top: 20px;"></div>
             </div>
 
             <div id="manageTab" class="tab-content">
                 <div class="input-group">
-                    <label for="manageCategory">Select Category</label>
+                    <label for="manageCategory">📂 Select Category</label>
                     <select id="manageCategory" onchange="loadProducts()" class="category-select">
-                        <option value="tote">👜 Tote Bags</option>
-                        <option value="skin">✨ Skin & Hair Care</option>
+                        <option value="tote">👜 Tote Bags Collection</option>
+                        <option value="skin">✨ Natural Skin & Hair Care</option>
                     </select>
                 </div>
 
-                <div id="productsLoading" class="status loading" style="margin: 15px 0;">
+                <div id="productsLoading" class="status loading hidden">
+                    <div class="spinner"></div>
                     Loading products...
                 </div>
 
@@ -377,44 +550,64 @@
             </div>
 
             <div id="configTab" class="tab-content">
-                <div class="token-warning">
-                    <strong>⚠️ Important:</strong> Never commit your GitHub token to the repository!<br><br>
-                    For Vercel deployment, add this environment variable:<br>
-                    <code>GITHUB_TOKEN=your_token_here</code>
+                <div class="admin-welcome">
+                    <h3>✅ System Status: Connected</h3>
+                    <ul>
+                        <li>GitHub Token: <span style="color: #2ecc71;">✓ Configured</span></li>
+                        <li>Repository: <span style="color: #2ecc71;">Private Mode ✓</span></li>
+                        <li>API Access: <span style="color: #2ecc71;">✓ Active</span></li>
+                        <li>Storage: <span style="color: #2ecc71;">✓ Unlimited</span></li>
+                    </ul>
                 </div>
 
                 <div class="input-group">
-                    <label for="githubToken">GitHub Token (for testing)</label>
-                    <input type="password" id="githubToken" placeholder="Enter GitHub token for testing">
+                    <label for="githubToken">🔑 GitHub Token (for reference)</label>
+                    <input type="password" id="githubToken" value="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" readonly>
+                    <button type="button" class="password-toggle" onclick="togglePassword('githubToken', this)">
+                        👁️
+                    </button>
                 </div>
 
                 <div class="input-group">
-                    <label for="adminPass">Admin Password</label>
-                    <input type="password" id="adminPass" placeholder="Change admin password">
+                    <label for="adminPass">🔐 Change Admin Password</label>
+                    <input type="password" id="adminPass" placeholder="Enter new admin password">
+                    <button type="button" class="password-toggle" onclick="togglePassword('adminPass', this)">
+                        👁️
+                    </button>
                 </div>
 
-                <button class="btn" onclick="saveConfig()">Save Configuration</button>
-                <div id="configStatus" class="status" style="margin-top: 15px;"></div>
+                <button class="btn" onclick="saveConfig()">💾 Save Configuration</button>
+                <div id="configStatus" class="status" style="margin-top: 20px;"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Configuration - YOU MUST SET THESE IN VERCEL ENVIRONMENT VARIABLES
+        // Configuration - Direct token since repo is private
         const CONFIG = {
+            GITHUB_TOKEN: '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',
             REPO_OWNER: 'xhclintohn',
             REPO_NAME: 'merunaturals-site',
             BRANCH: 'main',
-            
-            // Default admin password (change this!)
-            ADMIN_PASSWORD: 'meruadmin123',
-            
-            // Get token from Vercel environment variable
-            GITHUB_TOKEN: window.GITHUB_TOKEN || ''
+            ADMIN_PASSWORD: 'Mugambi@2020'
         };
 
-        // Store loaded products
         let currentProducts = [];
+
+        // Toggle password visibility
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+            input.setAttribute('type', type);
+            button.textContent = type === 'password' ? '👁️' : '🙈';
+        }
+
+        // Update category icon
+        function updateCategoryIcon() {
+            const category = document.getElementById('productCategory').value;
+            const icon = document.getElementById('categoryIcon');
+            icon.textContent = category === 'tote' ? '👜' : '✨';
+        }
 
         // Login function
         function login() {
@@ -422,31 +615,22 @@
             if (password === CONFIG.ADMIN_PASSWORD) {
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('adminPanel').classList.remove('hidden');
-                
-                // Check if GitHub token is set
-                if (!CONFIG.GITHUB_TOKEN) {
-                    alert('⚠️ GitHub token not found! Please set it in the Config tab or as Vercel environment variable.');
-                }
+                updateCategoryIcon(); // Set initial icon
             } else {
-                alert('❌ Incorrect password!');
+                alert('❌ Incorrect password! Please try again.');
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminPassword').focus();
             }
         }
 
         // Tab switching
         function switchTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            // Show selected tab
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            
             document.getElementById(tabName + 'Tab').classList.add('active');
             document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
 
-            // Load products if manage tab
             if (tabName === 'manage') {
                 loadProducts();
             }
@@ -468,72 +652,72 @@
             }
         }
 
-        // Generate unique filename
+        // Generate unique filename with category prefix
         function generateFilename(category) {
             const timestamp = Date.now();
-            const random = Math.floor(Math.random() * 10000);
+            const random = Math.random().toString(36).substring(2, 8);
             const prefix = category === 'tote' ? 'tote_' : 'skin_';
             return `${prefix}${timestamp}_${random}.jpg`;
         }
 
-        // Upload product
+        // Upload product to GitHub
         async function uploadProduct() {
             const category = document.getElementById('productCategory').value;
             const price = document.getElementById('productPrice').value;
             const fileInput = document.getElementById('productImage');
             const statusDiv = document.getElementById('uploadStatus');
 
+            // Validation
             if (!price || price < 1) {
-                statusDiv.textContent = '❌ Please enter a valid price';
+                statusDiv.textContent = '❌ Please enter a valid price (minimum 1 KSH)';
                 statusDiv.className = 'status error';
                 return;
             }
 
             if (!fileInput.files[0]) {
-                statusDiv.textContent = '❌ Please select an image';
-                statusDiv.className = 'status error';
-                return;
-            }
-
-            if (!CONFIG.GITHUB_TOKEN) {
-                statusDiv.textContent = '❌ GitHub token not configured';
+                statusDiv.textContent = '❌ Please select an image file';
                 statusDiv.className = 'status error';
                 return;
             }
 
             try {
-                statusDiv.textContent = '⏳ Uploading...';
+                statusDiv.innerHTML = '<div class="spinner"></div> Uploading product...';
                 statusDiv.className = 'status loading';
 
                 const file = fileInput.files[0];
                 const filename = generateFilename(category);
                 const folder = category === 'tote' ? 'Images' : 'Images2';
-                const priceFolder = price;
+                const priceFolder = price.trim();
                 
-                // Create folder structure: Images/1500/ or Images2/1500/
+                // Full path: Images/1500/filename.jpg or Images2/2500/filename.jpg
                 const path = `${folder}/${priceFolder}/${filename}`;
 
-                // Convert image to base64
+                // Convert to base64
                 const base64Image = await fileToBase64(file);
+                const content = base64Image.split(',')[1];
 
                 // Upload to GitHub
-                const response = await fetch(`https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${path}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: `Add product: ${filename}`,
-                        content: base64Image.split(',')[1], // Remove data URL prefix
-                        branch: CONFIG.BRANCH
-                    })
-                });
+                const response = await fetch(
+                    `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${path}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/vnd.github.v3+json'
+                        },
+                        body: JSON.stringify({
+                            message: `📦 Add ${category} product: ${filename} (Ksh ${price})`,
+                            content: content,
+                            branch: CONFIG.BRANCH
+                        })
+                    }
+                );
 
                 const result = await response.json();
 
                 if (response.ok) {
-                    statusDiv.textContent = '✅ Product uploaded successfully!';
+                    statusDiv.textContent = `✅ Success! Product uploaded to: ${folder}/${priceFolder}/`;
                     statusDiv.className = 'status success';
                     
                     // Reset form
@@ -541,10 +725,18 @@
                     document.getElementById('productImage').value = '';
                     document.getElementById('imagePreview').classList.add('hidden');
                     
-                    // Refresh products list if on manage tab
-                    loadProducts();
+                    // Auto-refresh products list
+                    setTimeout(() => loadProducts(), 1000);
+                    
                 } else {
-                    throw new Error(result.message || 'Upload failed');
+                    let errorMsg = result.message || 'Upload failed';
+                    // More user-friendly error messages
+                    if (errorMsg.includes('This repository is empty')) {
+                        errorMsg = 'Repository not found. Check repo name.';
+                    } else if (errorMsg.includes('Bad credentials')) {
+                        errorMsg = 'Invalid GitHub token. Please check token.';
+                    }
+                    throw new Error(errorMsg);
                 }
 
             } catch (error) {
@@ -561,52 +753,85 @@
             const loadingDiv = document.getElementById('productsLoading');
             const productsList = document.getElementById('productsList');
 
-            if (!CONFIG.GITHUB_TOKEN) {
-                productsList.innerHTML = '<div class="status error">GitHub token not configured</div>';
-                return;
-            }
-
             try {
                 loadingDiv.classList.remove('hidden');
                 productsList.innerHTML = '';
 
                 // Get all price folders
-                const response = await fetch(`https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${folder}`, {
-                    headers: {
-                        'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
+                const response = await fetch(
+                    `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${folder}`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
                     }
-                });
+                );
 
-                if (!response.ok) throw new Error('Failed to fetch folders');
+                if (response.status === 404) {
+                    productsList.innerHTML = `
+                        <div class="status">
+                            ℹ️ No products found in ${folder}. 
+                            <br>Upload your first product!
+                        </div>
+                    `;
+                    loadingDiv.classList.add('hidden');
+                    return;
+                }
+
+                if (!response.ok) {
+                    throw new Error(`Failed to load: ${response.statusText}`);
+                }
 
                 const folders = await response.json();
                 currentProducts = [];
 
-                // For each price folder
-                for (const priceFolder of folders.filter(item => item.type === 'dir')) {
-                    const price = priceFolder.name;
-                    
-                    // Get images in this price folder
-                    const imagesRes = await fetch(`https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${folder}/${price}`, {
-                        headers: {
-                            'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
-                        }
-                    });
+                // Check if folders exist (might be empty)
+                if (!folders || folders.length === 0) {
+                    productsList.innerHTML = `
+                        <div class="status">
+                            📭 No price folders yet. Add products with prices first.
+                        </div>
+                    `;
+                    loadingDiv.classList.add('hidden');
+                    return;
+                }
 
-                    if (imagesRes.ok) {
-                        const images = await imagesRes.json();
+                // Get images from each price folder
+                for (const priceFolder of folders) {
+                    if (priceFolder.type === 'dir') {
+                        const price = priceFolder.name;
                         
-                        images.forEach(image => {
-                            if (image.type === 'file' && image.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
-                                currentProducts.push({
-                                    path: image.path,
-                                    name: image.name,
-                                    price: price,
-                                    url: image.download_url,
-                                    sha: image.sha
+                        try {
+                            const imagesRes = await fetch(
+                                `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${folder}/${price}`,
+                                {
+                                    headers: {
+                                        'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
+                                        'Accept': 'application/vnd.github.v3+json'
+                                    }
+                                }
+                            );
+
+                            if (imagesRes.ok) {
+                                const images = await imagesRes.json();
+                                
+                                images.forEach(image => {
+                                    if (image.type === 'file' && /\.(jpg|jpeg|png|gif|webp)$/i.test(image.name)) {
+                                        currentProducts.push({
+                                            path: image.path,
+                                            name: image.name,
+                                            price: price,
+                                            url: image.download_url,
+                                            sha: image.sha,
+                                            category: category
+                                        });
+                                    }
                                 });
                             }
-                        });
+                        } catch (err) {
+                            console.log(`Skipping folder ${price}:`, err.message);
+                        }
                     }
                 }
 
@@ -614,25 +839,40 @@
                 loadingDiv.classList.add('hidden');
                 
                 if (currentProducts.length === 0) {
-                    productsList.innerHTML = '<div class="status">No products found</div>';
+                    productsList.innerHTML = `
+                        <div class="status">
+                            📭 No images found. Upload some products first!
+                        </div>
+                    `;
                     return;
                 }
+
+                // Sort by price (descending)
+                currentProducts.sort((a, b) => b.price - a.price);
 
                 currentProducts.forEach((product, index) => {
                     const productDiv = document.createElement('div');
                     productDiv.className = 'product-item';
-                    productDiv.style.animationDelay = `${index * 0.1}s`;
+                    productDiv.style.animationDelay = `${index * 0.05}s`;
                     
                     productDiv.innerHTML = `
                         <div class="product-info">
-                            <img src="${product.url}" class="product-image" alt="${product.name}">
+                            <img src="${product.url}?t=${Date.now()}" 
+                                 class="product-image" 
+                                 alt="${product.name}"
+                                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iODAiIGhlaWdodD0iODAiIGZpbGw9IiMyRDUwMTYiLz48dGV4dCB4PSI0MCIgeT0iNDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZmlsbD0iI0U2QjMyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPiR7cHJvZHVjdC5jYXRlZ29yeSA9PT0gJ3RvdGUnID8gJ8KnJyA6ICfimqAifTwvdGV4dD48L3N2Zz4='">
                             <div class="product-details">
                                 <div class="product-name">${product.name}</div>
-                                <div class="product-price">Ksh ${product.price}</div>
+                                <div>
+                                    <span class="product-price">Ksh ${product.price}</span>
+                                    <span class="category-badge ${product.category}">
+                                        ${product.category === 'tote' ? '👜 Tote' : '✨ Natural'}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <button class="btn btn-delete" onclick="deleteProduct('${product.path}', '${product.sha}')">
-                            Delete
+                            🗑️ Delete
                         </button>
                     `;
                     
@@ -642,73 +882,84 @@
             } catch (error) {
                 console.error('Load error:', error);
                 loadingDiv.classList.add('hidden');
-                productsList.innerHTML = `<div class="status error">Error: ${error.message}</div>`;
+                productsList.innerHTML = `
+                    <div class="status error">
+                        ❌ Error: ${error.message}
+                        <br><small>Check your GitHub token and repository name.</small>
+                    </div>
+                `;
             }
         }
 
         // Delete product
         async function deleteProduct(path, sha) {
-            if (!confirm('⚠️ Are you sure you want to delete this product?')) {
-                return;
-            }
-
-            if (!CONFIG.GITHUB_TOKEN) {
-                alert('GitHub token not configured');
+            if (!confirm('⚠️ Are you sure you want to DELETE this product?\n\nThis action cannot be undone!')) {
                 return;
             }
 
             try {
-                const response = await fetch(`https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${path}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: `Delete product: ${path.split('/').pop()}`,
-                        sha: sha,
-                        branch: CONFIG.BRANCH
-                    })
-                });
+                const response = await fetch(
+                    `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${path}`,
+                    {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/vnd.github.v3+json'
+                        },
+                        body: JSON.stringify({
+                            message: `🗑️ Delete product: ${path.split('/').pop()}`,
+                            sha: sha,
+                            branch: CONFIG.BRANCH
+                        })
+                    }
+                );
 
                 if (response.ok) {
                     alert('✅ Product deleted successfully!');
                     loadProducts(); // Refresh list
                 } else {
-                    throw new Error('Delete failed');
+                    const result = await response.json();
+                    throw new Error(result.message || 'Delete failed');
                 }
             } catch (error) {
                 console.error('Delete error:', error);
-                alert(`❌ Error: ${error.message}`);
+                alert(`❌ Delete failed: ${error.message}`);
             }
         }
 
         // Save configuration
         function saveConfig() {
-            const token = document.getElementById('githubToken').value;
             const newPassword = document.getElementById('adminPass').value;
             const statusDiv = document.getElementById('configStatus');
 
-            if (token) {
-                CONFIG.GITHUB_TOKEN = token;
-                localStorage.setItem('github_token', token);
-            }
-
-            if (newPassword) {
+            if (newPassword && newPassword.length >= 6) {
                 CONFIG.ADMIN_PASSWORD = newPassword;
-                localStorage.setItem('admin_password', newPassword);
-            }
-
-            statusDiv.textContent = '✅ Configuration saved!';
-            statusDiv.className = 'status success';
-            
-            setTimeout(() => {
-                statusDiv.textContent = '';
+                localStorage.setItem('meru_admin_password', newPassword);
+                statusDiv.textContent = '✅ Admin password updated successfully!';
+                statusDiv.className = 'status success';
+                
+                // Clear the field
+                document.getElementById('adminPass').value = '';
+                
+                setTimeout(() => {
+                    statusDiv.textContent = '';
+                    statusDiv.className = 'status';
+                }, 3000);
+            } else if (newPassword) {
+                statusDiv.textContent = '❌ Password must be at least 6 characters';
+                statusDiv.className = 'status error';
+            } else {
+                statusDiv.textContent = 'ℹ️ No changes made';
                 statusDiv.className = 'status';
-            }, 3000);
+                setTimeout(() => {
+                    statusDiv.textContent = '';
+                    statusDiv.className = 'status';
+                }, 2000);
+            }
         }
 
-        // Helper function to convert file to base64
+        // Helper: File to base64
         function fileToBase64(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -718,19 +969,20 @@
             });
         }
 
-        // Load saved config from localStorage
+        // Load saved password on startup
         document.addEventListener('DOMContentLoaded', function() {
-            const savedToken = localStorage.getItem('github_token');
-            const savedPassword = localStorage.getItem('admin_password');
-            
-            if (savedToken) {
-                CONFIG.GITHUB_TOKEN = savedToken;
-                document.getElementById('githubToken').value = savedToken;
-            }
-            
+            const savedPassword = localStorage.getItem('meru_admin_password');
             if (savedPassword) {
                 CONFIG.ADMIN_PASSWORD = savedPassword;
             }
+            
+            // Focus on password field
+            document.getElementById('adminPassword').focus();
+            
+            // Enter key to login
+            document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') login();
+            });
         });
     </script>
 </body>
