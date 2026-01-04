@@ -5,360 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meru Naturals Admin</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background: #f0f2f5;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .header {
-            background: #2d5016;
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .header p {
-            opacity: 0.9;
-            font-size: 14px;
-        }
-
-        .login-screen {
-            padding: 50px 30px;
-            text-align: center;
-        }
-
-        .login-icon {
-            font-size: 50px;
-            color: #2d5016;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 16px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #2d5016;
-        }
-
-        .password-wrapper {
-            position: relative;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 16px;
-            background: #e6b325;
-            color: #2d5016;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn:hover {
-            background: #d4a21e;
-            transform: translateY(-2px);
-        }
-
-        .tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #dee2e6;
-        }
-
-        .tab {
-            flex: 1;
-            padding: 18px;
-            text-align: center;
-            font-weight: 600;
-            color: #6c757d;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab.active {
-            color: #2d5016;
-            border-bottom-color: #e6b325;
-            background: white;
-        }
-
-        .tab-content {
-            padding: 30px;
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .category-buttons {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .category-btn {
-            flex: 1;
-            padding: 18px;
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
-            background: white;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .category-btn.active {
-            border-color: #2d5016;
-            background: #f8fff0;
-            color: #2d5016;
-        }
-
-        .price-input {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .currency {
-            color: #2d5016;
-            font-weight: bold;
-            min-width: 40px;
-        }
-
-        .file-upload {
-            padding: 30px;
-            border: 3px dashed #dee2e6;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            margin-bottom: 25px;
-            transition: all 0.3s;
-        }
-
-        .file-upload:hover {
-            border-color: #2d5016;
-            background: #f8fff0;
-        }
-
-        .file-upload input {
-            display: none;
-        }
-
-        .image-preview {
-            margin: 25px 0;
-            text-align: center;
-        }
-
-        .preview-img {
-            max-width: 100%;
-            max-height: 350px;
-            border-radius: 10px;
-            border: 2px solid #dee2e6;
-        }
-
-        .status {
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .status.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .status.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .status.loading {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .loading-spinner {
-            width: 20px;
-            height: 20px;
-            border: 3px solid #856404;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .product-list {
-            margin-top: 25px;
-        }
-
-        .product-item {
-            background: white;
-            border: 2px solid #dee2e6;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-
-        .product-image {
-            width: 100%;
-            max-height: 400px;
-            object-fit: contain;
-            border-radius: 8px;
-            border: 2px solid #e6b325;
-            margin-bottom: 15px;
-            background: #f8f9fa;
-        }
-
-        .product-info {
-            margin-bottom: 20px;
-        }
-
-        .product-name {
-            font-weight: 600;
-            color: #2d5016;
-            margin-bottom: 10px;
-            word-break: break-all;
-        }
-
-        .product-price {
-            font-size: 24px;
-            font-weight: 800;
-            color: #e6b325;
-            margin-bottom: 10px;
-        }
-
-        .product-category {
-            display: inline-block;
-            padding: 6px 12px;
-            background: #f0f7ff;
-            color: #2d5016;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .delete-btn {
-            width: 100%;
-            padding: 14px;
-            background: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .delete-btn:hover {
-            background: #c82333;
-            transform: translateY(-2px);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 50px 20px;
-            color: #6c757d;
-        }
-
-        .settings-section {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-        }
-
-        .settings-section h3 {
-            color: #2d5016;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                border-radius: 10px;
-            }
-            
-            .tab-content {
-                padding: 20px;
-            }
-            
-            .category-buttons {
-                flex-direction: column;
-            }
-            
-            .product-item {
-                padding: 20px;
-            }
-            
-            .product-image {
-                max-height: 300px;
-            }
-        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:system-ui,sans-serif;background:#f5f5f5;min-height:100vh;padding:20px;}
+        .container{max-width:800px;margin:0 auto;background:white;border-radius:12px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.12);}
+        .header{background:#2d5016;color:white;padding:25px;text-align:center;}
+        .header h1{font-size:24px;margin-bottom:5px;}
+        .header p{opacity:0.9;font-size:14px;}
+        .login-screen{padding:50px 30px;text-align:center;}
+        .login-icon{font-size:48px;color:#2d5016;margin-bottom:20px;}
+        .form-group{margin-bottom:20px;}
+        .form-input{width:100%;padding:15px;border:2px solid #ddd;border-radius:8px;font-size:16px;}
+        .form-input:focus{outline:none;border-color:#2d5016;}
+        .password-wrapper{position:relative;}
+        .toggle-password{position:absolute;right:15px;top:50%;transform:translateY(-50%);background:none;border:none;color:#666;cursor:pointer;font-size:18px;}
+        .btn{width:100%;padding:15px;background:#e6b325;color:#2d5016;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;transition:all 0.2s;}
+        .btn:hover{background:#d4a21e;}
+        .tabs{display:flex;background:#f8f9fa;}
+        .tab{flex:1;padding:18px;text-align:center;font-weight:600;color:#6c757d;cursor:pointer;border-bottom:3px solid transparent;}
+        .tab.active{color:#2d5016;border-bottom-color:#e6b325;background:white;}
+        .tab-content{padding:25px;display:none;}
+        .tab-content.active{display:block;}
+        .category-buttons{display:flex;gap:10px;margin-bottom:20px;}
+        .category-btn{flex:1;padding:15px;border:2px solid #dee2e6;border-radius:8px;background:white;cursor:pointer;font-weight:600;text-align:center;}
+        .category-btn.active{border-color:#2d5016;background:#f8fff0;color:#2d5016;}
+        .price-input{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+        .currency{color:#2d5016;font-weight:bold;min-width:40px;}
+        .file-upload{padding:25px;border:3px dashed #dee2e6;border-radius:8px;text-align:center;cursor:pointer;margin-bottom:20px;}
+        .file-upload:hover{border-color:#2d5016;background:#f8fff0;}
+        .file-upload input{display:none;}
+        .image-preview{margin:20px 0;text-align:center;}
+        .preview-img{max-width:100%;max-height:300px;border-radius:8px;border:2px solid #dee2e6;}
+        .status{padding:12px;border-radius:8px;margin:15px 0;text-align:center;font-weight:600;}
+        .status.success{background:#d4edda;color:#155724;}
+        .status.error{background:#f8d7da;color:#721c24;}
+        .status.loading{background:#fff3cd;color:#856404;}
+        .product-item{background:white;border:2px solid #dee2e6;border-radius:8px;padding:20px;margin-bottom:15px;}
+        .product-image{width:100%;max-height:350px;object-fit:contain;border-radius:6px;border:2px solid #e6b325;margin-bottom:15px;background:#f8f9fa;}
+        .product-price{font-size:22px;font-weight:800;color:#e6b325;margin-bottom:10px;}
+        .delete-btn{width:100%;padding:12px;background:#dc3545;color:white;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;}
+        .hidden{display:none!important;}
+        @media (max-width:600px){.container{border-radius:8px;}.tab-content{padding:20px;}}
     </style>
 </head>
 <body>
@@ -367,392 +53,66 @@
             <h1>Meru Naturals Admin</h1>
             <p>Product Management</p>
         </div>
-
         <div id="loginScreen" class="login-screen">
             <div class="login-icon">🔐</div>
             <div class="form-group">
                 <div class="password-wrapper">
-                    <input type="password" id="adminPassword" class="form-input" placeholder="Enter admin password">
-                    <button type="button" class="toggle-password" onclick="togglePassword('adminPassword')">
-                        👁️
-                    </button>
+                    <input type="password" id="adminPassword" class="form-input" placeholder="Password">
+                    <button type="button" class="toggle-password" onclick="togglePassword('adminPassword')">👁️</button>
                 </div>
             </div>
-            <button class="btn" onclick="login()">
-                Login
-            </button>
+            <button class="btn" onclick="login()">Login</button>
         </div>
-
         <div id="adminPanel" class="hidden">
             <div class="tabs">
                 <div class="tab active" onclick="switchTab('upload')">Upload</div>
                 <div class="tab" onclick="switchTab('manage')">Manage</div>
-                <div class="tab" onclick="switchTab('settings')">Settings</div>
             </div>
-
             <div id="uploadTab" class="tab-content active">
                 <div class="category-buttons">
                     <button class="category-btn active" onclick="selectCategory('tote')">👜 Tote Bags</button>
                     <button class="category-btn" onclick="selectCategory('skin')">✨ Skin & Hair</button>
                 </div>
                 <input type="hidden" id="productCategory" value="tote">
-
                 <div class="price-input">
                     <span class="currency">KSH</span>
                     <input type="number" id="productPrice" class="form-input" placeholder="Price" min="1">
                 </div>
-
                 <div class="file-upload" onclick="document.getElementById('imageInput').click()">
-                    <div style="font-size: 40px; color: #2d5016;">📷</div>
-                    <div style="margin-top: 15px; color: #2d5016; font-weight: 600;">Select Image</div>
+                    <div style="font-size:36px;color:#2d5016;">📷</div>
+                    <div style="margin-top:10px;color:#2d5016;font-weight:600;">Select Image</div>
                     <input type="file" id="imageInput" accept="image/*" onchange="previewImage()">
                 </div>
-
                 <div id="imagePreview" class="hidden">
                     <img id="preview" class="preview-img">
                 </div>
-
-                <button class="btn" onclick="uploadProduct()">
-                    Upload Product
-                </button>
+                <button class="btn" onclick="uploadProduct()">Upload Product</button>
                 <div id="uploadStatus" class="status"></div>
             </div>
-
             <div id="manageTab" class="tab-content">
                 <select id="manageCategory" class="form-input" onchange="loadProducts()">
                     <option value="tote">Tote Bags</option>
                     <option value="skin">Skin & Hair</option>
                 </select>
-
-                <div id="productsLoading" class="status loading hidden">
-                    <div class="loading-spinner"></div>
-                    Loading...
-                </div>
-
-                <div id="productsList" class="product-list">
-                    <div class="empty-state">
-                        Select category to view products
-                    </div>
-                </div>
-            </div>
-
-            <div id="settingsTab" class="tab-content">
-                <div class="settings-section">
-                    <h3>Change Password</h3>
-                    <div class="form-group">
-                        <div class="password-wrapper">
-                            <input type="password" id="newPassword" class="form-input" placeholder="New password">
-                            <button type="button" class="toggle-password" onclick="togglePassword('newPassword')">
-                                👁️
-                            </button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="password-wrapper">
-                            <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm password">
-                            <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">
-                                👁️
-                            </button>
-                        </div>
-                    </div>
-                    <button class="btn" onclick="changePassword()">
-                        Update Password
-                    </button>
-                    <div id="passwordStatus" class="status"></div>
-                </div>
+                <div id="productsLoading" class="status loading hidden">Loading...</div>
+                <div id="productsList" class="product-list"></div>
             </div>
         </div>
     </div>
-
     <script src="config.js"></script>
     <script>
-        let currentProducts = [];
-
-        function togglePassword(id) {
-            const input = document.getElementById(id);
-            const button = input.parentElement.querySelector('.toggle-password');
-            if (input.type === 'password') {
-                input.type = 'text';
-                button.textContent = '🙈';
-            } else {
-                input.type = 'password';
-                button.textContent = '👁️';
-            }
-        }
-
-        function selectCategory(category) {
-            document.getElementById('productCategory').value = category;
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-
-        function login() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === MERU_CONFIG.ADMIN_PASSWORD) {
-                document.getElementById('loginScreen').classList.add('hidden');
-                document.getElementById('adminPanel').classList.remove('hidden');
-            } else {
-                alert('Incorrect password');
-                document.getElementById('adminPassword').value = '';
-            }
-        }
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
-            document.getElementById(tabName + 'Tab').classList.add('active');
-            if (tabName === 'manage') loadProducts();
-        }
-
-        function previewImage() {
-            const file = document.getElementById('imageInput').files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('preview').src = e.target.result;
-                document.getElementById('imagePreview').classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
-        }
-
-        async function uploadProduct() {
-            const category = document.getElementById('productCategory').value;
-            const price = document.getElementById('productPrice').value;
-            const fileInput = document.getElementById('imageInput');
-            const statusDiv = document.getElementById('uploadStatus');
-
-            if (!price || price < 1) {
-                showStatus(statusDiv, 'Enter valid price', 'error');
-                return;
-            }
-
-            if (!fileInput.files[0]) {
-                showStatus(statusDiv, 'Select image', 'error');
-                return;
-            }
-
-            try {
-                showStatus(statusDiv, 'Uploading...', 'loading');
-                const file = fileInput.files[0];
-                const timestamp = Date.now();
-                const random = Math.random().toString(36).substring(2, 8);
-                const filename = `${category}_${timestamp}_${random}.jpg`;
-                const folder = category === 'tote' ? 'Images' : 'Images2';
-                const path = `${folder}/${price}/${filename}`;
-
-                const base64Image = await fileToBase64(file);
-                const content = base64Image.split(',')[1];
-
-                const response = await fetch(
-                    `https://api.github.com/repos/${MERU_CONFIG.REPO_OWNER}/${MERU_CONFIG.REPO_NAME}/contents/${path}`,
-                    {
-                        method: 'PUT',
-                        headers: {
-                            'Authorization': `Bearer ${MERU_CONFIG.GITHUB_TOKEN}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            message: `Added ${category} product`,
-                            content: content,
-                            branch: MERU_CONFIG.BRANCH
-                        })
-                    }
-                );
-
-                if (response.ok) {
-                    document.getElementById('productPrice').value = '';
-                    document.getElementById('imageInput').value = '';
-                    document.getElementById('imagePreview').classList.add('hidden');
-                    showStatus(statusDiv, 'Product uploaded', 'success');
-                } else {
-                    const error = await response.json();
-                    throw new Error(error.message || 'Upload failed');
-                }
-
-            } catch (error) {
-                showStatus(statusDiv, `Error: ${error.message}`, 'error');
-            }
-        }
-
-        async function loadProducts() {
-            const category = document.getElementById('manageCategory').value;
-            const folder = category === 'tote' ? 'Images' : 'Images2';
-            const loadingDiv = document.getElementById('productsLoading');
-            const productsList = document.getElementById('productsList');
-
-            try {
-                loadingDiv.classList.remove('hidden');
-                productsList.innerHTML = '';
-
-                const foldersRes = await fetch(
-                    `https://api.github.com/repos/${MERU_CONFIG.REPO_OWNER}/${MERU_CONFIG.REPO_NAME}/contents/${folder}`,
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${MERU_CONFIG.GITHUB_TOKEN}`
-                        }
-                    }
-                );
-
-                if (foldersRes.status === 404) {
-                    productsList.innerHTML = '<div class="empty-state">No products found</div>';
-                    loadingDiv.classList.add('hidden');
-                    return;
-                }
-
-                if (!foldersRes.ok) throw new Error('Failed to load');
-                const folders = await foldersRes.json();
-                currentProducts = [];
-
-                for (const priceFolder of folders) {
-                    if (priceFolder.type === 'dir') {
-                        const price = priceFolder.name;
-                        const imagesRes = await fetch(
-                            `https://api.github.com/repos/${MERU_CONFIG.REPO_OWNER}/${MERU_CONFIG.REPO_NAME}/contents/${folder}/${price}`,
-                            {
-                                headers: {
-                                    'Authorization': `Bearer ${MERU_CONFIG.GITHUB_TOKEN}`
-                                }
-                            }
-                        );
-
-                        if (imagesRes.ok) {
-                            const images = await imagesRes.json();
-                            images.forEach(image => {
-                                if (image.type === 'file' && /\.(jpg|jpeg|png|gif|webp)$/i.test(image.name)) {
-                                    const imageUrl = `https://raw.githubusercontent.com/${MERU_CONFIG.REPO_OWNER}/${MERU_CONFIG.REPO_NAME}/${MERU_CONFIG.BRANCH}/${image.path}`;
-                                    currentProducts.push({
-                                        path: image.path,
-                                        name: image.name,
-                                        price: price,
-                                        url: imageUrl,
-                                        sha: image.sha,
-                                        category: category
-                                    });
-                                }
-                            });
-                        }
-                    }
-                }
-
-                loadingDiv.classList.add('hidden');
-
-                if (currentProducts.length === 0) {
-                    productsList.innerHTML = '<div class="empty-state">No products found</div>';
-                    return;
-                }
-
-                currentProducts.forEach(product => {
-                    const productDiv = document.createElement('div');
-                    productDiv.className = 'product-item';
-                    productDiv.innerHTML = `
-                        <img src="${product.url}" class="product-image" alt="${product.name}">
-                        <div class="product-info">
-                            <div class="product-name">${product.name}</div>
-                            <div class="product-price">KSH ${product.price}</div>
-                            <span class="product-category">${product.category === 'tote' ? 'Tote Bag' : 'Natural Product'}</span>
-                        </div>
-                        <button class="delete-btn" onclick="deleteProduct('${product.path}', '${product.sha}')">
-                            Delete Product
-                        </button>
-                    `;
-                    productsList.appendChild(productDiv);
-                });
-
-            } catch (error) {
-                loadingDiv.classList.add('hidden');
-                productsList.innerHTML = `<div class="empty-state">Error: ${error.message}</div>`;
-            }
-        }
-
-        async function deleteProduct(path, sha) {
-            if (!confirm('Delete this product?')) return;
-            try {
-                const response = await fetch(
-                    `https://api.github.com/repos/${MERU_CONFIG.REPO_OWNER}/${MERU_CONFIG.REPO_NAME}/contents/${path}`,
-                    {
-                        method: 'DELETE',
-                        headers: {
-                            'Authorization': `Bearer ${MERU_CONFIG.GITHUB_TOKEN}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            message: 'Deleted product',
-                            sha: sha,
-                            branch: MERU_CONFIG.BRANCH
-                        })
-                    }
-                );
-                if (response.ok) {
-                    alert('Product deleted');
-                    loadProducts();
-                } else {
-                    throw new Error('Delete failed');
-                }
-            } catch (error) {
-                alert(`Error: ${error.message}`);
-            }
-        }
-
-        function changePassword() {
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const statusDiv = document.getElementById('passwordStatus');
-
-            if (!newPassword || !confirmPassword) {
-                showStatus(statusDiv, 'Fill both fields', 'error');
-                return;
-            }
-
-            if (newPassword !== confirmPassword) {
-                showStatus(statusDiv, 'Passwords dont match', 'error');
-                return;
-            }
-
-            if (newPassword.length < 6) {
-                showStatus(statusDiv, 'Min 6 characters', 'error');
-                return;
-            }
-
-            MERU_CONFIG.ADMIN_PASSWORD = newPassword;
-            localStorage.setItem('meru_password', newPassword);
-            showStatus(statusDiv, 'Password updated', 'success');
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmPassword').value = '';
-        }
-
-        function showStatus(element, message, type) {
-            element.textContent = message;
-            element.className = `status ${type}`;
-            if (type !== 'loading') {
-                setTimeout(() => {
-                    element.textContent = '';
-                    element.className = 'status';
-                }, 5000);
-            }
-        }
-
-        function fileToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedPassword = localStorage.getItem('meru_password');
-            if (savedPassword) {
-                MERU_CONFIG.ADMIN_PASSWORD = savedPassword;
-            }
-            document.getElementById('adminPassword').focus();
-            document.getElementById('adminPassword').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') login();
-            });
-        });
+        let currentProducts=[];
+        function togglePassword(id){const e=document.getElementById(id),t=e.parentElement.querySelector(".toggle-password");e.type="password"===e.type?"text":"password",t.textContent="text"===e.type?"🙈":"👁️"}
+        function selectCategory(e){document.getElementById("productCategory").value=e,document.querySelectorAll(".category-btn").forEach(t=>{t.classList.remove("active")}),event.target.classList.add("active")}
+        function login(){const e=document.getElementById("adminPassword").value;e===MERU_CONFIG.ADMIN_PASSWORD?(document.getElementById("loginScreen").classList.add("hidden"),document.getElementById("adminPanel").classList.remove("hidden")):(alert("Incorrect password"),document.getElementById("adminPassword").value="")}
+        function switchTab(e){document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active")),document.querySelectorAll(".tab-content").forEach(t=>t.classList.remove("active")),document.querySelector(`.tab[onclick="switchTab('${e}')"]`).classList.add("active"),document.getElementById(e+"Tab").classList.add("active"),"manage"===e&&loadProducts()}
+        function previewImage(){const e=document.getElementById("imageInput").files[0];if(e){const t=new FileReader;t.onload=function(e){document.getElementById("preview").src=e.target.result,document.getElementById("imagePreview").classList.remove("hidden")},t.readAsDataURL(e)}}
+        async function uploadProduct(){const e=document.getElementById("productCategory").value,t=document.getElementById("productPrice").value,c=document.getElementById("imageInput"),a=document.getElementById("uploadStatus");if(!t||t<1)return showStatus(a,"Enter price","error");if(!c.files[0])return showStatus(a,"Select image","error");showStatus(a,"Uploading...","loading");try{const i=c.files[0],o=Date.now(),d=Math.random().toString(36).substring(2,8),n=`${e}_${o}_${d}.jpg`,r="tote"===e?"Images":"Images2",l=`${r}/${t}/${n}`,s=await fileToBase64(i),g=s.split(",")[1];const p=await fetch(`${MERU_CONFIG.API_BASE}/repos/${MERU_CONFIG.REPO_OWNER}/${MERU_CONFIG.REPO_NAME}/contents/${l}`,{method:"PUT",headers:{"Authorization":`token ${MERU_CONFIG.GITHUB_TOKEN}`,"Content-Type":"application/json"},body:JSON.stringify({message:`Added ${e} product KSH ${t}`,content:g,branch:MERU_CONFIG.BRANCH})});if(p.ok){document.getElementById("productPrice").value="",document.getElementById("imageInput").value="",document.getElementById("imagePreview").classList.add("hidden"),showStatus(a,"Uploaded successfully","success")}else{const e=await p.json();throw new Error(e.message||"Upload failed")}}catch(e){showStatus(a,e.message,"error")}}
+        async function loadProducts(){const e=document.getElementById("manageCategory").value,t="tote"===e?"Images":"Images2",c=document.getElementById("productsLoading"),a=document.getElementById("productsList");try{c.classList.remove("hidden"),a.innerHTML="";const i=await fetch(`${MERU_CONFIG.API_BASE}/repos/${MERU_CONFIG.REPO_OWNER}/${MERU_CONFIG.REPO_NAME}/contents/${t}`,{headers:{"Authorization":`token ${MERU_CONFIG.GITHUB_TOKEN}`}});if(404===i.status)return a.innerHTML="<div style='padding:40px;text-align:center;color:#666;'>No products</div>",void c.classList.add("hidden");if(!i.ok)throw new Error("Failed to load");const o=await i.json();currentProducts=[];for(const e of o)if("dir"===e.type){const i=e.name,c=await fetch(`${MERU_CONFIG.API_BASE}/repos/${MERU_CONFIG.REPO_OWNER}/${MERU_CONFIG.REPO_NAME}/contents/${t}/${i}`,{headers:{"Authorization":`token ${MERU_CONFIG.GITHUB_TOKEN}`}});if(c.ok){const e=await c.json();e.forEach(e=>{if("file"===e.type&&/\.(jpg|jpeg|png|gif|webp)$/i.test(e.name)){const t=`https://raw.githubusercontent.com/${MERU_CONFIG.REPO_OWNER}/${MERU_CONFIG.REPO_NAME}/${MERU_CONFIG.BRANCH}/${e.path}`;currentProducts.push({path:e.path,name:e.name,price:i,url:t,sha:e.sha,category:e})}})}}c.classList.add("hidden"),0===currentProducts.length?a.innerHTML="<div style='padding:40px;text-align:center;color:#666;'>No products</div>":currentProducts.forEach(e=>{const t=document.createElement("div");t.className="product-item",t.innerHTML=`<img src="${e.url}" class="product-image" alt="${e.name}"><div class="product-price">KSH ${e.price}</div><button class="delete-btn" onclick="deleteProduct('${e.path}','${e.sha}')">Delete</button>`,a.appendChild(t)})}catch(e){c.classList.add("hidden"),a.innerHTML=`<div style='padding:40px;text-align:center;color:#721c24;'>Error: ${e.message}</div>`}}
+        async function deleteProduct(e,t){if(confirm("Delete this product?"))try{const c=await fetch(`${MERU_CONFIG.API_BASE}/repos/${MERU_CONFIG.REPO_OWNER}/${MERU_CONFIG.REPO_NAME}/contents/${e}`,{method:"DELETE",headers:{"Authorization":`token ${MERU_CONFIG.GITHUB_TOKEN}`,"Content-Type":"application/json"},body:JSON.stringify({message:"Deleted product",sha:t,branch:MERU_CONFIG.BRANCH})});c.ok?(alert("Deleted"),loadProducts()):alert("Delete failed")}catch(e){alert(`Error: ${e.message}`)}}
+        function showStatus(e,t,c){e.textContent=t,e.className=`status ${c}`,"loading"!==c&&setTimeout(()=>{e.textContent="",e.className="status"},5000)}
+        function fileToBase64(e){return new Promise((t,c)=>{const a=new FileReader;a.readAsDataURL(e),a.onload=()=>t(a.result),a.onerror=e=>c(e)})}
+        document.addEventListener("DOMContentLoaded",function(){const e=localStorage.getItem("meru_password");e&&(MERU_CONFIG.ADMIN_PASSWORD=e),document.getElementById("adminPassword").focus(),document.getElementById("adminPassword").addEventListener("keypress",function(e){"Enter"===e.key&&login()})});
     </script>
 </body>
 </html>
