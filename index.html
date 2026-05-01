@@ -847,7 +847,7 @@
                         </div>
                         <div class="product-info">
                             <div class="product-price">KSH ${product.price}</div>
-                            <button class="order-btn" onclick="orderProduct('${type === 'tote' ? 'Tote Bag' : 'Skin & Hair Product'} ${product.index}', ${product.price})">
+                            <button class="order-btn" onclick="orderProduct('${type === 'tote' ? 'Tote Bag' : 'Skin & Hair Product'} ${product.index}', ${product.price}, '${product.url}')">
                                 <span>📱</span> Order This Product
                             </button>
                         </div>
@@ -873,16 +873,14 @@
             }
         }
 
-        function orderProduct(productName, price) {
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-
-            const phone = '254734943210';
-            const message = `Hello! I'd like to order: ${productName} (KSH ${price}) from Meru Naturals.`;
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
-        }
+function orderProduct(productName, price, imgUrl) {
+              const phone = '254734943210';
+              const msg = imgUrl
+                  ? 'ORDER:' + imgUrl + '|KSH ' + price + '|' + productName
+                  : "Hello! I'd like to order: " + productName + " (KSH " + price + ") from Meru Naturals.";
+              const url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
+              window.open(url, '_blank');
+          }
 
         function openWhatsApp() {
             if (navigator.vibrate) {
