@@ -1,871 +1,611 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meru Admin</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #00ff88;
-            --primary-dark: #00cc6a;
-            --secondary: #8a2be2;
-            --dark-bg: #0a0a0f;
-            --darker-bg: #050508;
-            --card-bg: rgba(20, 20, 30, 0.8);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text: #ffffff;
-            --text-secondary: #b0b0c0;
-            --danger: #ff375f;
-            --warning: #ffb800;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(0, 255, 136, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 40%);
-            z-index: -1;
-        }
-
-        .admin-box {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.4),
-                0 0 0 1px var(--glass-border);
-            border: 1px solid var(--glass-border);
-            position: relative;
-        }
-
-        .admin-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-
-        .admin-header {
-            background: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(20, 20, 30, 0.9) 100%);
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .admin-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-        }
-
-        .admin-header h1 {
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-        }
-
-        .admin-header p {
-            color: var(--text-secondary);
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .login-area {
-            padding: 60px 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        .login-icon {
-            font-size: 64px;
-            margin-bottom: 30px;
-            animation: float 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.3));
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .input-box {
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 20px 60px 20px 30px;
-            background: var(--glass-bg);
-            border: 2px solid var(--glass-border);
-            border-radius: 16px;
-            font-size: 16px;
-            color: var(--text);
-            transition: all 0.3s ease;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(0, 255, 136, 0.1);
-            background: rgba(0, 255, 136, 0.05);
-        }
-
-        .input-field::placeholder {
-            color: var(--text-secondary);
-        }
-
-        .pass-box {
-            position: relative;
-        }
-
-        .eye-btn {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 24px;
-            transition: color 0.3s ease;
-            padding: 10px;
-        }
-
-        .eye-btn:hover {
-            color: var(--primary);
-        }
-
-        .main-btn {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .main-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .main-btn:hover::before {
-            left: 100%;
-        }
-
-        .main-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-        }
-
-        .tabs-row {
-            display: flex;
-            background: var(--darker-bg);
-            padding: 4px;
-            margin: 20px;
-            border-radius: 16px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 20px;
-            text-align: center;
-            font-weight: 600;
-            color: var(--text-secondary);
-            cursor: pointer;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
-
-        .tab-btn.active {
-            color: white;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
-        }
-
-        .tab-content {
-            padding: 40px;
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .cat-btns {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .cat-btn {
-            padding: 30px 20px;
-            background: var(--glass-bg);
-            border: 2px solid var(--glass-border);
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 150px;
-        }
-
-        .cat-btn:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
-        }
-
-        .cat-btn.active {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(138, 43, 226, 0.1));
-            border-color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
-        }
-
-        .cat-btn-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 10px currentColor);
-        }
-
-        .price-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            background: var(--glass-bg);
-            padding: 20px;
-            border-radius: 16px;
-            border: 2px solid var(--glass-border);
-        }
-
-        .ksh {
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 24px;
-            min-width: 60px;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
-        }
-
-        .upload-box {
-            padding: 60px 30px;
-            border: 3px dashed var(--glass-border);
-            border-radius: 20px;
-            text-align: center;
-            cursor: pointer;
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-            background: var(--glass-bg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .upload-box::before {
-            content: '📤';
-            position: absolute;
-            font-size: 80px;
-            opacity: 0.1;
-            transform: rotate(45deg);
-            right: -20px;
-            bottom: -20px;
-        }
-
-        .upload-box:hover {
-            border-color: var(--primary);
-            background: rgba(0, 255, 136, 0.05);
-            transform: translateY(-2px);
-        }
-
-        .upload-box input {
-            display: none;
-        }
-
-        .upload-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.3));
-        }
-
-        .preview-box {
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .preview-img {
-            max-width: 100%;
-            max-height: 500px;
-            border-radius: 16px;
-            border: 3px solid var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, var(--darker-bg), var(--dark-bg));
-            padding: 10px;
-        }
-
-        .status-msg {
-            padding: 20px;
-            border-radius: 16px;
-            margin: 20px 0;
-            text-align: center;
-            font-weight: 600;
-            animation: slideIn 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .status-success {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 106, 0.1));
-            color: var(--primary);
-            border: 2px solid rgba(0, 255, 136, 0.3);
-        }
-
-        .status-error {
-            background: linear-gradient(135deg, rgba(255, 55, 95, 0.1), rgba(255, 0, 0, 0.1));
-            color: var(--danger);
-            border: 2px solid rgba(255, 55, 95, 0.3);
-        }
-
-        .status-loading {
-            background: linear-gradient(135deg, rgba(255, 184, 0, 0.1), rgba(255, 200, 0, 0.1));
-            color: var(--warning);
-            border: 2px solid rgba(255, 184, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .status-loading::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .product-list {
-            margin-top: 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .product-card {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .product-card:hover::before {
-            opacity: 1;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: var(--primary);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 2px solid var(--glass-border);
-            background: linear-gradient(45deg, var(--darker-bg), var(--dark-bg));
-        }
-
-        .product-price {
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-
-        .product-name {
-            color: var(--text-secondary);
-            font-size: 14px;
-            word-break: break-all;
-            margin-bottom: 20px;
-            font-family: 'Monaco', 'Courier New', monospace;
-        }
-
-        .delete-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, var(--danger), #ff0066);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .delete-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 55, 95, 0.3);
-        }
-
-        .delete-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .delete-btn:hover::before {
-            left: 100%;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .empty-state {
-            padding: 80px 20px;
-            text-align: center;
-            color: var(--text-secondary);
-            grid-column: 1 / -1;
-        }
-
-        .empty-state-icon {
-            font-size: 80px;
-            margin-bottom: 30px;
-            opacity: 0.5;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        select.input-field {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300ff88' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 20px center;
-            background-size: 20px;
-            padding-right: 60px;
-        }
-
-        @media (max-width: 768px) {
-            .admin-box {
-                margin: 10px;
-                border-radius: 20px;
-            }
-            
-            .tab-content {
-                padding: 20px;
-            }
-            
-            .cat-btns {
-                grid-template-columns: 1fr;
-            }
-            
-            .product-list {
-                grid-template-columns: 1fr;
-            }
-            
-            .tabs-row {
-                margin: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .admin-header {
-                padding: 30px 20px;
-            }
-            
-            .admin-header h1 {
-                font-size: 24px;
-            }
-            
-            .login-area {
-                padding: 40px 20px;
-            }
-            
-            .tab-content {
-                padding: 15px;
-            }
-        }
-
-        /* Notification animation */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--darker-bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, var(--primary-dark), #7a1fc9);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Meru Naturals — Admin</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+--green:#1e7d4b;--green-l:#28a562;--green-xl:#e8f5ee;
+--sidebar-bg:#0f1923;--sidebar-text:rgba(255,255,255,.72);--sidebar-active:rgba(255,255,255,.12);
+--bg:#f4f6f9;--white:#fff;--border:#e5e7eb;
+--text:#111827;--text-muted:#6b7280;
+--red:#ef4444;--red-l:#fef2f2;
+--gold:#d97706;--gold-l:#fffbeb;
+--shadow:0 1px 4px rgba(0,0,0,.08);--shadow-md:0 4px 20px rgba(0,0,0,.10);
+--radius:12px;--radius-sm:8px;--tr:.18s ease;
+}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+
+/* ── LOGIN ── */
+.login-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;min-height:100vh;background:linear-gradient(135deg,#0f1923 0%,#1a3a2a 100%)}
+.login-card{background:var(--white);border-radius:20px;padding:40px 36px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.login-logo{text-align:center;margin-bottom:28px}
+.login-logo-icon{width:64px;height:64px;background:linear-gradient(135deg,var(--green),var(--green-l));border-radius:18px;display:inline-flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:12px;box-shadow:0 8px 24px rgba(30,125,75,.3)}
+.login-logo h1{font-size:20px;font-weight:800;color:var(--text)}
+.login-logo p{font-size:13px;color:var(--text-muted);margin-top:2px}
+.login-field{position:relative;margin-bottom:16px}
+.login-field label{display:block;font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:6px}
+.login-field input{width:100%;padding:13px 44px 13px 16px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:15px;color:var(--text);outline:none;transition:var(--tr);background:var(--bg)}
+.login-field input:focus{border-color:var(--green);background:var(--white);box-shadow:0 0 0 3px rgba(30,125,75,.12)}
+.eye{position:absolute;right:14px;bottom:13px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-muted)}
+.login-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--green),var(--green-l));color:var(--white);border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:700;cursor:pointer;transition:var(--tr);margin-top:4px}
+.login-btn:hover{opacity:.92;transform:translateY(-1px)}
+.login-btn:active{transform:none}
+.login-msg{padding:11px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;margin-top:12px;text-align:center;display:none}
+.login-msg.error{display:block;background:var(--red-l);color:var(--red);border:1px solid #fecaca}
+.login-msg.loading{display:block;background:var(--gold-l);color:var(--gold);border:1px solid #fde68a}
+
+/* ── APP SHELL ── */
+.app{display:none;min-height:100vh;flex-direction:row}
+
+/* ── SIDEBAR ── */
+.sidebar{width:240px;background:var(--sidebar-bg);display:flex;flex-direction:column;flex-shrink:0;position:fixed;top:0;left:0;bottom:0;z-index:200;transition:transform .25s ease}
+.sidebar-head{padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,.07)}
+.sidebar-brand{display:flex;align-items:center;gap:10px}
+.sidebar-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--green),var(--green-l));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sidebar-name{font-size:14px;font-weight:700;color:var(--white);line-height:1.2}
+.sidebar-role{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.4px}
+.sidebar-nav{flex:1;padding:12px 10px;overflow-y:auto}
+.nav-section-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.3);padding:14px 8px 6px;margin-top:4px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:var(--radius-sm);color:var(--sidebar-text);cursor:pointer;transition:var(--tr);font-size:14px;font-weight:500;border:none;background:none;width:100%;text-align:left;margin-bottom:2px}
+.nav-item:hover{background:rgba(255,255,255,.07);color:var(--white)}
+.nav-item.active{background:var(--sidebar-active);color:var(--white)}
+.nav-item-icon{font-size:17px;flex-shrink:0;width:20px;text-align:center}
+.nav-item-badge{margin-left:auto;background:var(--green);color:var(--white);font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
+.sidebar-footer{padding:14px 10px;border-top:1px solid rgba(255,255,255,.07)}
+.logout-btn{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--radius-sm);color:rgba(255,255,255,.5);cursor:pointer;font-size:13px;font-weight:500;border:none;background:none;width:100%;transition:var(--tr)}
+.logout-btn:hover{color:var(--white);background:rgba(239,68,68,.15)}
+
+/* ── MOBILE TOPBAR ── */
+.mobile-topbar{display:none;position:fixed;top:0;left:0;right:0;height:56px;background:var(--sidebar-bg);z-index:150;align-items:center;padding:0 16px;gap:14px}
+.hamburger{background:none;border:none;color:var(--white);font-size:22px;cursor:pointer;padding:4px}
+.mobile-title{color:var(--white);font-size:15px;font-weight:700;flex:1}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:190}
+@media(max-width:768px){
+  .mobile-topbar{display:flex}
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .overlay.show{display:block}
+  .main{margin-left:0!important;padding-top:56px}
+}
+
+/* ── MAIN ── */
+.main{margin-left:240px;flex:1;min-height:100vh;display:flex;flex-direction:column}
+.view{display:none;flex:1;padding:28px;animation:fadeIn .2s ease}
+.view.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.page-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px}
+.page-sub{font-size:14px;color:var(--text-muted);margin-bottom:24px}
+@media(max-width:600px){.view{padding:16px}}
+
+/* ── STAT CARDS ── */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:24px}
+.stat-card{background:var(--white);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px}
+.stat-card-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.stat-card-icon.green{background:var(--green-xl)}
+.stat-card-icon.blue{background:#eff6ff}
+.stat-card-icon.gold{background:var(--gold-l)}
+.stat-val{font-size:24px;font-weight:800;color:var(--text)}
+.stat-label{font-size:12px;color:var(--text-muted);margin-top:1px}
+
+/* ── CARD ── */
+.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px}
+.card-head{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:15px;font-weight:700;color:var(--text)}
+.card-body{padding:22px}
+
+/* ── FORM ── */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:540px){.form-row{grid-template-columns:1fr}}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:14px;color:var(--text);outline:none;transition:var(--tr);background:var(--bg);font-family:inherit}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green);background:var(--white);box-shadow:0 0 0 3px rgba(30,125,75,.10)}
+.form-group select{cursor:pointer}
+.new-cat-row{display:flex;gap:8px;margin-top:8px;display:none}
+.new-cat-row input{flex:1}
+.new-cat-add{padding:11px 16px;background:var(--green);color:var(--white);border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:var(--tr)}
+.new-cat-add:hover{background:#16643c}
+.radio-group{display:flex;gap:10px;flex-wrap:wrap}
+.radio-card{flex:1;min-width:120px;padding:14px 12px;border:2px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;text-align:center;transition:var(--tr);background:var(--bg)}
+.radio-card.selected{border-color:var(--green);background:var(--green-xl)}
+.radio-card-icon{font-size:24px;margin-bottom:6px}
+.radio-card-label{font-size:13px;font-weight:600;color:var(--text)}
+.radio-card-sub{font-size:11px;color:var(--text-muted);margin-top:2px}
+
+/* ── IMAGE DROP ── */
+.drop-area{border:2px dashed var(--border);border-radius:var(--radius);padding:40px 20px;text-align:center;cursor:pointer;transition:var(--tr);background:var(--bg);position:relative}
+.drop-area:hover,.drop-area.drag-over{border-color:var(--green);background:var(--green-xl)}
+.drop-area input{display:none}
+.drop-icon{font-size:40px;margin-bottom:10px;opacity:.6}
+.drop-label{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.drop-sub{font-size:12px;color:var(--text-muted)}
+.preview-wrap{position:relative;border-radius:var(--radius-sm);overflow:hidden;margin-top:14px;display:none}
+.preview-wrap img{width:100%;max-height:300px;object-fit:contain;background:#f9f9f9;border-radius:var(--radius-sm);border:2px solid var(--green)}
+.preview-clear{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.6);color:var(--white);border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+.preview-clear:hover{background:var(--red)}
+
+/* ── SUBMIT BTN ── */
+.submit-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--green),var(--green-l));color:var(--white);border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:700;cursor:pointer;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:8px}
+.submit-btn:hover{opacity:.9;transform:translateY(-1px)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+/* ── ALERT ── */
+.alert{padding:13px 16px;border-radius:var(--radius-sm);font-size:14px;font-weight:500;margin-top:14px;display:none;align-items:center;gap:10px}
+.alert.show{display:flex}
+.alert.success{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.alert.error{background:var(--red-l);color:var(--red);border:1px solid #fecaca}
+.alert.loading{background:var(--gold-l);color:var(--gold);border:1px solid #fde68a}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{width:16px;height:16px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+
+/* ── PRODUCT GRID (MANAGE) ── */
+.filter-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
+.filter-select{padding:9px 14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:14px;color:var(--text);background:var(--white);cursor:pointer;outline:none;transition:var(--tr)}
+.filter-select:focus{border-color:var(--green)}
+.filter-count{font-size:13px;color:var(--text-muted);margin-left:auto}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+@media(min-width:600px){.prod-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}}
+.prod-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--tr)}
+.prod-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.prod-img-wrap{aspect-ratio:1;overflow:hidden;background:var(--bg);position:relative}
+.prod-img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.prod-card:hover .prod-img{transform:scale(1.04)}
+.prod-body{padding:12px}
+.prod-cat-tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:20px;margin-bottom:6px}
+.prod-cat-tag.tote{background:#eff6ff;color:#1d4ed8}
+.prod-cat-tag.skin{background:#fdf4ff;color:#7e22ce}
+.prod-price{font-size:16px;font-weight:800;color:var(--green);margin-bottom:2px}
+.prod-name{font-size:12px;color:var(--text-muted);margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.del-btn{width:100%;padding:9px;background:var(--red-l);color:var(--red);border:1px solid #fecaca;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:var(--tr)}
+.del-btn:hover{background:var(--red);color:var(--white)}
+
+/* ── SKELETON MANAGE ── */
+.skel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.skel-prod{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.skel-img{height:180px;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:sh 1.4s infinite}
+.skel-body{padding:12px}.skel-line{height:10px;border-radius:5px;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:sh 1.4s infinite;margin-bottom:8px}
+.skel-line.s{width:50%}.skel-line.m{width:70%}
+@keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── EMPTY ── */
+.empty-view{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.empty-icon{font-size:52px;margin-bottom:14px;opacity:.5}
+.empty-text{font-size:15px;font-weight:500;margin-bottom:6px;color:var(--text)}
+.empty-sub{font-size:13px}
+</style>
 </head>
 <body>
-    <div class="admin-box">
-        <div class="admin-header">
-            <h1>🚀 Meru Naturals Admin</h1>
-            <p>Product Management Dashboard</p>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-icon">🌿</div>
+      <h1>Meru Naturals</h1>
+      <p>Admin Dashboard</p>
+    </div>
+    <div class="login-field">
+      <label for="passInput">Password</label>
+      <div style="position:relative">
+        <input type="password" id="passInput" placeholder="Enter admin password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+        <button class="eye" onclick="toggleEye()" id="eyeBtn">👁️</button>
+      </div>
+    </div>
+    <button class="login-btn" onclick="doLogin()" id="loginBtn">Sign In →</button>
+    <div class="login-msg" id="loginMsg"></div>
+  </div>
+</div>
+
+<!-- OVERLAY (mobile) -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- APP -->
+<div class="app" id="app">
+
+  <!-- MOBILE TOPBAR -->
+  <div class="mobile-topbar">
+    <button class="hamburger" onclick="openSidebar()">☰</button>
+    <div class="mobile-title" id="mobileTitle">Dashboard</div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-brand">
+        <div class="sidebar-icon">🌿</div>
+        <div>
+          <div class="sidebar-name">Meru Naturals</div>
+          <div class="sidebar-role">Admin Panel</div>
         </div>
-        
-        <div id="loginBox" class="login-area">
-            <div class="login-icon">🔐</div>
-            <div class="input-box">
-                <div class="pass-box">
-                    <input type="password" id="pass" class="input-field" placeholder="Enter Admin Password" autocomplete="off">
-                    <button type="button" class="eye-btn" onclick="togglePass()">👁️</button>
-                </div>
-            </div>
-            <button class="main-btn" onclick="login()">
-                <span style="display: inline-flex; align-items: center; gap: 10px;">
-                    🔓 Login to Dashboard
-                </span>
-            </button>
-            <div id="loginMsg" class="status-msg" style="display:none;margin-top:15px"></div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <button class="nav-item active" id="nav-dashboard" onclick="goView('dashboard')">
+        <span class="nav-item-icon">📊</span> Dashboard
+      </button>
+      <button class="nav-item" id="nav-upload" onclick="goView('upload')">
+        <span class="nav-item-icon">📤</span> Upload Product
+      </button>
+      <button class="nav-item" id="nav-manage" onclick="goView('manage')">
+        <span class="nav-item-icon">📦</span> Manage Products
+      </button>
+      <div class="nav-section-label">Site</div>
+      <button class="nav-item" onclick="window.open('https://merunaturals.vercel.app','_blank')">
+        <span class="nav-item-icon">🌐</span> View Site
+      </button>
+      <button class="nav-item" onclick="window.open('https://merunaturals.vercel.app','_blank')">
+        <span class="nav-item-icon">💬</span> WhatsApp Bot
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="doLogout()">
+        <span style="font-size:16px">🚪</span> Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="mainArea">
+
+    <!-- DASHBOARD -->
+    <div class="view active" id="view-dashboard">
+      <div class="page-title">Dashboard</div>
+      <div class="page-sub">Welcome back! Here's your store overview.</div>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-card-icon blue">👜</div>
+          <div><div class="stat-val" id="ds-tote">—</div><div class="stat-label">Tote Bag Products</div></div>
         </div>
-        
-        <div id="adminBox" class="hidden">
-            <div class="tabs-row">
-                <div class="tab-btn active" onclick="showTab('add')">
-                    📤 Upload Product
-                </div>
-                <div class="tab-btn" onclick="showTab('view')">
-                    📦 Manage Products
-                </div>
-            </div>
-            
-            <div id="addTab" class="tab-content active">
-                <div class="cat-btns">
-                    <button class="cat-btn active" onclick="selectCat('tote')">
-                        <div class="cat-btn-icon">👜</div>
-                        <div>Tote Bags Collection</div>
-                        <div style="font-size: 12px; margin-top: 8px; color: var(--text-secondary);">Upload new tote bag designs</div>
-                    </button>
-                    <button class="cat-btn" onclick="selectCat('skin')">
-                        <div class="cat-btn-icon">✨</div>
-                        <div>Skin & Hair Care</div>
-                        <div style="font-size: 12px; margin-top: 8px; color: var(--text-secondary);">Upload beauty & wellness products</div>
-                    </button>
-                </div>
-                <input type="hidden" id="cat" value="tote">
-                
-                <div class="price-row" style="margin-bottom:16px">
-                      <span style="font-size:22px;min-width:40px;text-align:center">🏷️</span>
-                      <input type="text" id="name" class="input-field" placeholder="Product name (e.g. Natural Shea Butter)">
-                  </div>
-                <div class="price-row">
-                    <div class="ksh pulse">KSH</div>
-                    <input type="number" id="price" class="input-field" placeholder="Enter product price" min="1">
-                </div>
-                
-                <div class="upload-box" onclick="document.getElementById('imgPick').click()">
-                    <div class="upload-icon">📷</div>
-                    <div style="margin-top: 15px; color: var(--primary); font-weight: bold; font-size: 20px;">Drop or Select Image</div>
-                    <div style="margin-top: 10px; color: var(--text-secondary); font-size: 14px;">Supports JPG, PNG, GIF, WEBP</div>
-                    <div style="margin-top: 5px; color: var(--text-secondary); font-size: 12px;">Max size: 10MB</div>
-                    <input type="file" id="imgPick" accept="image/*" onchange="showPrev()">
-                </div>
-                
-                <div id="prevBox" class="hidden">
-                    <div class="preview-box">
-                        <img id="prev" class="preview-img">
-                    </div>
-                </div>
-                
-                <button class="main-btn" onclick="upload()">
-                    <span style="display: inline-flex; align-items: center; gap: 10px;">
-                        🚀 Upload Product
-                    </span>
-                </button>
-                <div id="msg" class="status-msg"></div>
-            </div>
-            
-            <div id="viewTab" class="tab-content">
-                <select id="viewCat" class="input-field" onchange="loadItems()">
-                    <option value="tote">👜 Tote Bags</option>
-                    <option value="skin">✨ Skin & Hair</option>
-                </select>
-                
-                <div id="loadMsg" class="status-msg status-loading hidden">⏳ Loading products...</div>
-                
-                <div id="itemsList" class="product-list">
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📦</div>
-                        <div style="font-size: 18px; margin-bottom: 10px;">No products loaded</div>
-                        <div style="color: var(--text-secondary);">Select a category to view products</div>
-                    </div>
-                </div>
-            </div>
+        <div class="stat-card">
+          <div class="stat-card-icon green">✨</div>
+          <div><div class="stat-val" id="ds-skin">—</div><div class="stat-label">Skin & Hair Products</div></div>
         </div>
+        <div class="stat-card">
+          <div class="stat-card-icon gold">📦</div>
+          <div><div class="stat-val" id="ds-total">—</div><div class="stat-label">Total Products</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title">Quick Actions</div></div>
+        <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <button onclick="goView('upload')" style="padding:16px;border:2px dashed var(--border);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;font-size:14px;font-weight:600;color:var(--green);transition:var(--tr)" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+            📤 Upload New Product
+          </button>
+          <button onclick="goView('manage')" style="padding:16px;border:2px dashed var(--border);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;font-size:14px;font-weight:600;color:var(--text-muted);transition:var(--tr)" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">
+            📦 Manage Products
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title">How to use</div></div>
+        <div class="card-body" style="display:grid;gap:12px">
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:20px;flex-shrink:0">1️⃣</span><div><div style="font-size:14px;font-weight:600;margin-bottom:2px">Upload Product</div><div style="font-size:13px;color:var(--text-muted)">Go to Upload, choose a collection (or create a new one), enter the name, price, and upload the image.</div></div></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:20px;flex-shrink:0">2️⃣</span><div><div style="font-size:14px;font-weight:600;margin-bottom:2px">Manage & Delete</div><div style="font-size:13px;color:var(--text-muted)">Go to Manage Products to browse all products and delete any you no longer want to show.</div></div></div>
+          <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:20px;flex-shrink:0">3️⃣</span><div><div style="font-size:14px;font-weight:600;margin-bottom:2px">Customers Order via WhatsApp</div><div style="font-size:13px;color:var(--text-muted)">When a customer taps Order on the site, the bot automatically sends them the product image and alerts you.</div></div></div>
+        </div>
+      </div>
     </div>
 
-    <script>
-          const BOT_URL = 'https://merunaturalzzbotxd-6a66649095cf.herokuapp.com';
-          let adminPassword = '';
-          let items = [];
+    <!-- UPLOAD -->
+    <div class="view" id="view-upload">
+      <div class="page-title">Upload Product</div>
+      <div class="page-sub">Add a new product to your store. It will appear on the website immediately.</div>
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <label>Collection</label>
+            <div class="radio-group">
+              <div class="radio-card selected" id="rc-tote" onclick="selectCat('tote')">
+                <div class="radio-card-icon">👜</div>
+                <div class="radio-card-label">Tote Bags</div>
+                <div class="radio-card-sub">Bags collection</div>
+              </div>
+              <div class="radio-card" id="rc-skin" onclick="selectCat('skin')">
+                <div class="radio-card-icon">✨</div>
+                <div class="radio-card-label">Skin & Hair</div>
+                <div class="radio-card-sub">Beauty products</div>
+              </div>
+              <div class="radio-card" id="rc-new" onclick="selectCat('new')">
+                <div class="radio-card-icon">➕</div>
+                <div class="radio-card-label">New Category</div>
+                <div class="radio-card-sub">Create custom folder</div>
+              </div>
+            </div>
+            <div class="new-cat-row" id="newCatRow">
+              <input type="text" id="newCatName" placeholder="Category folder name (e.g. Jewelry)" maxlength="40">
+              <button class="new-cat-add" onclick="confirmNewCat()">Create</button>
+            </div>
+            <input type="hidden" id="selectedCat" value="tote">
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0">
+              <label>Product Name</label>
+              <input type="text" id="upName" placeholder="e.g. Natural Shea Butter" maxlength="60">
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label>Price (KSH)</label>
+              <input type="number" id="upPrice" placeholder="e.g. 750" min="1" max="999999">
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:16px">
+            <label>Product Image</label>
+            <div class="drop-area" id="dropArea" onclick="document.getElementById('imgInput').click()" ondragover="handleDrag(event,true)" ondragleave="handleDrag(event,false)" ondrop="handleDrop(event)">
+              <input type="file" id="imgInput" accept="image/*" onchange="handleFile(this.files[0])">
+              <div class="drop-icon">📷</div>
+              <div class="drop-label">Click to browse or drag & drop</div>
+              <div class="drop-sub">JPG, PNG, WEBP — max 10MB</div>
+            </div>
+            <div class="preview-wrap" id="previewWrap">
+              <img id="previewImg" alt="Preview">
+              <button class="preview-clear" onclick="clearImage(event)">✕</button>
+            </div>
+          </div>
+          <button class="submit-btn" id="uploadBtn" onclick="doUpload()">
+            📤 Upload Product
+          </button>
+          <div class="alert" id="uploadAlert"></div>
+        </div>
+      </div>
+    </div>
 
-          function togglePass() {
-              const field = document.getElementById('pass');
-              const eye = field.parentElement.querySelector('.eye-btn');
-              if (field.type === 'password') { field.type = 'text'; eye.textContent = '🙈'; }
-              else { field.type = 'password'; eye.textContent = '👁️'; }
-          }
+    <!-- MANAGE -->
+    <div class="view" id="view-manage">
+      <div class="page-title">Manage Products</div>
+      <div class="page-sub">View, browse and delete products from your store.</div>
+      <div class="filter-bar">
+        <select class="filter-select" id="manCat" onchange="loadManage()">
+          <option value="tote">👜 Tote Bags</option>
+          <option value="skin">✨ Skin & Hair</option>
+        </select>
+        <span class="filter-count" id="manCount"></span>
+      </div>
+      <div id="manGrid"></div>
+    </div>
 
-          function selectCat(cat) {
-              document.getElementById('cat').value = cat;
-              document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-              event.target.closest('.cat-btn').classList.add('active');
-          }
+  </main>
+</div>
 
-          async function login() {
-              const entered = document.getElementById('pass').value.trim();
-              const msg = document.getElementById('loginMsg');
-              if (!entered) return;
-              msg.textContent = '⏳ Verifying...';
-              msg.className = 'status-msg status-loading';
-              msg.style.display = 'block';
-              try {
-                  const r = await fetch(BOT_URL + '/api/admin/verify', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': entered }
-                  });
-                  if (r.ok) {
-                      adminPassword = entered;
-                      document.getElementById('loginBox').classList.add('hidden');
-                      document.getElementById('adminBox').classList.remove('hidden');
-                  } else {
-                      const passField = document.getElementById('pass');
-                      passField.style.borderColor = 'var(--danger)';
-                      passField.style.boxShadow = '0 0 0 4px rgba(255,55,95,0.1)';
-                      passField.value = '';
-                      passField.focus();
-                      msg.textContent = '❌ Incorrect password';
-                      msg.className = 'status-msg status-error';
-                      setTimeout(() => { passField.style.borderColor = ''; passField.style.boxShadow = ''; }, 1500);
-                  }
-              } catch (e) {
-                  msg.textContent = '❌ Cannot reach server — is the bot online?';
-                  msg.className = 'status-msg status-error';
-              }
-          }
+<script>
+const BOT = 'https://merunaturalzzbotxd-6a66649095cf.herokuapp.com';
+let pw = '';
+let manItems = [];
+let customCat = '';
 
-          function showTab(tab) {
-              document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-              document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-              document.querySelector('.tab-btn[onclick*="' + tab + '"]').classList.add('active');
-              document.getElementById(tab + 'Tab').classList.add('active');
-              if (tab === 'view') loadItems();
-          }
+function toggleEye() {
+  var f = document.getElementById('passInput');
+  var b = document.getElementById('eyeBtn');
+  if (f.type === 'password') { f.type = 'text'; b.textContent = '🙈'; }
+  else { f.type = 'password'; b.textContent = '👁️'; }
+}
 
-          function showPrev() {
-              const file = document.getElementById('imgPick').files[0];
-              if (!file) return;
-              if (file.size > 10 * 1024 * 1024) { alert('File size should be less than 10MB'); document.getElementById('imgPick').value = ''; return; }
-              const reader = new FileReader();
-              reader.onload = e => { document.getElementById('prev').src = e.target.result; document.getElementById('prevBox').classList.remove('hidden'); };
-              reader.readAsDataURL(file);
-          }
+async function doLogin() {
+  var entered = document.getElementById('passInput').value.trim();
+  var msg = document.getElementById('loginMsg');
+  var btn = document.getElementById('loginBtn');
+  if (!entered) return;
+  msg.className = 'login-msg loading';
+  msg.textContent = 'Verifying…';
+  btn.disabled = true;
+  try {
+    var r = await fetch(BOT + '/api/admin/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': entered }
+    });
+    if (r.ok) {
+      pw = entered;
+      document.getElementById('loginWrap').style.display = 'none';
+      document.getElementById('app').style.display = 'flex';
+      loadDashboard();
+    } else {
+      msg.className = 'login-msg error';
+      msg.textContent = '❌ Incorrect password. Try again.';
+      document.getElementById('passInput').value = '';
+      document.getElementById('passInput').focus();
+    }
+  } catch (e) {
+    msg.className = 'login-msg error';
+    msg.textContent = '❌ Cannot reach server — is the bot online?';
+  }
+  btn.disabled = false;
+}
 
-          function toBase64(file) {
-              return new Promise((resolve, reject) => { const r = new FileReader(); r.readAsDataURL(file); r.onload = () => resolve(r.result); r.onerror = reject; });
-          }
+function doLogout() {
+  pw = '';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('loginWrap').style.display = 'flex';
+  document.getElementById('passInput').value = '';
+  document.getElementById('loginMsg').className = 'login-msg';
+}
 
-          async function upload() {
-              const cat = document.getElementById('cat').value;
-              const name = document.getElementById('name').value.trim();
-              const price = document.getElementById('price').value;
-              const fileInput = document.getElementById('imgPick');
-              const msg = document.getElementById('msg');
-              if (!name) { msg.textContent = '⚠️ Please enter a product name'; msg.className = 'status-msg status-error'; return; }
-              if (!price || price < 1) { msg.textContent = '⚠️ Please enter a valid price'; msg.className = 'status-msg status-error'; return; }
-              if (!fileInput.files[0]) { msg.textContent = '⚠️ Please select an image'; msg.className = 'status-msg status-error'; return; }
-              try {
-                  msg.textContent = '⏳ Uploading product...';
-                  msg.className = 'status-msg status-loading';
-                  const imageBase64 = await toBase64(fileInput.files[0]);
-                  const r = await fetch(BOT_URL + '/api/admin/upload', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': adminPassword },
-                      body: JSON.stringify({ category: cat, name, price, imageBase64 })
-                  });
-                  const data = await r.json();
-                  if (r.ok) {
-                      document.getElementById('name').value = '';
-                      document.getElementById('price').value = '';
-                      document.getElementById('imgPick').value = '';
-                      document.getElementById('prevBox').classList.add('hidden');
-                      msg.textContent = '✅ Product uploaded successfully!';
-                      msg.className = 'status-msg status-success';
-                  } else {
-                      msg.textContent = '❌ ' + (data.error || 'Upload failed');
-                      msg.className = 'status-msg status-error';
-                  }
-              } catch (e) {
-                  msg.textContent = '❌ ' + e.message;
-                  msg.className = 'status-msg status-error';
-              }
-          }
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
 
-          async function loadItems() {
-              const cat = document.getElementById('viewCat').value;
-              const loading = document.getElementById('loadMsg');
-              const list = document.getElementById('itemsList');
-              try {
-                  loading.classList.remove('hidden');
-                  list.innerHTML = '';
-                  const r = await fetch(BOT_URL + '/api/products?cat=' + cat);
-                  if (!r.ok) { const e = await r.json(); throw new Error(e.error || 'Failed to load'); }
-                  items = await r.json();
-                  loading.classList.add('hidden');
-                  if (!items.length) {
-                      list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📦</div><div style="font-size:18px;margin-bottom:10px">No products found</div><div style="color:var(--text-secondary)">Upload your first product</div></div>';
-                      return;
-                  }
-                  list.innerHTML = items.map((item, i) => '<div class="product-card"><img class="product-image" src="' + item.url + '" alt="' + item.name + '" loading="lazy" onerror="this.style.opacity=0.3"><div class="product-price">KSH ' + item.price + '</div><div style="font-size:15px;color:#fff;margin-bottom:6px;font-weight:600">' + item.name + '</div><div class="product-name">' + item.path + '</div><button class="delete-btn" onclick="deleteItem(' + i + ')">🗑️ Delete</button></div>').join('');
-              } catch (e) {
-                  loading.classList.add('hidden');
-                  list.innerHTML = '<div class="status-msg status-error">❌ ' + e.message + '</div>';
-              }
-          }
+function goView(name) {
+  closeSidebar();
+  document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+  document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
+  document.getElementById('view-' + name).classList.add('active');
+  var ni = document.getElementById('nav-' + name);
+  if (ni) ni.classList.add('active');
+  var titles = { dashboard: 'Dashboard', upload: 'Upload Product', manage: 'Manage Products' };
+  document.getElementById('mobileTitle').textContent = titles[name] || 'Admin';
+  if (name === 'manage') loadManage();
+}
 
-          async function deleteItem(index) {
-              const item = items[index];
-              if (!item || !confirm('Delete "' + item.name + '"?')) return;
-              try {
-                  const r = await fetch(BOT_URL + '/api/admin/product', {
-                      method: 'DELETE',
-                      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': adminPassword },
-                      body: JSON.stringify({ path: item.path, sha: item.sha })
-                  });
-                  const data = await r.json();
-                  if (r.ok) loadItems();
-                  else alert('Delete failed: ' + (data.error || 'Unknown error'));
-              } catch (e) { alert('Error: ' + e.message); }
-          }
+async function loadDashboard() {
+  try {
+    var [rt, rs] = await Promise.all([
+      fetch(BOT + '/api/products?cat=tote'),
+      fetch(BOT + '/api/products?cat=skin')
+    ]);
+    var tote = await rt.json();
+    var skin = await rs.json();
+    document.getElementById('ds-tote').textContent = tote.length;
+    document.getElementById('ds-skin').textContent = skin.length;
+    document.getElementById('ds-total').textContent = tote.length + skin.length;
+  } catch (e) {}
+}
 
-          document.addEventListener('keydown', e => {
-              if (e.key === 'Enter' && !document.getElementById('loginBox').classList.contains('hidden')) login();
-          });
-      </script>
+function selectCat(cat) {
+  document.querySelectorAll('.radio-card').forEach(function(c){ c.classList.remove('selected'); });
+  document.getElementById('rc-' + cat).classList.add('selected');
+  document.getElementById('newCatRow').style.display = cat === 'new' ? 'flex' : 'none';
+  if (cat !== 'new') {
+    document.getElementById('selectedCat').value = cat;
+    customCat = '';
+  } else {
+    document.getElementById('selectedCat').value = '';
+    customCat = '';
+    document.getElementById('newCatName').value = '';
+    document.getElementById('newCatName').focus();
+  }
+}
+
+function confirmNewCat() {
+  var val = document.getElementById('newCatName').value.trim().replace(/[^a-zA-Z0-9_\- ]/g, '').replace(/\s+/g, '_');
+  if (!val) return alert('Please enter a valid category name');
+  customCat = val;
+  document.getElementById('selectedCat').value = val;
+  document.getElementById('rc-new').querySelector('.radio-card-sub').textContent = '📁 ' + val;
+}
+
+function handleDrag(e, over) {
+  e.preventDefault();
+  document.getElementById('dropArea').classList.toggle('drag-over', over);
+}
+function handleDrop(e) {
+  e.preventDefault();
+  handleDrag(e, false);
+  var f = e.dataTransfer.files[0];
+  if (f) handleFile(f);
+}
+function handleFile(file) {
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) { alert('Image must be under 10MB'); return; }
+  if (!file.type.startsWith('image/')) { alert('Please select an image file'); return; }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('previewImg').src = e.target.result;
+    document.getElementById('previewWrap').style.display = 'block';
+    document.getElementById('dropArea').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+function clearImage(e) {
+  e.stopPropagation();
+  document.getElementById('imgInput').value = '';
+  document.getElementById('previewWrap').style.display = 'none';
+  document.getElementById('dropArea').style.display = 'block';
+}
+
+function showAlert(id, type, msg) {
+  var el = document.getElementById(id);
+  el.className = 'alert ' + type + ' show';
+  el.innerHTML = type === 'loading' ? '<div class="spinner"></div><span>' + msg + '</span>' : '<span>' + (type === 'success' ? '✅' : '❌') + '</span><span>' + msg + '</span>';
+}
+
+async function doUpload() {
+  var cat = document.getElementById('selectedCat').value;
+  var name = document.getElementById('upName').value.trim();
+  var price = document.getElementById('upPrice').value.trim();
+  var imgFile = document.getElementById('imgInput').files[0];
+  var btn = document.getElementById('uploadBtn');
+  if (!cat) { showAlert('uploadAlert','error','Please select a collection or create a new one.'); return; }
+  if (!name) { showAlert('uploadAlert','error','Please enter a product name.'); return; }
+  if (!price || Number(price) < 1) { showAlert('uploadAlert','error','Please enter a valid price.'); return; }
+  if (!imgFile) { showAlert('uploadAlert','error','Please select a product image.'); return; }
+  showAlert('uploadAlert','loading','Uploading to GitHub…');
+  btn.disabled = true;
+  try {
+    var b64 = await new Promise(function(res, rej){
+      var r = new FileReader(); r.readAsDataURL(imgFile);
+      r.onload = function(){ res(r.result); }; r.onerror = rej;
+    });
+    var resp = await fetch(BOT + '/api/admin/upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': pw },
+      body: JSON.stringify({ category: cat, name: name, price: price, imageBase64: b64 })
+    });
+    var data = await resp.json();
+    if (resp.ok) {
+      showAlert('uploadAlert','success','Product uploaded successfully! It\'s now live on the site.');
+      document.getElementById('upName').value = '';
+      document.getElementById('upPrice').value = '';
+      clearImage({ stopPropagation: function(){} });
+      loadDashboard();
+    } else {
+      showAlert('uploadAlert','error', data.error || 'Upload failed. Please try again.');
+    }
+  } catch (e) {
+    showAlert('uploadAlert','error','Network error: ' + e.message);
+  }
+  btn.disabled = false;
+}
+
+async function loadManage() {
+  var cat = document.getElementById('manCat').value;
+  var grid = document.getElementById('manGrid');
+  var count = document.getElementById('manCount');
+  var skel = '<div class="skel-grid">';
+  for (var i = 0; i < 6; i++) skel += '<div class="skel-prod"><div class="skel-img"></div><div class="skel-body"><div class="skel-line m"></div><div class="skel-line s"></div></div></div>';
+  grid.innerHTML = skel + '</div>';
+  count.textContent = '';
+  try {
+    var r = await fetch(BOT + '/api/products?cat=' + cat, { headers: { 'X-Admin-Password': pw } });
+    var items = await r.json();
+    manItems = items;
+    count.textContent = items.length + ' product' + (items.length !== 1 ? 's' : '');
+    if (!items.length) {
+      grid.innerHTML = '<div class="empty-view"><div class="empty-icon">' + (cat === 'tote' ? '👜' : '✨') + '</div><div class="empty-text">No products yet</div><div class="empty-sub">Upload your first product using the Upload tab.</div></div>';
+      return;
+    }
+    var html = '<div class="prod-grid">';
+    items.forEach(function(item, i) {
+      html += '<div class="prod-card">' +
+        '<div class="prod-img-wrap"><img class="prod-img" src="' + item.imageUrl + '" alt="' + (item.name||'') + '" loading="lazy" onerror="this.style.opacity=.3"></div>' +
+        '<div class="prod-body">' +
+        '<div class="prod-cat-tag ' + cat + '">' + (cat === 'tote' ? '👜 Tote' : '✨ Skin & Hair') + '</div>' +
+        '<div class="prod-price">KSH ' + item.price + '</div>' +
+        '<div class="prod-name">' + (item.name || item.path) + '</div>' +
+        '<button class="del-btn" onclick="deleteProduct(' + i + ')">🗑️ Delete</button>' +
+        '</div></div>';
+    });
+    html += '</div>';
+    grid.innerHTML = html;
+  } catch (e) {
+    grid.innerHTML = '<div class="empty-view"><div class="empty-icon">😞</div><div class="empty-text">Failed to load</div><div class="empty-sub">' + e.message + '</div></div>';
+  }
+}
+
+async function deleteProduct(i) {
+  var item = manItems[i];
+  if (!item) return;
+  if (!confirm('Delete "' + (item.name || item.path) + '"?\n\nThis cannot be undone.')) return;
+  try {
+    var r = await fetch(BOT + '/api/admin/product', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': pw },
+      body: JSON.stringify({ path: item.path, sha: item.sha })
+    });
+    var d = await r.json();
+    if (r.ok) loadManage();
+    else alert('Delete failed: ' + (d.error || 'Unknown error'));
+  } catch (e) { alert('Error: ' + e.message); }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.getElementById('loginWrap').style.display !== 'none') doLogin();
+});
+</script>
 </body>
 </html>
