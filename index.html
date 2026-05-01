@@ -1,882 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meru Naturals</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f8f5f0;
-            color: #333;
-            padding-top: 80px;
-            padding-bottom: 80px;
-            transition: background 0.3s ease;
-        }
-
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: #2d5016;
-            color: white;
-            padding: 15px;
-            z-index: 1000;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: rotate(5deg);
-        }
-
-        .title {
-            font-size: 1.4rem;
-            font-weight: bold;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 30px 20px;
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero h1 {
-            color: #2d5016;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            transition: color 0.3s ease;
-        }
-
-        .hero p {
-            color: #666;
-            margin-bottom: 25px;
-            line-height: 1.5;
-            transition: color 0.3s ease;
-        }
-
-        .delivery-note {
-            background: #e6b325;
-            color: #2d5016;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 30px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .categories {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            padding: 0 20px;
-            opacity: 0;
-            animation: fadeIn 0.5s ease 0.2s forwards;
-        }
-
-        .category-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-            border-color: #e6b325;
-        }
-
-        .category-card:active {
-            transform: translateY(-2px);
-        }
-
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(230, 179, 37, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .category-card:hover::before {
-            left: 100%;
-        }
-
-        .category-icon {
-            font-size: 2.8rem;
-            color: #2d5016;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .category-card:hover .category-icon {
-            transform: scale(1.1);
-        }
-
-        .category-title {
-            font-size: 1.4rem;
-            color: #2d5016;
-            margin-bottom: 10px;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .category-desc {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            transition: color 0.3s ease;
-        }
-
-        .view-btn {
-            background: #e6b325;
-            color: #2d5016;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .view-btn:hover {
-            background: #d4a21e;
-            transform: scale(1.05);
-        }
-
-        .view-btn:active {
-            transform: scale(0.95);
-        }
-
-        .products-section {
-            display: none;
-            padding: 20px;
-            opacity: 0;
-            animation: slideIn 0.4s ease forwards;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .back-btn {
-            background: #2d5016;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: #3a641f;
-            transform: translateX(-5px);
-        }
-
-        .section-title {
-            text-align: center;
-            color: #2d5016;
-            font-size: 1.6rem;
-            margin-bottom: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
-
-        .instructions {
-            background: #f0ebe5;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            text-align: center;
-            color: #2d5016;
-            font-weight: bold;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .products-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: productAppear 0.5s ease forwards;
-        }
-
-        @keyframes productAppear {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-image {
-            transform: scale(1.02);
-        }
-
-        .image-fallback {
-            width: 100%;
-            height: 320px;
-            background: linear-gradient(135deg, #2d5016, #3a641f);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2.5rem;
-        }
-
-        .product-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .product-price {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #2d5016;
-            margin-bottom: 15px;
-        }
-
-        .order-btn {
-            background: #e6b325;
-            color: #2d5016;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .order-btn:hover {
-            background: #d4a21e;
-            transform: scale(1.05);
-        }
-
-        .order-btn:active {
-            transform: scale(0.95);
-        }
-
-        .contact-section {
-            background: #2d5016;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            margin: 20px;
-            border-radius: 20px;
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards;
-            box-shadow: 0 8px 25px rgba(45, 80, 22, 0.3);
-        }
-
-        .contact-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            transition: color 0.3s ease;
-        }
-
-        .contact-text {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
-            line-height: 1.6;
-            transition: color 0.3s ease;
-        }
-
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin: 0 auto;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-        }
-
-        .whatsapp-btn:hover {
-            background: #128C7E;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
-        }
-
-        .whatsapp-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 0;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            color: #666;
-            text-decoration: none;
-            font-size: 0.85rem;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            min-width: 70px;
-        }
-
-        .nav-item:hover {
-            background: rgba(45, 80, 22, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .nav-item.active {
-            color: #2d5016;
-            background: rgba(45, 80, 22, 0.15);
-            transform: translateY(-3px);
-        }
-
-        .nav-icon {
-            font-size: 1.4rem;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-item:hover .nav-icon {
-            transform: scale(1.1);
-        }
-
-        .loading {
-            text-align: center;
-            padding: 50px;
-            color: #2d5016;
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(45, 80, 22, 0.1);
-            border-top-color: #2d5016;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Enhanced UX: Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #2d5016;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3a641f;
-        }
-
-        /* Enhanced UX: Product counter */
-        .product-counter {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #e6b325;
-            color: #2d5016;
-            font-weight: bold;
-            font-size: 0.8rem;
-            padding: 3px 8px;
-            border-radius: 12px;
-            z-index: 1;
-        }
-
-        /* Enhanced UX: Loading dots animation */
-        .loading-dots {
-            display: inline-block;
-            margin-left: 5px;
-        }
-
-        .loading-dots::after {
-            content: '.';
-            animation: dots 1.5s steps(4, end) infinite;
-        }
-
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60%, 100% { content: '...'; }
-        }
-
-        /* Enhanced UX: Haptic feedback simulation */
-        @media (hover: none) and (pointer: coarse) {
-            .category-card:active,
-            .order-btn:active,
-            .whatsapp-btn:active,
-            .nav-item:active {
-                transform: scale(0.95);
-                transition: transform 0.1s ease;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .products-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-
-            .product-image {
-                height: 350px;
-            }
-
-            .image-fallback {
-                height: 350px;
-            }
-
-            /* Enhanced UX: Desktop hover effects */
-            .product-card {
-                position: relative;
-            }
-
-            .product-card::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(230, 179, 37, 0);
-                transition: background 0.3s ease;
-                pointer-events: none;
-                border-radius: 20px;
-            }
-
-            .product-card:hover::after {
-                background: rgba(230, 179, 37, 0.05);
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Meru Naturals — Premium Tote Bags & Natural Beauty</title>
+<meta name="description" content="Shop premium tote bags and natural skincare & hair products. Order directly on WhatsApp.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+--green:#1e7d4b;--green-light:#28a562;--green-dark:#145c36;
+--cream:#f7f3ee;--cream-dark:#ede8e0;--gold:#c9913d;
+--text:#1a1a1a;--text-muted:#6b6b6b;--white:#fff;
+--shadow:0 4px 24px rgba(0,0,0,.10);--shadow-md:0 8px 40px rgba(0,0,0,.13);
+--radius:16px;--radius-sm:10px;--transition:.22s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overscroll-behavior:none}
+
+/* ── TOP NAV ── */
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:60px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--green),var(--green-light));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.brand-name{font-size:16px;font-weight:700;color:var(--green-dark);letter-spacing:-.3px}
+.brand-sub{font-size:10px;color:var(--text-muted);letter-spacing:.5px;text-transform:uppercase;margin-top:1px}
+.nav-links{display:flex;gap:4px}
+.nav-link{padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:var(--transition);border:none;background:none;white-space:nowrap}
+.nav-link.active,.nav-link:hover{color:var(--green);background:rgba(30,125,75,.08)}
+.nav-wa{background:var(--green);color:var(--white)!important;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:var(--transition)}
+.nav-wa:hover{background:var(--green-dark)}
+@media(max-width:600px){.nav-links{display:none}.nav-wa{font-size:12px;padding:7px 13px}}
+
+/* ── PAGE WRAPPER ── */
+.page{margin-top:60px;min-height:calc(100vh - 60px);padding-bottom:80px}
+
+/* ── SECTIONS ── */
+.section{display:none;animation:fadeUp .3s ease}
+.section.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(160deg,var(--green-dark) 0%,var(--green) 60%,#2ab870 100%);color:var(--white);padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.05)}
+.hero::after{content:'';position:absolute;bottom:-60px;left:-30px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:clamp(26px,6vw,40px);font-weight:800;line-height:1.2;margin-bottom:14px;letter-spacing:-.5px}
+.hero p{font-size:15px;opacity:.88;max-width:360px;margin:0 auto 32px;line-height:1.6}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-btn-primary{background:var(--white);color:var(--green-dark);padding:13px 28px;border-radius:12px;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:var(--transition);box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.hero-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.hero-btn-sec{background:rgba(255,255,255,.18);color:var(--white);padding:13px 28px;border-radius:12px;font-size:15px;font-weight:600;border:2px solid rgba(255,255,255,.35);cursor:pointer;transition:var(--transition)}
+.hero-btn-sec:hover{background:rgba(255,255,255,.28)}
+.hero-stats{display:flex;justify-content:center;gap:32px;margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,.18)}
+.stat{text-align:center}
+.stat-num{font-size:22px;font-weight:800;display:block}
+.stat-label{font-size:11px;opacity:.75;letter-spacing:.5px;text-transform:uppercase}
+
+/* ── CATEGORY CARDS ── */
+.cat-section{padding:32px 20px 12px}
+.section-label{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px}
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cat-card{background:var(--white);border-radius:var(--radius);padding:28px 20px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow);border:2px solid transparent;text-align:center;position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(30,125,75,.0),rgba(30,125,75,.06));opacity:0;transition:var(--transition)}
+.cat-card:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.cat-card:hover::before{opacity:1}
+.cat-emoji{font-size:36px;margin-bottom:12px;display:block}
+.cat-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:5px}
+.cat-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+.cat-arrow{margin-top:14px;display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--green)}
+
+/* ── FEATURES ── */
+.features{padding:8px 20px 32px}
+.feature-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.feature-item{background:var(--white);border-radius:var(--radius-sm);padding:16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.feature-icon{font-size:22px;flex-shrink:0}
+.feature-text{font-size:13px;font-weight:600;color:var(--text);line-height:1.4}
+
+/* ── PRODUCTS SECTION ── */
+.products-section{padding:0}
+.products-header{display:flex;align-items:center;gap:14px;padding:20px 20px 16px;background:var(--white);border-bottom:1px solid rgba(0,0,0,.06)}
+.back-btn{width:38px;height:38px;border-radius:10px;border:none;background:var(--cream);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0}
+.back-btn:hover{background:var(--cream-dark)}
+.products-header-text{flex:1}
+.products-header-title{font-size:18px;font-weight:700;color:var(--text)}
+.products-header-sub{font-size:13px;color:var(--text-muted);margin-top:2px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;padding:20px}
+@media(min-width:600px){.products-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;padding:24px}}
+@media(min-width:1000px){.products-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}
+
+/* ── SKELETON ── */
+.skeleton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;padding:20px}
+@media(min-width:600px){.skeleton-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;padding:24px}}
+.skeleton-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.skeleton-img{height:200px;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.skeleton-body{padding:14px}
+.skeleton-line{height:12px;border-radius:6px;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-bottom:10px}
+.skeleton-line.short{width:55%}.skeleton-line.medium{width:75%}
+.skeleton-btn{height:38px;border-radius:8px;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-top:4px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── PRODUCT CARD ── */
+.product-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);cursor:default}
+.product-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.product-img-wrap{position:relative;aspect-ratio:1;overflow:hidden;background:var(--cream)}
+.product-img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.product-card:hover .product-img{transform:scale(1.04)}
+.product-img-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:48px;background:var(--cream)}
+.product-body{padding:14px}
+.product-price{font-size:18px;font-weight:800;color:var(--green-dark);margin-bottom:4px}
+.product-name{font-size:13px;color:var(--text-muted);margin-bottom:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.order-btn{width:100%;padding:11px;background:linear-gradient(135deg,#25d366,#20b358);color:var(--white);border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:var(--transition)}
+.order-btn:hover{background:linear-gradient(135deg,#20b358,#1a9147);transform:translateY(-1px)}
+.order-btn svg{width:16px;height:16px;fill:currentColor;flex-shrink:0}
+.error-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-muted)}
+.error-icon{font-size:48px;margin-bottom:16px}
+.retry-btn{margin-top:16px;padding:12px 28px;background:var(--green);color:var(--white);border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+
+/* ── CONTACT ── */
+.contact-section{padding:32px 20px}
+.contact-card{background:var(--white);border-radius:var(--radius);padding:32px 24px;box-shadow:var(--shadow);text-align:center;max-width:480px;margin:0 auto}
+.contact-icon{font-size:56px;margin-bottom:16px}
+.contact-title{font-size:22px;font-weight:800;margin-bottom:10px;color:var(--text)}
+.contact-text{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:28px}
+.wa-btn{width:100%;padding:16px;background:linear-gradient(135deg,#25d366,#20b358);color:var(--white);border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:var(--transition);box-shadow:0 4px 16px rgba(37,211,102,.3)}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.4)}
+.contact-info{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left}
+.info-item{background:var(--cream);border-radius:10px;padding:14px;display:flex;align-items:flex-start;gap:10px}
+.info-item-icon{font-size:20px;flex-shrink:0}
+.info-item-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:3px}
+.info-item-val{font-size:13px;font-weight:600;color:var(--text)}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid rgba(0,0,0,.08);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px 8px;cursor:pointer;border:none;background:none;transition:var(--transition);gap:4px;min-height:56px}
+.bnav-icon{font-size:22px;transition:var(--transition)}
+.bnav-label{font-size:10px;font-weight:600;color:var(--text-muted);transition:var(--transition);letter-spacing:.2px}
+.bnav-item.active .bnav-label,.bnav-item:hover .bnav-label{color:var(--green)}
+.bnav-item.active .bnav-icon{transform:scale(1.15)}
+.bnav-dot{width:4px;height:4px;border-radius:50%;background:var(--green);display:none;margin:0 auto 2px}
+.bnav-item.active .bnav-dot{display:block}
+
+/* ── EMPTY STATE ── */
+.empty-state{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--text-muted)}
+.empty-icon{font-size:56px;margin-bottom:16px;opacity:.5}
+
+/* ── DESKTOP ── */
+@media(min-width:900px){
+  .topnav{padding:0 40px}
+  .hero{padding:80px 40px 64px}
+  .cat-section,.features,.contact-section{padding-left:40px;padding-right:40px}
+  .products-header{padding:24px 40px}
+  .products-grid,.skeleton-grid{padding:28px 40px}
+  .cat-grid{grid-template-columns:repeat(2,minmax(240px,320px));justify-content:center}
+  .bottom-nav{display:none}
+  .page{padding-bottom:0}
+  .nav-links{display:flex}
+}
+</style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo-container">
-            <img src="https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png" alt="Logo" class="logo">
-            <div>
-                <div class="title">Meru Naturals</div>
-                <div class="subtitle">Premium Products</div>
-            </div>
-        </div>
+
+<nav class="topnav">
+  <a class="brand" href="#" onclick="showSection('home');return false">
+    <div class="brand-icon">🌿</div>
+    <div><div class="brand-name">Meru Naturals</div><div class="brand-sub">Est. Kenya</div></div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link active" id="nl-home" onclick="showSection('home')">Home</button>
+    <button class="nav-link" id="nl-tote" onclick="showSection('tote')">Tote Bags</button>
+    <button class="nav-link" id="nl-skin" onclick="showSection('skin')">Skin & Hair</button>
+    <button class="nav-link" id="nl-contact" onclick="showSection('contact')">Contact</button>
+  </div>
+  <button class="nav-wa" onclick="openWhatsApp()">💬 WhatsApp</button>
+</nav>
+
+<div class="page">
+
+  <!-- HOME -->
+  <div class="section active" id="sec-home">
+    <div class="hero">
+      <div class="hero-badge">🌿 100% Natural & Authentic</div>
+      <h1>Kenya's Finest Natural<br>Beauty & Lifestyle Brand</h1>
+      <p>Premium handcrafted tote bags and nature-powered skincare & hair care, delivered to your door.</p>
+      <div class="hero-btns">
+        <button class="hero-btn-primary" onclick="showSection('tote')">👜 Shop Tote Bags</button>
+        <button class="hero-btn-sec" onclick="showSection('skin')">✨ Skin & Hair</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" id="stat-tote">—</span><span class="stat-label">Tote Designs</span></div>
+        <div class="stat"><span class="stat-num" id="stat-skin">—</span><span class="stat-label">Beauty Products</span></div>
+        <div class="stat"><span class="stat-num">🚚</span><span class="stat-label">Countrywide</span></div>
+      </div>
     </div>
-
-    <section id="homeSection">
-        <div class="hero">
-            <h1>Welcome to Meru Naturals</h1>
-            <p>Discover our exclusive collection of crafted tote bags and premium natural skin and hair products. Each item is made with quality materials for your everyday needs.</p>
-            <div class="delivery-note">🚚 We Deliver Countrywide</div>
+    <div class="cat-section">
+      <div class="section-label">Browse Collections</div>
+      <div class="cat-grid">
+        <div class="cat-card" onclick="showSection('tote')">
+          <span class="cat-emoji">👜</span>
+          <div class="cat-name">Tote Bags</div>
+          <div class="cat-desc">Premium, spacious & stylish bags for every occasion</div>
+          <div class="cat-arrow">Shop Now →</div>
         </div>
-
-        <div class="categories">
-            <div class="category-card" onclick="showToteBags()">
-                <div class="category-icon">👜</div>
-                <h2 class="category-title">Tote Bags</h2>
-                <p class="category-desc">Crafted with premium materials, very spacious and durable for all your needs.</p>
-                <button class="view-btn">
-                    <span>❄️</span> View Collection
-                </button>
-            </div>
-
-            <div class="category-card" onclick="showSkinCare()">
-                <div class="category-icon">✨</div>
-                <h2 class="category-title">Skin & Hair Care</h2>
-                <p class="category-desc">Premium natural products made with organic ingredients for healthy skin and hair.</p>
-                <button class="view-btn">
-                    <span>❄️</span> View Products
-                </button>
-            </div>
+        <div class="cat-card" onclick="showSection('skin')">
+          <span class="cat-emoji">✨</span>
+          <div class="cat-name">Skin & Hair</div>
+          <div class="cat-desc">Natural ingredients for radiant skin and healthy hair</div>
+          <div class="cat-arrow">Shop Now →</div>
         </div>
-    </section>
-
-    <section id="toteSection" class="products-section">
-        <button class="back-btn" onclick="showHome()">
-            <span>←</span> Back to Home
-        </button>
-        <h2 class="section-title">Tote Bags Collection</h2>
-        <p class="section-subtitle">Crafted with premium materials, very spacious and durable</p>
-
-        <div class="instructions">
-            📸 Take a screenshot of your desired product and send it to us on WhatsApp for ordering
-        </div>
-
-        <div class="loading" id="toteLoading">
-            <div class="spinner"></div>
-            <p>Loading products<span class="loading-dots"></span></p>
-        </div>
-
-        <div class="products-grid" id="toteGrid"></div>
-    </section>
-
-    <section id="skinSection" class="products-section">
-        <button class="back-btn" onclick="showHome()">
-            <span>←</span> Back to Home
-        </button>
-        <h2 class="section-title">Skin & Hair Care</h2>
-        <p class="section-subtitle">Premium natural products for healthy skin and hair</p>
-
-        <div class="instructions">
-            📸 Take a screenshot of your desired product and send it to us on WhatsApp for ordering
-        </div>
-
-        <div class="loading" id="skinLoading">
-            <div class="spinner"></div>
-            <p>Loading products<span class="loading-dots"></span></p>
-        </div>
-
-        <div class="products-grid" id="skinGrid"></div>
-    </section>
-
-    <section id="contactSection" class="products-section">
-        <button class="back-btn" onclick="showHome()">
-            <span>←</span> Back to Home
-        </button>
-        <div class="contact-section">
-            <h2 class="contact-title">Ready to Order?</h2>
-            <p class="contact-text">Contact us on WhatsApp for inquiries or to place your order. Take a screenshot of your desired product and send it to us. We deliver countrywide! Our team is ready to assist you!</p>
-            <button class="whatsapp-btn" onclick="openWhatsApp()">
-                <span>📱</span> Chat on WhatsApp
-            </button>
-        </div>
-    </section>
-
-    <div class="bottom-nav">
-        <div class="nav-item active" onclick="showHome()">
-            <div class="nav-icon">🏠</div>
-            <div>Home</div>
-        </div>
-        <div class="nav-item" onclick="showToteBags()">
-            <div class="nav-icon">👜</div>
-            <div>Tote Bags</div>
-        </div>
-        <div class="nav-item" onclick="showSkinCare()">
-            <div class="nav-icon">✨</div>
-            <div>Skin & Hair</div>
-        </div>
-        <div class="nav-item" onclick="showContact()">
-            <div class="nav-icon">📱</div>
-            <div>Contact</div>
-        </div>
+      </div>
     </div>
+    <div class="features">
+      <div class="section-label">Why Choose Us</div>
+      <div class="feature-list">
+        <div class="feature-item"><span class="feature-icon">🌿</span><div class="feature-text">100% Natural Ingredients</div></div>
+        <div class="feature-item"><span class="feature-icon">🚚</span><div class="feature-text">Nationwide Delivery</div></div>
+        <div class="feature-item"><span class="feature-icon">💰</span><div class="feature-text">Affordable Prices</div></div>
+        <div class="feature-item"><span class="feature-icon">⭐</span><div class="feature-text">Premium Quality</div></div>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        const sections = {
-            home: document.getElementById('homeSection'),
-            tote: document.getElementById('toteSection'),
-            skin: document.getElementById('skinSection'),
-            contact: document.getElementById('contactSection')
-        };
+  <!-- TOTE BAGS -->
+  <div class="section" id="sec-tote">
+    <div class="products-header">
+      <button class="back-btn" onclick="showSection('home')">←</button>
+      <div class="products-header-text">
+        <div class="products-header-title">👜 Tote Bags</div>
+        <div class="products-header-sub" id="tote-sub">Loading products…</div>
+      </div>
+    </div>
+    <div id="tote-grid"></div>
+  </div>
 
-        const grids = {
-            tote: document.getElementById('toteGrid'),
-            skin: document.getElementById('skinGrid')
-        };
+  <!-- SKIN & HAIR -->
+  <div class="section" id="sec-skin">
+    <div class="products-header">
+      <button class="back-btn" onclick="showSection('home')">←</button>
+      <div class="products-header-text">
+        <div class="products-header-title">✨ Skin & Hair Care</div>
+        <div class="products-header-sub" id="skin-sub">Loading products…</div>
+      </div>
+    </div>
+    <div id="skin-grid"></div>
+  </div>
 
-        const loaders = {
-            tote: document.getElementById('toteLoading'),
-            skin: document.getElementById('skinLoading')
-        };
+  <!-- CONTACT -->
+  <div class="section" id="sec-contact">
+    <div class="contact-section">
+      <div class="contact-card">
+        <div class="contact-icon">💬</div>
+        <div class="contact-title">Ready to Order?</div>
+        <div class="contact-text">Browse our collections, tap <strong>Order This Product</strong> on any item, and we'll get back to you instantly on WhatsApp. We deliver countrywide!</div>
+        <button class="wa-btn" onclick="openWhatsApp()">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </button>
+        <div class="contact-info">
+          <div class="info-item"><span class="info-item-icon">📍</span><div><div class="info-item-label">Location</div><div class="info-item-val">Meru, Kenya</div></div></div>
+          <div class="info-item"><span class="info-item-icon">🚚</span><div><div class="info-item-label">Delivery</div><div class="info-item-val">Countrywide</div></div></div>
+          <div class="info-item"><span class="info-item-icon">💳</span><div><div class="info-item-label">Payment</div><div class="info-item-val">M-Pesa & Cash</div></div></div>
+          <div class="info-item"><span class="info-item-icon">⏰</span><div><div class="info-item-label">Response</div><div class="info-item-val">Within 1 hour</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        const navItems = document.querySelectorAll('.nav-item');
+</div>
 
-        const visitedSections = new Set(['home']);
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="bnav-item active" id="bn-home" onclick="showSection('home')">
+    <div class="bnav-dot"></div><span class="bnav-icon">🏠</span><span class="bnav-label">Home</span>
+  </button>
+  <button class="bnav-item" id="bn-tote" onclick="showSection('tote')">
+    <div class="bnav-dot"></div><span class="bnav-icon">👜</span><span class="bnav-label">Tote Bags</span>
+  </button>
+  <button class="bnav-item" id="bn-skin" onclick="showSection('skin')">
+    <div class="bnav-dot"></div><span class="bnav-icon">✨</span><span class="bnav-label">Skin & Hair</span>
+  </button>
+  <button class="bnav-item" id="bn-contact" onclick="showSection('contact')">
+    <div class="bnav-dot"></div><span class="bnav-icon">📱</span><span class="bnav-label">Contact</span>
+  </button>
+</nav>
 
-        function showHome() {
-            hideAllSections();
-            sections.home.style.display = 'block';
-            updateNav('home');
-            visitedSections.add('home');
-            smoothScrollToTop();
-        }
+<script>
+const BOT = 'https://merunaturalzzbotxd-6a66649095cf.herokuapp.com';
+const WA_NUMBER = '254734943210';
+const loaded = {};
+const cache = {};
 
-        function showToteBags() {
-            hideAllSections();
-            sections.tote.style.display = 'block';
-            updateNav('tote');
-            visitedSections.add('tote');
-            smoothScrollToTop();
+const WA_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
 
-            if (grids.tote.children.length === 0) {
-                loadProducts('tote');
-            }
-        }
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + name).classList.add('active');
+  var nl = document.getElementById('nl-' + name);
+  var bn = document.getElementById('bn-' + name);
+  if (nl) nl.classList.add('active');
+  if (bn) bn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if ((name === 'tote' || name === 'skin') && !loaded[name]) {
+    loadProducts(name);
+  }
+}
 
-        function showSkinCare() {
-            hideAllSections();
-            sections.skin.style.display = 'block';
-            updateNav('skin');
-            visitedSections.add('skin');
-            smoothScrollToTop();
+function makeSkeleton(count) {
+  var html = '<div class="skeleton-grid">';
+  for (var i = 0; i < count; i++) {
+    html += '<div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="skeleton-btn"></div></div></div>';
+  }
+  return html + '</div>';
+}
 
-            if (grids.skin.children.length === 0) {
-                loadProducts('skin');
-            }
-        }
+async function loadProducts(type) {
+  var gridEl = document.getElementById(type + '-grid');
+  var subEl = document.getElementById(type + '-sub');
+  gridEl.innerHTML = makeSkeleton(6);
+  try {
+    var res = await fetch(BOT + '/api/products?cat=' + type);
+    if (!res.ok) throw new Error('Server error ' + res.status);
+    var products = await res.json();
+    cache[type] = products;
+    loaded[type] = true;
+    if (type === 'tote') document.getElementById('stat-tote').textContent = products.length + '+';
+    if (type === 'skin') document.getElementById('stat-skin').textContent = products.length + '+';
+    if (subEl) subEl.textContent = products.length + ' product' + (products.length !== 1 ? 's' : '') + ' available';
+    if (!products.length) {
+      gridEl.innerHTML = '<div class="products-grid"><div class="empty-state"><div class="empty-icon">' + (type === 'tote' ? '👜' : '✨') + '</div><p>No products yet. Check back soon!</p></div></div>';
+      return;
+    }
+    var html = '<div class="products-grid">';
+    products.forEach(function(p, i) {
+      var safePath = encodeURIComponent(p.path);
+      var safeName = (p.name || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      html += '<div class="product-card">' +
+        '<div class="product-img-wrap">' +
+        '<img class="product-img" src="' + p.imageUrl + '" alt="' + safeName + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+        '<div class="product-img-fallback">' + (type === 'tote' ? '👜' : '✨') + '</div>' +
+        '</div>' +
+        '<div class="product-body">' +
+        '<div class="product-price">KSH ' + p.price + '</div>' +
+        '<div class="product-name">' + (p.name || 'Product') + '</div>' +
+        '<button class="order-btn" onclick="orderProduct(\'' + safeName.replace(/'/g, "\\'") + '\',\'' + p.price + '\',\'' + safePath + '\')">' +
+        WA_SVG + ' Order on WhatsApp</button>' +
+        '</div></div>';
+    });
+    html += '</div>';
+    gridEl.innerHTML = html;
+  } catch (err) {
+    loaded[type] = false;
+    if (subEl) subEl.textContent = 'Failed to load';
+    gridEl.innerHTML = '<div class="products-grid"><div class="error-state"><div class="error-icon">😞</div><p>Could not load products. Please check your connection.</p><button class="retry-btn" onclick="loadProducts(\'' + type + '\')">Try Again</button></div></div>';
+  }
+}
 
-        function showContact() {
-            hideAllSections();
-            sections.contact.style.display = 'block';
-            updateNav('contact');
-            visitedSections.add('contact');
-            smoothScrollToTop();
-        }
+function orderProduct(name, price, encodedPath) {
+  var filePath = decodeURIComponent(encodedPath);
+  var msg = 'ORDER:' + filePath + '|KSH ' + price + '|' + name;
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+}
 
-        function hideAllSections() {
-            Object.values(sections).forEach(section => {
-                section.style.display = 'none';
-            });
-        }
+function openWhatsApp() {
+  var msg = 'Hello! I\'d like to learn more about Meru Naturals products.';
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+}
 
-        function updateNav(active) {
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (active === 'home' && item.textContent.includes('Home')) {
-                    item.classList.add('active');
-                } else if (active === 'tote' && item.textContent.includes('Tote')) {
-                    item.classList.add('active');
-                } else if (active === 'skin' && item.textContent.includes('Skin')) {
-                    item.classList.add('active');
-                } else if (active === 'contact' && item.textContent.includes('Contact')) {
-                    item.classList.add('active');
-                }
-            });
-        }
-
-        async function loadProducts(type) {
-              const grid = grids[type];
-              const loader = loaders[type];
-              loader.style.display = 'block';
-              grid.innerHTML = '';
-              try {
-                  const res = await fetch('https://merunaturalzzbotxd-6a66649095cf.herokuapp.com/api/products?cat=' + type);
-                  if (!res.ok) throw new Error('Failed to load');
-                  const products = await res.json();
-                  const sectionTitle = document.querySelector('#' + type + 'Section .section-subtitle');
-                  if (sectionTitle) {
-                      const base = type === 'tote'
-                          ? 'Crafted with premium materials, very spacious and durable'
-                          : 'Premium natural products for healthy skin and hair';
-                      sectionTitle.innerHTML = base + ' <br><small style="font-size:0.8em;color:#e6b325;">(' + products.length + ' products available)</small>';
-                  }
-                  if (!products.length) {
-                      loader.style.display = 'none';
-                      grid.innerHTML = '<div style="text-align:center;padding:50px;color:#666;"><div style="font-size:48px;margin-bottom:20px;">😔</div><div>No products yet. Check back soon!</div></div>';
-                      return;
-                  }
-                  products.forEach(function(product, index) {
-                      var card = document.createElement('div');
-                      card.className = 'product-card';
-                      card.style.animationDelay = (index * 0.1) + 's';
-                      var safeName = product.name.replace(/'/g, "\\'");
-                      card.innerHTML =
-                          '<div class="product-counter">#' + (index + 1) + '</div>' +
-                          '<img src="' + product.imageUrl + '" alt="' + product.name + '" class="product-image" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
-                          '<div class="image-fallback" style="display:none;">' + (type === 'tote' ? '👜' : '✨') + '</div>' +
-                          '<div class="product-info">' +
-                          '<div class="product-price">KSH ' + product.price + '</div>' +
-                          '<div class="product-name">' + product.name + '</div>' +
-                          '<button class="order-btn" onclick="orderProduct(\'' + safeName + '\',\'' + product.price + '\',\'' + encodeURIComponent(product.path) + '\')">' +
-                          '<span>📱</span> Order This Product</button>' +
-                          '</div>';
-                      grid.appendChild(card);
-                  });
-                  setTimeout(function() { loader.style.display = 'none'; }, 800);
-              } catch (err) {
-                  loader.style.display = 'none';
-                  grid.innerHTML = '<div style="text-align:center;padding:50px;color:#666;"><div style="font-size:48px;margin-bottom:20px;">😔</div><div>Unable to load products. Please try again later.</div></div>';
-              }
-          }
-
-        function orderProduct(productName, price, encodedPath) {
-            const phone = '254734943210';
-            const filePath = decodeURIComponent(encodedPath);
-            const msg = 'ORDER:' + filePath + '|KSH ' + price + '|' + productName;
-            window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank');
-        }
-        function openWhatsApp() {
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-
-            const phone = '254734943210';
-            const message = 'Hello! I\'m interested in products from Meru Naturals.';
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
-        }
-
-        function smoothScrollToTop() {
-            setTimeout(() => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }, 100);
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && visitedSections.size > 1) {
-                showHome();
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            showHome();
-
-            const logo = new Image();
-            logo.src = 'https://raw.githubusercontent.com/xhclintohn/merunaturals-site/main/merunaturals.png';
-            logo.onload = function() {
-                document.querySelector('.logo').style.opacity = '1';
-            };
-
-            document.querySelectorAll('.category-card, .nav-item, .order-btn, .whatsapp-btn').forEach(element => {
-                element.addEventListener('touchstart', function() {
-                    this.style.opacity = '0.8';
-                    this.style.transform = 'scale(0.98)';
-                });
-
-                element.addEventListener('touchend', function() {
-                    this.style.opacity = '1';
-                    this.style.transform = '';
-                });
-
-                element.addEventListener('touchcancel', function() {
-                    this.style.opacity = '1';
-                    this.style.transform = '';
-                });
-            });
-
-            document.querySelectorAll('.loading p').forEach(p => {
-                p.innerHTML = 'Loading products<span class="loading-dots"></span>';
-            });
-        });
-    </script>
+fetch(BOT + '/api/products?cat=tote').then(function(r){ return r.json(); }).then(function(d){
+  document.getElementById('stat-tote').textContent = d.length + '+';
+}).catch(function(){});
+fetch(BOT + '/api/products?cat=skin').then(function(r){ return r.json(); }).then(function(d){
+  document.getElementById('stat-skin').textContent = d.length + '+';
+}).catch(function(){});
+</script>
 </body>
 </html>
