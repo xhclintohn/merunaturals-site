@@ -641,6 +641,7 @@
                     🔓 Login to Dashboard
                 </span>
             </button>
+            <div id="loginMsg" class="status-msg" style="display:none;margin-top:15px"></div>
         </div>
         
         <div id="adminBox" class="hidden">
@@ -668,6 +669,10 @@
                 </div>
                 <input type="hidden" id="cat" value="tote">
                 
+                <div class="price-row" style="margin-bottom:16px">
+                      <span style="font-size:22px;min-width:40px;text-align:center">🏷️</span>
+                      <input type="text" id="name" class="input-field" placeholder="Product name (e.g. Natural Shea Butter)">
+                  </div>
                 <div class="price-row">
                     <div class="ksh pulse">KSH</div>
                     <input type="number" id="price" class="input-field" placeholder="Enter product price" min="1">
@@ -715,373 +720,152 @@
     </div>
 
     <script>
-        // All original JavaScript functions remain exactly the same
-        // Only CSS has been updated for the super cool UI
-        
-        const SECURE = {
-            getToken: () => {
-                const parts = [
-                 
-                ];
-                return parts.join('');
-            },
-            owner: 'xhclintohn',
-            repo: 'merunaturals-site',
-            branch: 'main',
-            pass: 'Mugambi@2020'
-        };
+          const BOT_URL = 'https://merunaturalzzbotxd-6a66649095cf.herokuapp.com';
+          let adminPassword = '';
+          let items = [];
 
-        let items = [];
-        const TOKEN = SECURE.getToken();
+          function togglePass() {
+              const field = document.getElementById('pass');
+              const eye = field.parentElement.querySelector('.eye-btn');
+              if (field.type === 'password') { field.type = 'text'; eye.textContent = '🙈'; }
+              else { field.type = 'password'; eye.textContent = '👁️'; }
+          }
 
-        function togglePass() {
-            const field = document.getElementById('pass');
-            const eye = field.parentElement.querySelector('.eye-btn');
-            if (field.type === 'password') {
-                field.type = 'text';
-                eye.textContent = '🙈';
-            } else {
-                field.type = 'password';
-                eye.textContent = '👁️';
-            }
-        }
+          function selectCat(cat) {
+              document.getElementById('cat').value = cat;
+              document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+              event.target.closest('.cat-btn').classList.add('active');
+          }
 
-        function selectCat(cat) {
-            document.getElementById('cat').value = cat;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.closest('.cat-btn').classList.add('active');
-        }
+          async function login() {
+              const entered = document.getElementById('pass').value.trim();
+              const msg = document.getElementById('loginMsg');
+              if (!entered) return;
+              msg.textContent = '⏳ Verifying...';
+              msg.className = 'status-msg status-loading';
+              msg.style.display = 'block';
+              try {
+                  const r = await fetch(BOT_URL + '/api/admin/verify', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': entered }
+                  });
+                  if (r.ok) {
+                      adminPassword = entered;
+                      document.getElementById('loginBox').classList.add('hidden');
+                      document.getElementById('adminBox').classList.remove('hidden');
+                  } else {
+                      const passField = document.getElementById('pass');
+                      passField.style.borderColor = 'var(--danger)';
+                      passField.style.boxShadow = '0 0 0 4px rgba(255,55,95,0.1)';
+                      passField.value = '';
+                      passField.focus();
+                      msg.textContent = '❌ Incorrect password';
+                      msg.className = 'status-msg status-error';
+                      setTimeout(() => { passField.style.borderColor = ''; passField.style.boxShadow = ''; }, 1500);
+                  }
+              } catch (e) {
+                  msg.textContent = '❌ Cannot reach server — is the bot online?';
+                  msg.className = 'status-msg status-error';
+              }
+          }
 
-        function login() {
-            const entered = document.getElementById('pass').value;
-            if (entered === SECURE.pass) {
-                document.getElementById('loginBox').classList.add('hidden');
-                document.getElementById('adminBox').classList.remove('hidden');
-                // Add entrance animation
-                document.getElementById('adminBox').style.animation = 'fadeIn 0.5s ease';
-            } else {
-                // Enhanced error feedback
-                const passField = document.getElementById('pass');
-                passField.style.borderColor = 'var(--danger)';
-                passField.style.boxShadow = '0 0 0 4px rgba(255, 55, 95, 0.1)';
-                passField.value = '';
-                passField.focus();
-                
-                // Reset border after 1.5 seconds
-                setTimeout(() => {
-                    passField.style.borderColor = '';
-                    passField.style.boxShadow = '';
-                }, 1500);
-            }
-        }
+          function showTab(tab) {
+              document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+              document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+              document.querySelector('.tab-btn[onclick*="' + tab + '"]').classList.add('active');
+              document.getElementById(tab + 'Tab').classList.add('active');
+              if (tab === 'view') loadItems();
+          }
 
-        function showTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelector(`.tab-btn[onclick*="${tab}"]`).classList.add('active');
-            document.getElementById(tab + 'Tab').classList.add('active');
-            if (tab === 'view') loadItems();
-        }
+          function showPrev() {
+              const file = document.getElementById('imgPick').files[0];
+              if (!file) return;
+              if (file.size > 10 * 1024 * 1024) { alert('File size should be less than 10MB'); document.getElementById('imgPick').value = ''; return; }
+              const reader = new FileReader();
+              reader.onload = e => { document.getElementById('prev').src = e.target.result; document.getElementById('prevBox').classList.remove('hidden'); };
+              reader.readAsDataURL(file);
+          }
 
-        function showPrev() {
-            const file = document.getElementById('imgPick').files[0];
-            if (!file) return;
-            
-            // File size validation
-            if (file.size > 10 * 1024 * 1024) {
-                alert('File size should be less than 10MB');
-                document.getElementById('imgPick').value = '';
-                return;
-            }
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('prev').src = e.target.result;
-                document.getElementById('prevBox').classList.remove('hidden');
-                document.getElementById('prevBox').style.animation = 'fadeIn 0.5s ease';
-            };
-            reader.readAsDataURL(file);
-        }
+          function toBase64(file) {
+              return new Promise((resolve, reject) => { const r = new FileReader(); r.readAsDataURL(file); r.onload = () => resolve(r.result); r.onerror = reject; });
+          }
 
-        async function upload() {
-            const cat = document.getElementById('cat').value;
-            const price = document.getElementById('price').value;
-            const fileInput = document.getElementById('imgPick');
-            const msg = document.getElementById('msg');
+          async function upload() {
+              const cat = document.getElementById('cat').value;
+              const name = document.getElementById('name').value.trim();
+              const price = document.getElementById('price').value;
+              const fileInput = document.getElementById('imgPick');
+              const msg = document.getElementById('msg');
+              if (!name) { msg.textContent = '⚠️ Please enter a product name'; msg.className = 'status-msg status-error'; return; }
+              if (!price || price < 1) { msg.textContent = '⚠️ Please enter a valid price'; msg.className = 'status-msg status-error'; return; }
+              if (!fileInput.files[0]) { msg.textContent = '⚠️ Please select an image'; msg.className = 'status-msg status-error'; return; }
+              try {
+                  msg.textContent = '⏳ Uploading product...';
+                  msg.className = 'status-msg status-loading';
+                  const imageBase64 = await toBase64(fileInput.files[0]);
+                  const r = await fetch(BOT_URL + '/api/admin/upload', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': adminPassword },
+                      body: JSON.stringify({ category: cat, name, price, imageBase64 })
+                  });
+                  const data = await r.json();
+                  if (r.ok) {
+                      document.getElementById('name').value = '';
+                      document.getElementById('price').value = '';
+                      document.getElementById('imgPick').value = '';
+                      document.getElementById('prevBox').classList.add('hidden');
+                      msg.textContent = '✅ Product uploaded successfully!';
+                      msg.className = 'status-msg status-success';
+                  } else {
+                      msg.textContent = '❌ ' + (data.error || 'Upload failed');
+                      msg.className = 'status-msg status-error';
+                  }
+              } catch (e) {
+                  msg.textContent = '❌ ' + e.message;
+                  msg.className = 'status-msg status-error';
+              }
+          }
 
-            if (!price || price < 1) {
-                msg.textContent = '⚠️ Please enter a valid price';
-                msg.className = 'status-msg status-error';
-                return;
-            }
+          async function loadItems() {
+              const cat = document.getElementById('viewCat').value;
+              const loading = document.getElementById('loadMsg');
+              const list = document.getElementById('itemsList');
+              try {
+                  loading.classList.remove('hidden');
+                  list.innerHTML = '';
+                  const r = await fetch(BOT_URL + '/api/products?cat=' + cat);
+                  if (!r.ok) { const e = await r.json(); throw new Error(e.error || 'Failed to load'); }
+                  items = await r.json();
+                  loading.classList.add('hidden');
+                  if (!items.length) {
+                      list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📦</div><div style="font-size:18px;margin-bottom:10px">No products found</div><div style="color:var(--text-secondary)">Upload your first product</div></div>';
+                      return;
+                  }
+                  list.innerHTML = items.map((item, i) => '<div class="product-card"><img class="product-image" src="' + item.url + '" alt="' + item.name + '" loading="lazy" onerror="this.style.opacity=0.3"><div class="product-price">KSH ' + item.price + '</div><div style="font-size:15px;color:#fff;margin-bottom:6px;font-weight:600">' + item.name + '</div><div class="product-name">' + item.path + '</div><button class="delete-btn" onclick="deleteItem(' + i + ')">🗑️ Delete</button></div>').join('');
+              } catch (e) {
+                  loading.classList.add('hidden');
+                  list.innerHTML = '<div class="status-msg status-error">❌ ' + e.message + '</div>';
+              }
+          }
 
-            if (!fileInput.files[0]) {
-                msg.textContent = '⚠️ Please select an image';
-                msg.className = 'status-msg status-error';
-                return;
-            }
+          async function deleteItem(index) {
+              const item = items[index];
+              if (!item || !confirm('Delete "' + item.name + '"?')) return;
+              try {
+                  const r = await fetch(BOT_URL + '/api/admin/product', {
+                      method: 'DELETE',
+                      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': adminPassword },
+                      body: JSON.stringify({ path: item.path, sha: item.sha })
+                  });
+                  const data = await r.json();
+                  if (r.ok) loadItems();
+                  else alert('Delete failed: ' + (data.error || 'Unknown error'));
+              } catch (e) { alert('Error: ' + e.message); }
+          }
 
-            try {
-                msg.textContent = '⏳ Uploading product...';
-                msg.className = 'status-msg status-loading';
-
-                const file = fileInput.files[0];
-                const timestamp = Date.now();
-                const random = Math.random().toString(36).substring(2, 10);
-                const filename = `${cat}_${timestamp}_${random}.jpg`;
-                const folder = cat === 'tote' ? 'Images' : 'Images2';
-                const path = `${folder}/${price}/${filename}`;
-
-                const base64 = await toBase64(file);
-                const content = base64.split(',')[1];
-
-                const response = await fetch(
-                    `https://api.github.com/repos/${SECURE.owner}/${SECURE.repo}/contents/${path}`,
-                    {
-                        method: 'PUT',
-                        headers: {
-                            'Authorization': `Bearer ${TOKEN}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            message: `Added ${cat} product - KSH ${price}`,
-                            content: content,
-                            branch: SECURE.branch
-                        })
-                    }
-                );
-
-                if (response.ok) {
-                    // Success animation
-                    document.getElementById('price').value = '';
-                    document.getElementById('imgPick').value = '';
-                    document.getElementById('prevBox').classList.add('hidden');
-                    msg.textContent = '✅ Product uploaded successfully!';
-                    msg.className = 'status-msg status-success';
-                    
-                    // Add success pulse animation
-                    msg.classList.add('pulse');
-                    setTimeout(() => msg.classList.remove('pulse'), 2000);
-                } else {
-                    const error = await response.json();
-                    let errorMsg = error.message || 'Upload failed';
-                    if (errorMsg.includes('Bad credentials')) {
-                        errorMsg = 'Token issue. Check GitHub token.';
-                    }
-                    throw new Error(errorMsg);
-                }
-
-            } catch (error) {
-                msg.textContent = `❌ ${error.message}`;
-                msg.className = 'status-msg status-error';
-            }
-        }
-
-        async function loadItems() {
-            const cat = document.getElementById('viewCat').value;
-            const folder = cat === 'tote' ? 'Images' : 'Images2';
-            const loading = document.getElementById('loadMsg');
-            const list = document.getElementById('itemsList');
-
-            try {
-                loading.classList.remove('hidden');
-                list.innerHTML = '';
-
-                const foldersRes = await fetch(
-                    `https://api.github.com/repos/${SECURE.owner}/${SECURE.repo}/contents/${folder}`,
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${TOKEN}`
-                        }
-                    }
-                );
-
-                if (foldersRes.status === 404) {
-                    list.innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-state-icon">📁</div>
-                            <div style="font-size: 18px; margin-bottom: 10px;">No products found</div>
-                            <div style="color: var(--text-secondary);">Start by uploading your first product</div>
-                        </div>
-                    `;
-                    loading.classList.add('hidden');
-                    return;
-                }
-
-                if (!foldersRes.ok) {
-                    const error = await foldersRes.json();
-                    throw new Error(error.message || 'Failed to load');
-                }
-
-                const folders = await foldersRes.json();
-                items = [];
-
-                for (const priceFolder of folders) {
-                    if (priceFolder.type === 'dir') {
-                        const price = priceFolder.name;
-                        const imagesRes = await fetch(
-                            `https://api.github.com/repos/${SECURE.owner}/${SECURE.repo}/contents/${folder}/${price}`,
-                            {
-                                headers: {
-                                    'Authorization': `Bearer ${TOKEN}`
-                                }
-                            }
-                        );
-
-                        if (imagesRes.ok) {
-                            const images = await imagesRes.json();
-                            images.forEach(img => {
-                                if (img.type === 'file' && /\.(jpg|jpeg|png|gif|webp)$/i.test(img.name)) {
-                                    const url = `https://raw.githubusercontent.com/${SECURE.owner}/${SECURE.repo}/${SECURE.branch}/${img.path}`;
-                                    items.push({
-                                        path: img.path,
-                                        name: img.name,
-                                        price: price,
-                                        url: url,
-                                        sha: img.sha
-                                    });
-                                }
-                            });
-                        }
-                    }
-                }
-
-                loading.classList.add('hidden');
-
-                if (items.length === 0) {
-                    list.innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-state-icon">📦</div>
-                            <div style="font-size: 18px; margin-bottom: 10px;">No products available</div>
-                            <div style="color: var(--text-secondary);">Upload products to see them here</div>
-                        </div>
-                    `;
-                    return;
-                }
-
-                items.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    card.innerHTML = `
-                        <img src="${item.url}" 
-                             class="product-image" 
-                             alt="${item.name}"
-                             loading="lazy"
-                             onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxNDE0MjMiLz48dGV4dCB4PSIzMDAiIHk9IjIwMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjMDBGRjg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Qcm9kdWN0IEltYWdlPC90ZXh0Pjwvc3ZnPg==';">
-                        <div class="product-price">KSH ${item.price}</div>
-                        <div class="product-name">${item.name}</div>
-                        <button class="delete-btn" onclick="delItem('${item.path}', '${item.sha}')">
-                            🗑️ Delete Product
-                        </button>
-                    `;
-                    list.appendChild(card);
-                });
-
-            } catch (error) {
-                loading.classList.add('hidden');
-                list.innerHTML = `
-                    <div class="empty-state">
-                        <div style="font-size: 48px; margin-bottom: 20px; color: var(--danger);">⚠️</div>
-                        <div style="font-size: 18px; margin-bottom: 10px;">Error Loading Products</div>
-                        <div style="color: var(--text-secondary);">${error.message}</div>
-                    </div>
-                `;
-            }
-        }
-
-        async function delItem(path, sha) {
-            if (!confirm('Are you sure you want to delete this product? This action cannot be undone.')) return;
-
-            try {
-                const response = await fetch(
-                    `https://api.github.com/repos/${SECURE.owner}/${SECURE.repo}/contents/${path}`,
-                    {
-                        method: 'DELETE',
-                        headers: {
-                            'Authorization': `Bearer ${TOKEN}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            message: 'Deleted product',
-                            sha: sha,
-                            branch: SECURE.branch
-                        })
-                    }
-                );
-
-                if (response.ok) {
-                    // Show success message
-                    const list = document.getElementById('itemsList');
-                    list.innerHTML = `
-                        <div class="empty-state">
-                            <div style="font-size: 48px; margin-bottom: 20px; color: var(--primary);">✅</div>
-                            <div style="font-size: 18px; margin-bottom: 10px;">Product deleted successfully!</div>
-                            <div style="color: var(--text-secondary);">Reloading products...</div>
-                        </div>
-                    `;
-                    
-                    setTimeout(() => {
-                        loadItems();
-                    }, 1500);
-                } else {
-                    const error = await response.json();
-                    throw new Error(error.message || 'Delete failed');
-                }
-            } catch (error) {
-                alert(`Error: ${error.message}`);
-            }
-        }
-
-        function toBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('pass').focus();
-            document.getElementById('pass').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') login();
-            });
-            
-            // Add drag and drop functionality
-            const uploadBox = document.querySelector('.upload-box');
-            uploadBox.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadBox.style.borderColor = 'var(--primary)';
-                uploadBox.style.background = 'rgba(0, 255, 136, 0.1)';
-            });
-            
-            uploadBox.addEventListener('dragleave', () => {
-                uploadBox.style.borderColor = '';
-                uploadBox.style.background = '';
-            });
-            
-            uploadBox.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadBox.style.borderColor = '';
-                uploadBox.style.background = '';
-                
-                if (e.dataTransfer.files.length) {
-                    document.getElementById('imgPick').files = e.dataTransfer.files;
-                    showPrev();
-                }
-            });
-            
-            // Auto-focus price field after category selection
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    setTimeout(() => {
-                        document.getElementById('price').focus();
-                    }, 100);
-                });
-            });
-        });
-    </script>
+          document.addEventListener('keydown', e => {
+              if (e.key === 'Enter' && !document.getElementById('loginBox').classList.contains('hidden')) login();
+          });
+      </script>
 </body>
 </html>
