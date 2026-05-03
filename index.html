@@ -5,152 +5,211 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Meru Naturals — Premium Tote Bags & Natural Beauty</title>
 <meta name="description" content="Shop premium tote bags and natural skincare & hair products. Order directly on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
---green:#1e7d4b;--green-light:#28a562;--green-dark:#145c36;
---cream:#f7f3ee;--cream-dark:#ede8e0;--gold:#c9913d;
---text:#1a1a1a;--text-muted:#6b6b6b;--white:#fff;
---shadow:0 4px 24px rgba(0,0,0,.10);--shadow-md:0 8px 40px rgba(0,0,0,.13);
---radius:16px;--radius-sm:10px;--transition:.22s cubic-bezier(.4,0,.2,1);
+--green:#1a6b3f;--green-light:#228a52;--green-dark:#0f4429;--green-muted:rgba(26,107,63,.08);
+--cream:#f8f5f0;--cream-dark:#ede8df;--cream-mid:#f2ede6;
+--gold:#b8862a;--gold-light:#d4a843;
+--text:#141414;--text-muted:#6b6b6b;--text-light:#9a9a9a;
+--white:#ffffff;--off-white:#fafaf8;
+--shadow-sm:0 2px 12px rgba(0,0,0,.06);
+--shadow:0 6px 32px rgba(0,0,0,.09);
+--shadow-md:0 12px 48px rgba(0,0,0,.13);
+--shadow-lg:0 24px 72px rgba(0,0,0,.16);
+--radius:20px;--radius-sm:12px;--radius-xs:8px;
+--transition:.28s cubic-bezier(.4,0,.2,1);
+--font-body:'Inter',system-ui,-apple-system,sans-serif;
+--font-display:'Playfair Display',Georgia,serif;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overscroll-behavior:none}
+body{font-family:var(--font-body);background:var(--cream);color:var(--text);min-height:100vh;overscroll-behavior:none;-webkit-font-smoothing:antialiased}
 
-/* ── TOP NAV ── */
-.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);border-bottom:1px solid rgba(0,0,0,.07);display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:60px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.brand-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--green),var(--green-light));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.brand-name{font-size:16px;font-weight:700;color:var(--green-dark);letter-spacing:-.3px}
-.brand-sub{font-size:10px;color:var(--text-muted);letter-spacing:.5px;text-transform:uppercase;margin-top:1px}
-.nav-links{display:flex;gap:4px}
-.nav-link{padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:var(--transition);border:none;background:none;white-space:nowrap}
-.nav-link.active,.nav-link:hover{color:var(--green);background:rgba(30,125,75,.08)}
-.nav-wa{background:var(--green);color:var(--white)!important;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:var(--transition)}
-.nav-wa:hover{background:var(--green-dark)}
-@media(max-width:600px){.nav-links{display:none}.nav-wa{font-size:12px;padding:7px 13px}}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px;transition:box-shadow var(--transition)}
+.topnav.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.1)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;cursor:pointer}
+.brand-mark{width:38px;height:38px;background:linear-gradient(135deg,var(--green-dark),var(--green-light));border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(26,107,63,.3)}
+.brand-mark svg{width:20px;height:20px;fill:white}
+.brand-text{display:flex;flex-direction:column}
+.brand-name{font-size:15px;font-weight:800;color:var(--green-dark);letter-spacing:-.3px;line-height:1}
+.brand-sub{font-size:10px;color:var(--text-muted);letter-spacing:.8px;text-transform:uppercase;margin-top:2px}
+.nav-links{display:flex;gap:2px}
+.nav-link{padding:9px 16px;border-radius:var(--radius-xs);font-size:14px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:var(--transition);border:none;background:none;white-space:nowrap;font-family:var(--font-body)}
+.nav-link.active,.nav-link:hover{color:var(--green);background:var(--green-muted)}
+.nav-wa{background:var(--green);color:var(--white);padding:9px 20px;border-radius:var(--radius-xs);font-size:13px;font-weight:700;border:none;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:7px;letter-spacing:.1px;font-family:var(--font-body)}
+.nav-wa:hover{background:var(--green-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,107,63,.35)}
+.nav-wa svg{width:15px;height:15px;fill:currentColor;flex-shrink:0}
+@media(max-width:640px){.nav-links{display:none}.nav-wa span{display:none}}
 
-/* ── PAGE WRAPPER ── */
-.page{margin-top:60px;min-height:calc(100vh - 60px);padding-bottom:80px}
+.page{margin-top:64px;min-height:calc(100vh - 64px);padding-bottom:80px}
 
-/* ── SECTIONS ── */
-.section{display:none;animation:fadeUp .3s ease}
+.section{display:none}
 .section.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── HERO ── */
-.hero{background:linear-gradient(160deg,var(--green-dark) 0%,var(--green) 60%,#2ab870 100%);color:var(--white);padding:56px 24px 48px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.05)}
-.hero::after{content:'';position:absolute;bottom:-60px;left:-30px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.04)}
-.hero-badge{display:inline-block;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:20px}
-.hero h1{font-size:clamp(26px,6vw,40px);font-weight:800;line-height:1.2;margin-bottom:14px;letter-spacing:-.5px}
-.hero p{font-size:15px;opacity:.88;max-width:360px;margin:0 auto 32px;line-height:1.6}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.hero-btn-primary{background:var(--white);color:var(--green-dark);padding:13px 28px;border-radius:12px;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:var(--transition);box-shadow:0 4px 16px rgba(0,0,0,.15)}
-.hero-btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
-.hero-btn-sec{background:rgba(255,255,255,.18);color:var(--white);padding:13px 28px;border-radius:12px;font-size:15px;font-weight:600;border:2px solid rgba(255,255,255,.35);cursor:pointer;transition:var(--transition)}
-.hero-btn-sec:hover{background:rgba(255,255,255,.28)}
-.hero-stats{display:flex;justify-content:center;gap:32px;margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,.18)}
-.stat{text-align:center}
-.stat-num{font-size:22px;font-weight:800;display:block}
-.stat-label{font-size:11px;opacity:.75;letter-spacing:.5px;text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal.hidden{opacity:0;transform:translateY(32px)}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-left.hidden{opacity:0;transform:translateX(-32px)}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-right.hidden{opacity:0;transform:translateX(32px)}
+.reveal-scale{opacity:0;transform:scale(.94);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1)}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+.reveal-scale.hidden{opacity:0;transform:scale(.94)}
 
-/* ── CATEGORY CARDS ── */
-.cat-section{padding:32px 20px 12px}
-.section-label{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px}
-.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.cat-card{background:var(--white);border-radius:var(--radius);padding:28px 20px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow);border:2px solid transparent;text-align:center;position:relative;overflow:hidden}
-.cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(30,125,75,.0),rgba(30,125,75,.06));opacity:0;transition:var(--transition)}
-.cat-card:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.cat-card:hover::before{opacity:1}
-.cat-emoji{font-size:36px;margin-bottom:12px;display:block}
-.cat-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:5px}
-.cat-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
-.cat-arrow{margin-top:14px;display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--green)}
+.hero{background:linear-gradient(150deg,var(--green-dark) 0%,var(--green) 55%,#2ea86a 100%);color:var(--white);padding:72px 28px 64px;text-align:center;position:relative;overflow:hidden;min-height:560px;display:flex;flex-direction:column;justify-content:center}
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none}
+.hero-orb-1{width:380px;height:380px;top:-100px;right:-100px;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%)}
+.hero-orb-2{width:300px;height:300px;bottom:-80px;left:-80px;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%)}
+.hero-orb-3{width:200px;height:200px;top:40%;left:15%;background:radial-gradient(circle,rgba(46,168,106,.2) 0%,transparent 70%)}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.22);border-radius:30px;padding:6px 16px 6px 10px;font-size:12px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:24px;position:relative;z-index:1}
+.hero-badge svg{width:14px;height:14px;fill:currentColor;opacity:.9}
+.hero-eyebrow{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.65;margin-bottom:14px;position:relative;z-index:1}
+.hero h1{font-family:var(--font-display);font-size:clamp(30px,6vw,56px);font-weight:800;line-height:1.12;margin-bottom:18px;letter-spacing:-.5px;position:relative;z-index:1}
+.hero h1 em{font-style:normal;color:var(--gold-light)}
+.hero p{font-size:16px;opacity:.82;max-width:420px;margin:0 auto 40px;line-height:1.7;font-weight:400;position:relative;z-index:1}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.hero-btn-primary{background:var(--white);color:var(--green-dark);padding:15px 32px;border-radius:var(--radius-sm);font-size:15px;font-weight:700;border:none;cursor:pointer;transition:var(--transition);box-shadow:0 6px 24px rgba(0,0,0,.18);display:flex;align-items:center;gap:8px;font-family:var(--font-body)}
+.hero-btn-primary svg{width:16px;height:16px;fill:currentColor}
+.hero-btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.25)}
+.hero-btn-sec{background:rgba(255,255,255,.12);color:var(--white);padding:15px 32px;border-radius:var(--radius-sm);font-size:15px;font-weight:600;border:1.5px solid rgba(255,255,255,.3);cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:8px;backdrop-filter:blur(8px);font-family:var(--font-body)}
+.hero-btn-sec svg{width:16px;height:16px;fill:currentColor}
+.hero-btn-sec:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
+.hero-divider{height:1px;background:rgba(255,255,255,.14);margin:40px 0 36px;position:relative;z-index:1}
+.hero-stats{display:flex;justify-content:center;gap:0;position:relative;z-index:1}
+.stat{text-align:center;padding:0 32px}
+.stat+.stat{border-left:1px solid rgba(255,255,255,.15)}
+.stat-num{font-family:var(--font-display);font-size:28px;font-weight:700;display:block;line-height:1}
+.stat-label{font-size:11px;opacity:.65;letter-spacing:.8px;text-transform:uppercase;margin-top:5px;display:block}
 
-/* ── FEATURES ── */
-.features{padding:8px 20px 32px}
-.feature-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.feature-item{background:var(--white);border-radius:var(--radius-sm);padding:16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.feature-icon{font-size:22px;flex-shrink:0}
+.section-wrap{padding:56px 24px 16px}
+.section-header{text-align:center;margin-bottom:40px}
+.section-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.section-title{font-family:var(--font-display);font-size:clamp(24px,4vw,36px);font-weight:700;color:var(--text);line-height:1.2;letter-spacing:-.3px}
+.section-sub{font-size:15px;color:var(--text-muted);margin-top:10px;line-height:1.6;max-width:480px;margin-left:auto;margin-right:auto}
+
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cat-card{background:var(--white);border-radius:var(--radius);padding:32px 24px;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow-sm);border:1.5px solid rgba(0,0,0,.05);text-align:center;position:relative;overflow:hidden}
+.cat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,107,63,.0),rgba(26,107,63,.07));opacity:0;transition:var(--transition)}
+.cat-card:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.cat-card:hover::after{opacity:1}
+.cat-icon-wrap{width:64px;height:64px;background:linear-gradient(135deg,var(--green-muted),rgba(26,107,63,.15));border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.cat-icon-wrap svg{width:30px;height:30px;fill:var(--green)}
+.cat-name{font-size:17px;font-weight:800;color:var(--text);margin-bottom:6px;letter-spacing:-.2px}
+.cat-desc{font-size:13px;color:var(--text-muted);line-height:1.55}
+.cat-link{margin-top:18px;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--green)}
+.cat-link svg{width:14px;height:14px;fill:currentColor;transition:var(--transition)}
+.cat-card:hover .cat-link svg{transform:translateX(4px)}
+
+.features-section{padding:8px 24px 48px}
+.feature-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feature-item{background:var(--white);border-radius:var(--radius-sm);padding:18px 16px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,.04)}
+.feature-icon-wrap{width:40px;height:40px;border-radius:10px;background:var(--green-muted);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.feature-icon-wrap svg{width:18px;height:18px;fill:var(--green)}
 .feature-text{font-size:13px;font-weight:600;color:var(--text);line-height:1.4}
 
-/* ── PRODUCTS SECTION ── */
+.trust-strip{background:var(--green-dark);padding:28px 24px;display:flex;justify-content:center;flex-wrap:wrap;gap:0}
+.trust-item{display:flex;align-items:center;gap:10px;padding:8px 24px;color:var(--white)}
+.trust-item+.trust-item{border-left:1px solid rgba(255,255,255,.12)}
+.trust-item svg{width:18px;height:18px;fill:var(--gold-light);flex-shrink:0}
+.trust-text{font-size:13px;font-weight:500;opacity:.85}
+@media(max-width:600px){.trust-strip{flex-direction:column;gap:4px}.trust-item+.trust-item{border-left:none;border-top:1px solid rgba(255,255,255,.08)}}
+
 .products-section{padding:0}
-.products-header{display:flex;align-items:center;gap:14px;padding:20px 20px 16px;background:var(--white);border-bottom:1px solid rgba(0,0,0,.06)}
-.back-btn{width:38px;height:38px;border-radius:10px;border:none;background:var(--cream);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0}
-.back-btn:hover{background:var(--cream-dark)}
+.products-header{display:flex;align-items:center;gap:16px;padding:24px 24px 20px;background:var(--white);border-bottom:1px solid rgba(0,0,0,.06);position:sticky;top:64px;z-index:50;backdrop-filter:blur(12px)}
+.back-btn{width:40px;height:40px;border-radius:var(--radius-xs);border:1.5px solid rgba(0,0,0,.1);background:var(--off-white);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0}
+.back-btn svg{width:18px;height:18px;fill:var(--text-muted)}
+.back-btn:hover{background:var(--cream-dark);border-color:rgba(0,0,0,.2)}
 .products-header-text{flex:1}
-.products-header-title{font-size:18px;font-weight:700;color:var(--text)}
+.products-header-title{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.3px}
 .products-header-sub{font-size:13px;color:var(--text-muted);margin-top:2px}
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;padding:20px}
-@media(min-width:600px){.products-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;padding:24px}}
+.products-header-icon{width:44px;height:44px;border-radius:var(--radius-xs);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.products-header-icon svg{width:22px;height:22px}
+
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:16px;padding:24px}
+@media(min-width:600px){.products-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;padding:28px}}
 @media(min-width:1000px){.products-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}
 
-/* ── SKELETON ── */
-.skeleton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;padding:20px}
-@media(min-width:600px){.skeleton-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;padding:24px}}
-.skeleton-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
-.skeleton-img{height:200px;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
-.skeleton-body{padding:14px}
-.skeleton-line{height:12px;border-radius:6px;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-bottom:10px}
-.skeleton-line.short{width:55%}.skeleton-line.medium{width:75%}
-.skeleton-btn{height:38px;border-radius:8px;background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin-top:4px}
+.skeleton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:16px;padding:24px}
+@media(min-width:600px){.skeleton-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;padding:28px}}
+.skeleton-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm)}
+.skeleton-img{height:210px;background:linear-gradient(90deg,#f0eee9 25%,#e8e4de 50%,#f0eee9 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+.skeleton-body{padding:16px}
+.skeleton-line{height:12px;border-radius:6px;background:linear-gradient(90deg,#f0eee9 25%,#e8e4de 50%,#f0eee9 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;margin-bottom:10px}
+.skeleton-line.short{width:50%}.skeleton-line.medium{width:70%}
+.skeleton-btn{height:42px;border-radius:var(--radius-xs);background:linear-gradient(90deg,#f0eee9 25%,#e8e4de 50%,#f0eee9 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;margin-top:6px}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* ── PRODUCT CARD ── */
-.product-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);cursor:default}
-.product-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
-.product-img-wrap{position:relative;aspect-ratio:1;overflow:hidden;background:var(--cream)}
-.product-img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
-.product-card:hover .product-img{transform:scale(1.04)}
-.product-img-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:48px;background:var(--cream)}
-.product-body{padding:14px}
-.product-price{font-size:18px;font-weight:800;color:var(--green-dark);margin-bottom:4px}
-.product-name{font-size:13px;color:var(--text-muted);margin-bottom:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.order-btn{width:100%;padding:11px;background:linear-gradient(135deg,#25d366,#20b358);color:var(--white);border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:var(--transition)}
-.order-btn:hover{background:linear-gradient(135deg,#20b358,#1a9147);transform:translateY(-1px)}
+.product-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:var(--transition);border:1px solid rgba(0,0,0,.04)}
+.product-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px);border-color:rgba(26,107,63,.12)}
+.product-img-wrap{position:relative;aspect-ratio:1;overflow:hidden;background:var(--cream-mid)}
+.product-img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.product-card:hover .product-img{transform:scale(1.06)}
+.product-img-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:var(--cream-mid)}
+.product-img-fallback svg{width:48px;height:48px;fill:var(--text-light)}
+.product-badge{position:absolute;top:10px;left:10px;background:var(--green);color:var(--white);font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px}
+.product-body{padding:16px}
+.product-price{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--green-dark);margin-bottom:4px}
+.product-name{font-size:13px;color:var(--text-muted);margin-bottom:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.order-btn{width:100%;padding:13px;background:linear-gradient(135deg,#25d366,#1ea855);color:var(--white);border:none;border-radius:var(--radius-xs);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:var(--transition);font-family:var(--font-body);letter-spacing:.1px}
 .order-btn svg{width:16px;height:16px;fill:currentColor;flex-shrink:0}
-.error-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-muted)}
-.error-icon{font-size:48px;margin-bottom:16px}
-.retry-btn{margin-top:16px;padding:12px 28px;background:var(--green);color:var(--white);border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.order-btn:hover{background:linear-gradient(135deg,#1ea855,#178a44);transform:translateY(-1px);box-shadow:0 6px 20px rgba(30,168,85,.35)}
 
-/* ── CONTACT ── */
-.contact-section{padding:32px 20px}
-.contact-card{background:var(--white);border-radius:var(--radius);padding:32px 24px;box-shadow:var(--shadow);text-align:center;max-width:480px;margin:0 auto}
-.contact-icon{font-size:56px;margin-bottom:16px}
-.contact-title{font-size:22px;font-weight:800;margin-bottom:10px;color:var(--text)}
-.contact-text{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:28px}
-.wa-btn{width:100%;padding:16px;background:linear-gradient(135deg,#25d366,#20b358);color:var(--white);border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:var(--transition);box-shadow:0 4px 16px rgba(37,211,102,.3)}
-.wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.4)}
-.contact-info{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left}
-.info-item{background:var(--cream);border-radius:10px;padding:14px;display:flex;align-items:flex-start;gap:10px}
-.info-item-icon{font-size:20px;flex-shrink:0}
-.info-item-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:3px}
-.info-item-val{font-size:13px;font-weight:600;color:var(--text)}
+.error-state{grid-column:1/-1;text-align:center;padding:72px 24px;color:var(--text-muted)}
+.error-icon{width:64px;height:64px;border-radius:16px;background:rgba(239,68,68,.08);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.error-icon svg{width:30px;height:30px;fill:#ef4444}
+.error-state p{font-size:15px;font-weight:500;color:var(--text-muted);margin-bottom:20px}
+.retry-btn{padding:12px 28px;background:var(--green);color:var(--white);border:none;border-radius:var(--radius-xs);font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-body);transition:var(--transition)}
+.retry-btn:hover{background:var(--green-dark)}
 
-/* ── BOTTOM NAV ── */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid rgba(0,0,0,.08);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -4px 20px rgba(0,0,0,.08)}
-.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px 8px;cursor:pointer;border:none;background:none;transition:var(--transition);gap:4px;min-height:56px}
-.bnav-icon{font-size:22px;transition:var(--transition)}
-.bnav-label{font-size:10px;font-weight:600;color:var(--text-muted);transition:var(--transition);letter-spacing:.2px}
+.contact-section{padding:40px 24px}
+.contact-wrap{max-width:520px;margin:0 auto}
+.contact-hero{background:linear-gradient(135deg,var(--green-dark),var(--green));border-radius:var(--radius);padding:40px 32px;text-align:center;color:var(--white);margin-bottom:20px;position:relative;overflow:hidden}
+.contact-hero-orb{position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);top:-60px;right:-60px;pointer-events:none}
+.contact-hero-icon{width:64px;height:64px;background:rgba(255,255,255,.15);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:1}
+.contact-hero-icon svg{width:30px;height:30px;fill:white}
+.contact-title{font-family:var(--font-display);font-size:26px;font-weight:700;margin-bottom:10px;position:relative;z-index:1}
+.contact-text{font-size:14px;opacity:.82;line-height:1.7;margin-bottom:28px;position:relative;z-index:1}
+.wa-btn{width:100%;padding:17px;background:rgba(255,255,255,.95);color:#1a6b3f;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:var(--transition);font-family:var(--font-body);position:relative;z-index:1}
+.wa-btn svg{width:20px;height:20px;fill:currentColor;flex-shrink:0}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,0,0,.2);background:white}
+.contact-info{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.info-card{background:var(--white);border-radius:var(--radius-sm);padding:18px 16px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,.05)}
+.info-icon{width:38px;height:38px;border-radius:10px;background:var(--green-muted);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.info-icon svg{width:18px;height:18px;fill:var(--green)}
+.info-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-light);margin-bottom:3px}
+.info-val{font-size:13px;font-weight:600;color:var(--text)}
+
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(0,0,0,.08);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -6px 28px rgba(0,0,0,.07)}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px 8px;cursor:pointer;border:none;background:none;transition:var(--transition);gap:4px;min-height:58px;position:relative}
+.bnav-indicator{position:absolute;top:0;left:50%;transform:translateX(-50%);width:24px;height:2.5px;border-radius:2px;background:var(--green);opacity:0;transition:var(--transition)}
+.bnav-item.active .bnav-indicator{opacity:1}
+.bnav-icon{transition:var(--transition);display:flex;align-items:center;justify-content:center}
+.bnav-icon svg{width:22px;height:22px;fill:var(--text-light);transition:var(--transition)}
+.bnav-item.active .bnav-icon svg,.bnav-item:hover .bnav-icon svg{fill:var(--green)}
+.bnav-item.active .bnav-icon{transform:scale(1.1)}
+.bnav-label{font-size:10px;font-weight:600;color:var(--text-light);transition:var(--transition);letter-spacing:.2px;font-family:var(--font-body)}
 .bnav-item.active .bnav-label,.bnav-item:hover .bnav-label{color:var(--green)}
-.bnav-item.active .bnav-icon{transform:scale(1.15)}
-.bnav-dot{width:4px;height:4px;border-radius:50%;background:var(--green);display:none;margin:0 auto 2px}
-.bnav-item.active .bnav-dot{display:block}
 
-/* ── EMPTY STATE ── */
-.empty-state{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--text-muted)}
-.empty-icon{font-size:56px;margin-bottom:16px;opacity:.5}
+.empty-state{grid-column:1/-1;text-align:center;padding:96px 24px;color:var(--text-muted)}
+.empty-icon{width:72px;height:72px;border-radius:20px;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.empty-icon svg{width:34px;height:34px;fill:var(--text-light)}
+.empty-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:6px}
+.empty-sub{font-size:14px;line-height:1.6}
 
-/* ── DESKTOP ── */
 @media(min-width:900px){
-  .topnav{padding:0 40px}
-  .hero{padding:80px 40px 64px}
-  .cat-section,.features,.contact-section{padding-left:40px;padding-right:40px}
-  .products-header{padding:24px 40px}
-  .products-grid,.skeleton-grid{padding:28px 40px}
-  .cat-grid{grid-template-columns:repeat(2,minmax(240px,320px));justify-content:center}
+  .topnav{padding:0 48px}
+  .hero{padding:96px 48px 80px}
+  .section-wrap,.features-section,.contact-section{padding-left:48px;padding-right:48px}
+  .products-header{padding:28px 48px 22px}
+  .products-grid,.skeleton-grid{padding:32px 48px}
+  .cat-grid{grid-template-columns:repeat(2,minmax(260px,340px));justify-content:center}
+  .feature-list{grid-template-columns:repeat(4,1fr)}
   .bottom-nav{display:none}
   .page{padding-bottom:0}
   .nav-links{display:flex}
@@ -159,10 +218,15 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 </head>
 <body>
 
-<nav class="topnav">
+<nav class="topnav" id="topnav">
   <a class="brand" href="#" onclick="showSection('home');return false">
-    <div class="brand-icon">🌿</div>
-    <div><div class="brand-name">Meru Naturals</div><div class="brand-sub">Est. Kenya</div></div>
+    <div class="brand-mark">
+      <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c6 0 8-5 8-5s-4 1.5-8 .5a14.23 14.23 0 0 1 4.49-6.14A9.68 9.68 0 0 1 17 8z"/></svg>
+    </div>
+    <div class="brand-text">
+      <div class="brand-name">Meru Naturals</div>
+      <div class="brand-sub">Est. Kenya</div>
+    </div>
   </a>
   <div class="nav-links">
     <button class="nav-link active" id="nl-home" onclick="showSection('home')">Home</button>
@@ -170,95 +234,215 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
     <button class="nav-link" id="nl-skin" onclick="showSection('skin')">Skin & Hair</button>
     <button class="nav-link" id="nl-contact" onclick="showSection('contact')">Contact</button>
   </div>
-  <button class="nav-wa" onclick="openWhatsApp()">💬 WhatsApp</button>
+  <button class="nav-wa" onclick="openWhatsApp()">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span>WhatsApp</span>
+  </button>
 </nav>
 
 <div class="page">
 
-  <!-- HOME -->
   <div class="section active" id="sec-home">
     <div class="hero">
-      <div class="hero-badge">🌿 100% Natural & Authentic</div>
-      <h1>Kenya's Finest Natural<br>Beauty & Lifestyle Brand</h1>
-      <p>Premium handcrafted tote bags and nature-powered skincare & hair care, delivered to your door.</p>
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c6 0 8-5 8-5s-4 1.5-8 .5a14.23 14.23 0 0 1 4.49-6.14A9.68 9.68 0 0 1 17 8z"/></svg>
+        100% Natural &amp; Authentic
+      </div>
+      <h1>Kenya's Finest Natural<br><em>Beauty & Lifestyle</em> Brand</h1>
+      <p>Premium handcrafted tote bags and nature-powered skincare & hair care, delivered to your door countrywide.</p>
       <div class="hero-btns">
-        <button class="hero-btn-primary" onclick="showSection('tote')">👜 Shop Tote Bags</button>
-        <button class="hero-btn-sec" onclick="showSection('skin')">✨ Skin & Hair</button>
+        <button class="hero-btn-primary" onclick="showSection('tote')">
+          <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
+          Shop Tote Bags
+        </button>
+        <button class="hero-btn-sec" onclick="showSection('skin')">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+          Skin & Hair
+        </button>
       </div>
+      <div class="hero-divider"></div>
       <div class="hero-stats">
-        <div class="stat"><span class="stat-num" id="stat-tote">—</span><span class="stat-label">Tote Designs</span></div>
-        <div class="stat"><span class="stat-num" id="stat-skin">—</span><span class="stat-label">Beauty Products</span></div>
-        <div class="stat"><span class="stat-num">🚚</span><span class="stat-label">Countrywide</span></div>
+        <div class="stat">
+          <span class="stat-num" id="stat-tote">—</span>
+          <span class="stat-label">Tote Designs</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" id="stat-skin">—</span>
+          <span class="stat-label">Beauty Products</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">KE</span>
+          <span class="stat-label">Countrywide</span>
+        </div>
       </div>
     </div>
-    <div class="cat-section">
-      <div class="section-label">Browse Collections</div>
+
+    <div class="trust-strip">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 15l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+        <span class="trust-text">Premium Quality Guaranteed</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+        <span class="trust-text">Nationwide Delivery</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+        <span class="trust-text">Affordable Prices</span>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>
+        <span class="trust-text">Top-Rated Products</span>
+      </div>
+    </div>
+
+    <div class="section-wrap">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">Collections</div>
+        <div class="section-title">Browse Our Collections</div>
+        <div class="section-sub">Handcrafted with care, designed for you.</div>
+      </div>
       <div class="cat-grid">
-        <div class="cat-card" onclick="showSection('tote')">
-          <span class="cat-emoji">👜</span>
+        <div class="cat-card reveal-left" onclick="showSection('tote')">
+          <div class="cat-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
+          </div>
           <div class="cat-name">Tote Bags</div>
-          <div class="cat-desc">Premium, spacious & stylish bags for every occasion</div>
-          <div class="cat-arrow">Shop Now →</div>
+          <div class="cat-desc">Premium, spacious &amp; stylish bags for every occasion — crafted with purpose</div>
+          <div class="cat-link">
+            Shop Now
+            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+          </div>
         </div>
-        <div class="cat-card" onclick="showSection('skin')">
-          <span class="cat-emoji">✨</span>
+        <div class="cat-card reveal-right" onclick="showSection('skin')">
+          <div class="cat-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c6 0 8-5 8-5s-4 1.5-8 .5a14.23 14.23 0 0 1 4.49-6.14A9.68 9.68 0 0 1 17 8z"/></svg>
+          </div>
           <div class="cat-name">Skin & Hair</div>
-          <div class="cat-desc">Natural ingredients for radiant skin and healthy hair</div>
-          <div class="cat-arrow">Shop Now →</div>
+          <div class="cat-desc">Natural ingredients for radiant skin and healthy hair — straight from nature</div>
+          <div class="cat-link">
+            Shop Now
+            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+          </div>
         </div>
       </div>
     </div>
-    <div class="features">
-      <div class="section-label">Why Choose Us</div>
+
+    <div class="features-section">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">Why Us</div>
+        <div class="section-title">Why Choose Meru Naturals</div>
+      </div>
       <div class="feature-list">
-        <div class="feature-item"><span class="feature-icon">🌿</span><div class="feature-text">100% Natural Ingredients</div></div>
-        <div class="feature-item"><span class="feature-icon">🚚</span><div class="feature-text">Nationwide Delivery</div></div>
-        <div class="feature-item"><span class="feature-icon">💰</span><div class="feature-text">Affordable Prices</div></div>
-        <div class="feature-item"><span class="feature-icon">⭐</span><div class="feature-text">Premium Quality</div></div>
+        <div class="feature-item reveal">
+          <div class="feature-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c6 0 8-5 8-5s-4 1.5-8 .5a14.23 14.23 0 0 1 4.49-6.14A9.68 9.68 0 0 1 17 8z"/></svg>
+          </div>
+          <div class="feature-text">100% Natural Ingredients</div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="feature-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
+          </div>
+          <div class="feature-text">Nationwide Delivery</div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="feature-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+          </div>
+          <div class="feature-text">Affordable Prices</div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="feature-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>
+          </div>
+          <div class="feature-text">Premium Quality</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- TOTE BAGS -->
   <div class="section" id="sec-tote">
     <div class="products-header">
-      <button class="back-btn" onclick="showSection('home')">←</button>
+      <button class="back-btn" onclick="showSection('home')">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      </button>
       <div class="products-header-text">
-        <div class="products-header-title">👜 Tote Bags</div>
-        <div class="products-header-sub" id="tote-sub">Loading products…</div>
+        <div class="products-header-title">Tote Bags</div>
+        <div class="products-header-sub" id="tote-sub">Loading products...</div>
       </div>
     </div>
     <div id="tote-grid"></div>
   </div>
 
-  <!-- SKIN & HAIR -->
   <div class="section" id="sec-skin">
     <div class="products-header">
-      <button class="back-btn" onclick="showSection('home')">←</button>
+      <button class="back-btn" onclick="showSection('home')">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      </button>
       <div class="products-header-text">
-        <div class="products-header-title">✨ Skin & Hair Care</div>
-        <div class="products-header-sub" id="skin-sub">Loading products…</div>
+        <div class="products-header-title">Skin & Hair Care</div>
+        <div class="products-header-sub" id="skin-sub">Loading products...</div>
       </div>
     </div>
     <div id="skin-grid"></div>
   </div>
 
-  <!-- CONTACT -->
   <div class="section" id="sec-contact">
     <div class="contact-section">
-      <div class="contact-card">
-        <div class="contact-icon">💬</div>
-        <div class="contact-title">Ready to Order?</div>
-        <div class="contact-text">Browse our collections, tap <strong>Order This Product</strong> on any item, and we'll get back to you instantly on WhatsApp. We deliver countrywide!</div>
-        <button class="wa-btn" onclick="openWhatsApp()">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Chat on WhatsApp
-        </button>
+      <div class="contact-wrap">
+        <div class="contact-hero reveal">
+          <div class="contact-hero-orb"></div>
+          <div class="contact-hero-icon">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div class="contact-title">Ready to Order?</div>
+          <div class="contact-text">Browse our collections, tap <strong>Order on WhatsApp</strong> on any item, and we'll get back to you instantly. We deliver countrywide!</div>
+          <button class="wa-btn" onclick="openWhatsApp()">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chat on WhatsApp
+          </button>
+        </div>
         <div class="contact-info">
-          <div class="info-item"><span class="info-item-icon">📍</span><div><div class="info-item-label">Location</div><div class="info-item-val">Meru, Kenya</div></div></div>
-          <div class="info-item"><span class="info-item-icon">🚚</span><div><div class="info-item-label">Delivery</div><div class="info-item-val">Countrywide</div></div></div>
-          <div class="info-item"><span class="info-item-icon">💳</span><div><div class="info-item-label">Payment</div><div class="info-item-val">M-Pesa & Cash</div></div></div>
-          <div class="info-item"><span class="info-item-icon">⏰</span><div><div class="info-item-label">Response</div><div class="info-item-val">Within 1 hour</div></div></div>
+          <div class="info-card reveal">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div>
+              <div class="info-label">Location</div>
+              <div class="info-val">Meru, Kenya</div>
+            </div>
+          </div>
+          <div class="info-card reveal">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
+            </div>
+            <div>
+              <div class="info-label">Delivery</div>
+              <div class="info-val">Countrywide</div>
+            </div>
+          </div>
+          <div class="info-card reveal">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+            </div>
+            <div>
+              <div class="info-label">Payment</div>
+              <div class="info-val">M-Pesa & Cash</div>
+            </div>
+          </div>
+          <div class="info-card reveal">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+            </div>
+            <div>
+              <div class="info-label">Response</div>
+              <div class="info-val">Within 1 hour</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -266,19 +450,26 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 
 </div>
 
-<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <button class="bnav-item active" id="bn-home" onclick="showSection('home')">
-    <div class="bnav-dot"></div><span class="bnav-icon">🏠</span><span class="bnav-label">Home</span>
+    <div class="bnav-indicator"></div>
+    <div class="bnav-icon"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+    <span class="bnav-label">Home</span>
   </button>
   <button class="bnav-item" id="bn-tote" onclick="showSection('tote')">
-    <div class="bnav-dot"></div><span class="bnav-icon">👜</span><span class="bnav-label">Tote Bags</span>
+    <div class="bnav-indicator"></div>
+    <div class="bnav-icon"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg></div>
+    <span class="bnav-label">Tote Bags</span>
   </button>
   <button class="bnav-item" id="bn-skin" onclick="showSection('skin')">
-    <div class="bnav-dot"></div><span class="bnav-icon">✨</span><span class="bnav-label">Skin & Hair</span>
+    <div class="bnav-indicator"></div>
+    <div class="bnav-icon"><svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c6 0 8-5 8-5s-4 1.5-8 .5a14.23 14.23 0 0 1 4.49-6.14A9.68 9.68 0 0 1 17 8z"/></svg></div>
+    <span class="bnav-label">Skin & Hair</span>
   </button>
   <button class="bnav-item" id="bn-contact" onclick="showSection('contact')">
-    <div class="bnav-dot"></div><span class="bnav-icon">📱</span><span class="bnav-label">Contact</span>
+    <div class="bnav-indicator"></div>
+    <div class="bnav-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+    <span class="bnav-label">Contact</span>
   </button>
 </nav>
 
@@ -288,12 +479,16 @@ const WA_NUMBER = '254734943210';
 const loaded = {};
 const cache = {};
 
-const WA_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+const WA_PATH = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z';
+
+function waIcon(size){
+  return '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" fill="currentColor"><path d="' + WA_PATH + '"/></svg>';
+}
 
 function showSection(name) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-  document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.nav-link').forEach(function(n){ n.classList.remove('active'); });
+  document.querySelectorAll('.bnav-item').forEach(function(b){ b.classList.remove('active'); });
   document.getElementById('sec-' + name).classList.add('active');
   var nl = document.getElementById('nl-' + name);
   var bn = document.getElementById('bn-' + name);
@@ -303,12 +498,13 @@ function showSection(name) {
   if ((name === 'tote' || name === 'skin') && !loaded[name]) {
     loadProducts(name);
   }
+  setTimeout(initReveal, 100);
 }
 
 function makeSkeleton(count) {
   var html = '<div class="skeleton-grid">';
   for (var i = 0; i < count; i++) {
-    html += '<div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div><div class="skeleton-btn"></div></div></div>';
+    html += '<div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line medium"></div><div class="skeleton-line short"></div><div class="skeleton-btn"></div></div></div>';
   }
   return html + '</div>';
 }
@@ -327,31 +523,32 @@ async function loadProducts(type) {
     if (type === 'skin') document.getElementById('stat-skin').textContent = products.length + '+';
     if (subEl) subEl.textContent = products.length + ' product' + (products.length !== 1 ? 's' : '') + ' available';
     if (!products.length) {
-      gridEl.innerHTML = '<div class="products-grid"><div class="empty-state"><div class="empty-icon">' + (type === 'tote' ? '👜' : '✨') + '</div><p>No products yet. Check back soon!</p></div></div>';
+      gridEl.innerHTML = '<div class="products-grid"><div class="empty-state"><div class="empty-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div><div class="empty-title">No products yet</div><div class="empty-sub">Check back soon — new products coming!</div></div></div>';
       return;
     }
     var html = '<div class="products-grid">';
-    products.forEach(function(p, i) {
+    products.forEach(function(p) {
       var safePath = encodeURIComponent(p.path);
       var safeName = (p.name || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-      html += '<div class="product-card">' +
+      html += '<div class="product-card reveal">' +
         '<div class="product-img-wrap">' +
         '<img class="product-img" src="' + p.imageUrl + '" alt="' + safeName + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
-        '<div class="product-img-fallback">' + (type === 'tote' ? '👜' : '✨') + '</div>' +
+        '<div class="product-img-fallback"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>' +
         '</div>' +
         '<div class="product-body">' +
         '<div class="product-price">KSH ' + p.price + '</div>' +
         '<div class="product-name">' + (p.name || 'Product') + '</div>' +
         '<button class="order-btn" onclick="orderProduct(\'' + safeName.replace(/'/g, "\\'") + '\',\'' + p.price + '\',\'' + safePath + '\')">' +
-        WA_SVG + ' Order on WhatsApp</button>' +
+        waIcon(16) + ' Order on WhatsApp</button>' +
         '</div></div>';
     });
     html += '</div>';
     gridEl.innerHTML = html;
+    setTimeout(initReveal, 50);
   } catch (err) {
     loaded[type] = false;
     if (subEl) subEl.textContent = 'Failed to load';
-    gridEl.innerHTML = '<div class="products-grid"><div class="error-state"><div class="error-icon">😞</div><p>Could not load products. Please check your connection.</p><button class="retry-btn" onclick="loadProducts(\'' + type + '\')">Try Again</button></div></div>';
+    gridEl.innerHTML = '<div class="products-grid"><div class="error-state"><div class="error-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div><p>Could not load products. Please check your connection.</p><button class="retry-btn" onclick="loadProducts(\'' + type + '\')">Try Again</button></div></div>';
   }
 }
 
@@ -366,12 +563,44 @@ function openWhatsApp() {
   window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
 }
 
-fetch(BOT + '/api/products?cat=tote').then(function(r){ return r.json(); }).then(function(d){
-  document.getElementById('stat-tote').textContent = d.length + '+';
-}).catch(function(){});
-fetch(BOT + '/api/products?cat=skin').then(function(r){ return r.json(); }).then(function(d){
-  document.getElementById('stat-skin').textContent = d.length + '+';
-}).catch(function(){});
+var revealObserver = null;
+
+function initReveal() {
+  if (revealObserver) revealObserver.disconnect();
+  revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        entry.target.classList.remove('hidden');
+      } else {
+        entry.target.classList.remove('visible');
+        entry.target.classList.add('hidden');
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.section.active .reveal, .section.active .reveal-left, .section.active .reveal-right, .section.active .reveal-scale').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+}
+
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 10) {
+    document.getElementById('topnav').classList.add('scrolled');
+  } else {
+    document.getElementById('topnav').classList.remove('scrolled');
+  }
+}, { passive: true });
+
+document.addEventListener('DOMContentLoaded', function() {
+  initReveal();
+  fetch(BOT + '/api/products?cat=tote').then(function(r){ return r.json(); }).then(function(d){
+    document.getElementById('stat-tote').textContent = d.length + '+';
+  }).catch(function(){});
+  fetch(BOT + '/api/products?cat=skin').then(function(r){ return r.json(); }).then(function(d){
+    document.getElementById('stat-skin').textContent = d.length + '+';
+  }).catch(function(){});
+});
 </script>
 </body>
 </html>
